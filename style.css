@@ -1,0 +1,118 @@
+body
+{
+	background-color: #2D476B;
+	font-family: 'Montserrat';
+}
+
+.starDescription
+{
+	position: absolute;
+	transform: translateX(-50%);
+	background-color: #2D476B;
+	border-bottom: 20px solid #2D476B;
+	border-top: 20px solid #2D476B;
+	font-size: 18px;
+	border-radius: 20px;
+	padding: 20px;
+	color: rgba(255,255,255,0);
+	width: 450px;
+	z-index: 1;
+	display: none;
+}
+
+.starAndGlow
+{
+	width: 110px;
+	height: 110px;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
+.star
+{
+	transform: translate(-50%, -50%);
+	position: absolute;
+	left: 50%;
+	top: 50%;	
+	width: 50%;
+	height: 50%;
+	border-radius: 100%; /* doesn't work for the SVG, which always is rendered in a rectangular viewBox, but I need it for the touch area */
+}
+.starDiffractionHorizontal
+{	
+	transform: translateY(-50%);
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	height: 1.5%;
+	background-image: linear-gradient(90deg, rgba(255,255,255,0), white, rgba(255,255,255,0));
+}
+.starDiffractionVertical
+{	
+	transform: translateX(-50%);
+	position: absolute;
+	left: 50%;
+	height: 100%;
+	width: 1.5%;
+	background-image: linear-gradient(0deg, rgba(255,255,255,0), white, rgba(255,255,255,0));
+}
+.halo
+{
+	transform: translate(-50%, -50%);
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 140%;
+	height: 140%;
+	pointer-events: none;
+}
+.core
+{
+	transform: translate(-50%, -50%);
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 10%;
+	height: 10%;
+	border-radius: 100%;
+	background-color: white;
+	pointer-events: none;
+	opacity: 0;
+}
+.ring
+{
+	transform: translate(-50%, -50%);
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 10%;
+	height: 10%;
+	border-radius: 100%;
+	border: 2px solid white;
+	pointer-events: none;
+	opacity: 0;
+}
+.link
+{
+	width: 100%;
+	height: 100%;
+	border-radius: 100%;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+.svgDiv
+{
+	cursor:pointer;
+	width: 100px;
+	height: 100px;
+	border-radius:100%;
+	margin-right: 15px;
+}
+.window
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
