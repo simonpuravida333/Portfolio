@@ -73,7 +73,7 @@ projects.push(network);
 
 const life = structuredClone(codingProject);
 life.name = 'Life (Harvard CS50W Final Project)';
-life.objective = 'A single-page app to easily access the data of the GBIF (Global Biodiversity Information Facility).';
+life.objective = 'A single-page app to easily access the data of the GBIF (Global Biodiversity Information Facility). The choice of project was free in this final assignment: I chose the GBIF where two passions come together: nature and tech.';
 life.stack = 'Front-end: restful AJAX, Web Animations API, HTML, CSS<br>Back-end: yet to be implemented.';
 life.tasks = 'deep examination of the GBIF API (restful), sensible user querying and filter options, fetch calls design with thorough server response vetting, dynamic image loading, dynamic and appealing UI design, animations';
 life.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24';
@@ -84,7 +84,7 @@ const vocz = structuredClone(codingProject);
 vocz.name = 'Vocz';
 vocz.objective = "A single-page app for learning vocabulary.";
 vocz.stack = 'Front-end: JavaScript, HTML, CSS';
-vocz.tasks = 'appealing design and fluent user interactivity to make it feel like a computer game; algorithms<br><br>Creator comment: Vocz is my first JS application, written several years ago out of personal need / desire. Today, knowing JS better, I would write the code differently. It is perfectly stable though and the code is coherent. But I may rewrite Vocz in the near future (e.g. using objects instead of global variables).'
+vocz.tasks = 'appealing design and fluent user interactivity to make it feel like a computer game; algorithms<br><br>Creator comment: Vocz is my first JS application, written several years ago out of personal need / desire. Today, knowing JS better, I would write the code differently. It is perfectly stable though and the code is coherent. I may rewrite Vocz in the near future (e.g. using objects instead of global variables).'
 vocz.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24';
 vocz.links.push('https://github.com/simonpuravida333/Vocz');
 projects.push(vocz);
@@ -103,6 +103,31 @@ berlioz.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B2
 berlioz.links.push('https://www.canva.com/design/DAFSzcX9FIE/nsbMCeFcpSsz7-xhMKUsIw/edit?utm_content=DAFSzcX9FIE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton');
 projects.push(berlioz);
 
+const myself = {
+	myself:
+	{
+		name: "Simon R&#246sch",
+		passions: ["I &#x1F49C to conceptualize and design apps.","I &#x1F49C programming and building things.","Interaction design serves my strong interests in society, culture and creative conceptualization.","Programming serves my passions of building things and solving problems."],
+		what_I_Want: "To create ;)",
+		what_fascinates_me_the_most: "Nature and tech. My app designs draw strongly from nature &#x1F33A &#x1F99A &#x1F338 aesthetically and functionally",
+		why_You_want_me: "Generally, I like any programming challenge: back-end, front-end, data, algorithms... I've always loved puzzle games and programming is the <i>ultimate</i> puzzle game.<br>My full potential comes to the fore where I'm allowed to explore concepts, designs and user interactivities. Preferebly I do it all: software engineering, UX, conceptualization...",
+		further_interests: "Astronomy, ancient history, cultures and anthropology, composing music, creative writing, the conservation of the natural world.",
+		imgLink: "myself lower res.jpg",
+	},
+	software_engineering:
+	{
+		intermediate: 'JavaScript',
+		junior: 'Java <strong>&#9679</strong> C# <strong>&#9679</strong> Python',
+		more_techs: 'Git <strong>&#9679</strong> SQL (SQLite) <strong>&#9679</strong> Django <strong>&#9679</strong> CI/CD <strong>&#9679</strong> HTML <strong>&#9679</strong> CSS <strong>&#9679</strong> Bootstrap',
+		coding_experience: [" completed Harvard's CS50W (Webdevelopment with Python and JavaScript)<br> "," some private coding expeirences"," currently engaged in Harvard's CS50G (Introduction to Game Development) which is great for learning to create sophisticated and engaging interaction designs for (web)apps.","completed 'Fundamentals of Programming' and 'Algorithm and Datastructures' at university"],
+	},
+	design:
+	{
+		skills: ["proficiency in Figma and Adobe Creative Suite<br> "," proficiency in conceptualization (wireframes, mockups and interactive, functional visuals)<br> "," deep knowledge of visual and functional design rules and concepts."],
+		design_experience: ["fascinated by and analysed (esp application) designs since I can remember<br> "," graduated from a design-technical high-school, expanded design knowledge since then<br> "," several design projects (that I want to technically realize in the near future)"],
+	}
+}
+
 document.addEventListener("DOMContentLoaded", (event) =>
 {
 	const body = document.querySelector('body');	
@@ -120,7 +145,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 	const backgroundAspectRatio = 1.7778; // 16:9
 	let backgroundImageFullHeight = true;
 	if (windowAspectRatio > backgroundAspectRatio) backgroundImageFullHeight = false;
-		
+
 	background.onload = ()=>
 	{
 		function adjustBackground() // makes certain that height is always used.
@@ -340,6 +365,164 @@ document.addEventListener("DOMContentLoaded", (event) =>
 				replaceRenderedText(windowDiv, starAndGlow, renderedText);
 			}
 		}
+	}
+	
+	const myselfDiv = document.createElement('div');
+	const myselfCore = document.createElement('div');
+	const myselfRing = document.createElement('div');
+	myselfDiv.classList.add('star');
+	myselfDiv.id = 'myselfStar';
+	myselfCore.classList.add('core');
+	myselfRing.classList.add('ring');
+	myselfCore.style.width = '50%';
+	myselfCore.style.height = '50%';
+	myselfCore.style.opacity =1;
+	myselfRing.style.width = '100%';
+	myselfRing.style.height = '100%';
+	myselfRing.style.opacity = 1;
+	myselfDiv.append(myselfCore, myselfRing);
+	windowDiv.append(myselfDiv);
+	
+	setTimeout(()=>
+	{
+		myselfDiv.style.display = 'block';
+		myselfDiv.animate({opacity: [0,1]},500).onfinish = ()=> myselfRing.animate({
+			width: ['100%','200%','300%'],
+			height: ['100%','200%','300%'],
+			opacity: [0,1,0],
+			easing: ['ease-in','ease-out'],
+		},800).onfinish = ()=> myselfRing.animate({opacity: [0,1]},300);
+	},3000);
+	
+	myselfDiv.onmouseover = ()=>
+	{
+		myselfRing.animate({
+			width: ['100%','80%','120%','100%'],
+			height: ['100%','80%','120%','100%'],
+			easing: ['ease-in','ease-out'],
+		},800);
+		myselfCore.animate({
+			width: ['50%','50%','40%','50%'],
+			height: ['50%','50%','40%','50%'],
+			easing: ['ease-in','ease-out'],
+		},800);
+	}
+	let myselfInfoVisible = false;
+	myselfDiv.onclick = ()=>
+	{
+		myselfRing.animate({
+			width: ['100%','200%','300%'],
+			height: ['100%','200%','300%'],
+			opacity: [1,1,0],
+		},300).onfinish = ()=> myselfRing.animate({opacity: [0,1]},300);
+		myselfInfoVisible ^= true;
+		if (myselfInfoVisible)
+		{
+			myselfInfo.style.display = 'block';
+			myselfInfo.animate({opacity:[0,1]},500);
+		}
+		else myselfInfo.animate({opacity:[1,0]},500).onfinish = ()=> myselfInfo.style.display = 'none';	
+	}
+		
+	let myselfInfo = document.createElement('div');
+	myselfInfo.classList.add('starDescription');
+	myselfInfo.id = 'myselfDescription';
+	windowDiv.append(myselfInfo);
+	myselfInfo = loopObject(myself, myselfInfo);
+	
+	function loopObject(object, container)
+	{
+		for (const key in object)
+		{
+			const subHeadline = document.createElement('div');
+			subHeadline.innerHTML += key.replaceAll('_',' ').toUpperCase();
+			subHeadline.style['font-weight'] = '600';
+			
+			if (typeof object[key] === 'object' && !Array.isArray(object[key]))
+			{	
+				subHeadline.style['font-size'] = '18px';
+				
+				const lineDiv = document.createElement('div');
+				lineDiv.style['background-color'] = "white";
+				lineDiv.style.flex = 1;
+				lineDiv.style.height = '2px';
+				lineDiv.style['border-radius'] = '2px';
+				lineDiv.style.margin = '5px';
+				
+				const pearl = document.createElement('div');
+				pearl.style.width = '8px';
+				pearl.style.height = '8px';
+				pearl.style.margin = '8px';
+				pearl.style['border-radius'] = '4px'
+				pearl.style['background-color'] = 'white';
+				
+				const flexy = document.createElement('div');
+				flexy.classList.add('flexPart');
+				flexy.style['margin-left'] = 0;
+				flexy.append(pearl, lineDiv, pearl.cloneNode(true), subHeadline, pearl.cloneNode(true), lineDiv.cloneNode(true), pearl.cloneNode(true));
+				
+				const subContainer = document.createElement('div');
+				subContainer.style.margin = '15px';
+				subContainer.style['margin-bottom'] = '60px';
+				
+				container.append(flexy, loopObject(object[key], subContainer));
+			}
+			else 
+			{
+				const aDiv = document.createElement('div');
+				aDiv.style['margin-bottom'] = '20px';
+				subHeadline.style['letter-spacing'] = '0.1em';
+				subHeadline.style['font-style'] = 'italic';
+				subHeadline.style['font-family'] = 'Crimson Pro';
+				
+				aDiv.append(subHeadline);
+				
+				if (Array.isArray(object[key])) for (const point of object[key])
+				{
+					const subDiv = document.createElement('div');
+					subDiv.innerHTML = point;
+					//subDiv.style['margin-left'] = '20px';
+					
+					const flexy = document.createElement('div');
+					flexy.classList.add('flexPart');
+					flexy.style['justify-content'] = 'left';
+					flexy.style.margin = 0;
+					flexy.style['margin-bottom'] = '10px';
+					const bullet = document.createElement('div');
+					bullet.style.marginRight = '10px';
+					bullet.innerHTML = "<strong>&#9679</strong>"
+					flexy.append(bullet, subDiv)
+					aDiv.append(flexy)
+					/*if (x === object[key].length-1) aDiv.append(subDiv)
+					else aDiv.append(flexy);*/ // useful when creating style-divisions between the points, so that there's no division after the last point
+				}
+				else if (key === 'imgLink')
+				{
+					subHeadline.innerHTML = "";
+					const image = document.createElement('img');
+					image.src = object[key];
+					const frame = document.createElement('div');
+					frame.style.border = "8px solid white";
+					frame.style['border-radius'] = '10px';
+					image.onload = ()=>
+					{
+						frame.style.width = image.naturalWidth+'px';
+						frame.style.height = image.naturalHeight+'px';
+						frame.style.margin = '0 auto';
+						frame.append(image);
+						aDiv.append(frame);
+					}
+				}
+				else 
+				{
+					const subDiv = document.createElement('div');
+					subDiv.innerHTML = object[key];
+					aDiv.append(subDiv);
+				}
+				container.append(aDiv);
+			}
+		}
+		return container;
 	}
 });
 
