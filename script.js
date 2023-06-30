@@ -107,9 +107,9 @@ const myself = {
 	myself:
 	{
 		name: "Simon R&#246sch",
-		passions: ["I &#x1F49C to conceptualize and design apps.","I &#x1F49C programming and building things.","Interaction design serves my strong interests in society, culture and creative conceptualization.","Programming serves my passions of building things and solving problems."],
+		passions: ["I &#x1F49C to conceptualize and design apps.","I &#x1F49C programming and technically design systems.","Interaction design serves my strong interests in aesthetics, conceptualization and creating an engaging flow state.","Programming serves my passions for building things and solving problems."],
 		what_I_Want: "To create ;)",
-		what_fascinates_me_the_most: "Nature and tech. My app designs draw strongly from nature &#x1F33A &#x1F99A &#x1F338 aesthetically and functionally",
+		what_fascinates_me_the_most: "Creativity, nature and tech. My app designs draw strongly from nature &#x1F33A &#x1F99A &#x1F338 aesthetically and functionally, and are often about aiding the ideation process",
 		why_You_want_me: "Generally, I like any programming challenge: back-end, front-end, data, algorithms... I've always loved puzzle games and programming is the <i>ultimate</i> puzzle game.<br>My full potential comes to the fore where I'm allowed to explore concepts, designs and user interactivities. Preferebly I do it all: software engineering, UX, conceptualization...",
 		further_interests: "Astronomy, ancient history, cultures and anthropology, composing music, creative writing, the conservation of the natural world.",
 		imgLink: "myself lower res.jpg",
@@ -119,12 +119,11 @@ const myself = {
 		intermediate: 'JavaScript',
 		junior: 'Java <strong>&#9679</strong> C# <strong>&#9679</strong> Python',
 		more_techs: 'Git <strong>&#9679</strong> SQL (SQLite) <strong>&#9679</strong> Django <strong>&#9679</strong> CI/CD <strong>&#9679</strong> HTML <strong>&#9679</strong> CSS <strong>&#9679</strong> Bootstrap',
-		coding_experience: [" completed Harvard's CS50W (Webdevelopment with Python and JavaScript)<br> "," some private coding expeirences"," currently engaged in Harvard's CS50G (Introduction to Game Development) which is great for learning to create sophisticated and engaging interaction designs for (web)apps.","completed 'Fundamentals of Programming' and 'Algorithm and Datastructures' at university"],
+		coding_experience: [" completed Harvard's CS50W (Webdevelopment with Python and JavaScript)<br> "," currently engaged in Harvard's CS50G (Introduction to Game Development) which is great for learning to create sophisticated and engaging interaction designs for (web)apps."," some private coding experiences","completed 'Fundamentals of Programming' and 'Algorithm and Datastructures' at university + two more CS courses."],
 	},
 	design:
 	{
-		skills: ["proficiency in Figma and Adobe Creative Suite<br> "," proficiency in conceptualization (wireframes, mockups and interactive, functional visuals)<br> "," deep knowledge of visual and functional design rules and concepts."],
-		design_experience: ["fascinated by and analysed (esp application) designs since I can remember<br> "," graduated from a design-technical high-school, expanded design knowledge since then<br> "," several design projects (that I want to technically realize in the near future)"],
+		skills: ["proficiency in Figma and Adobe Creative Suite","proficiency in conceptualization (wireframes, mockups and interactive, functional visuals)","deep knowledge of visual and functional design rules and concepts.","mulitple ongoing application design projects, that I want to technically realize in the near future","fascinated by and analysed designs (esp applications) since I can remember"],
 	}
 }
 
@@ -506,8 +505,8 @@ document.addEventListener("DOMContentLoaded", (event) =>
 					frame.style['border-radius'] = '10px';
 					image.onload = ()=>
 					{
-						frame.style.width = image.naturalWidth+'px';
-						frame.style.height = image.naturalHeight+'px';
+						frame.style['max-width'] = image.naturalWidth+'px';
+						frame.style['max-height'] = image.naturalHeight+'px';
 						frame.style.margin = '0 auto';
 						frame.append(image);
 						aDiv.append(frame);
@@ -548,7 +547,7 @@ function replaceRenderedText(windowDiv, starAndGlow, renderedText)
 
 function getRndInteger(min, max)
 {
-		return Math.floor(Math.random() * (max - min + 1)) + min;
+	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function getRndFloat(min, max)
