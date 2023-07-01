@@ -428,102 +428,102 @@ document.addEventListener("DOMContentLoaded", (event) =>
 	myselfInfo.id = 'myselfDescription';
 	windowDiv.append(myselfInfo);
 	myselfInfo = loopObject(myself, myselfInfo);
-	
-	function loopObject(object, container)
+});
+
+function loopObject(object, container)
+{
+	for (const key in object)
 	{
-		for (const key in object)
-		{
-			const subHeadline = document.createElement('div');
-			subHeadline.innerHTML += key.replaceAll('_',' ').toUpperCase();
-			subHeadline.style['font-weight'] = '600';
+		const subHeadline = document.createElement('div');
+		subHeadline.innerHTML += key.replaceAll('_',' ').toUpperCase();
+		subHeadline.style['font-weight'] = '600';
+		
+		if (typeof object[key] === 'object' && !Array.isArray(object[key]))
+		{	
+			subHeadline.style['font-size'] = '18px';
 			
-			if (typeof object[key] === 'object' && !Array.isArray(object[key]))
-			{	
-				subHeadline.style['font-size'] = '18px';
-				
-				const lineDiv = document.createElement('div');
-				lineDiv.style['background-color'] = "white";
-				lineDiv.style.flex = 1;
-				lineDiv.style.height = '2px';
-				lineDiv.style['border-radius'] = '2px';
-				lineDiv.style.margin = '5px';
-				
-				const pearl = document.createElement('div');
-				pearl.style.width = '8px';
-				pearl.style.height = '8px';
-				pearl.style.margin = '8px';
-				pearl.style['border-radius'] = '4px'
-				pearl.style['background-color'] = 'white';
+			const lineDiv = document.createElement('div');
+			lineDiv.style['background-color'] = "white";
+			lineDiv.style.flex = 1;
+			lineDiv.style.height = '2px';
+			lineDiv.style['border-radius'] = '2px';
+			lineDiv.style.margin = '5px';
+			
+			const pearl = document.createElement('div');
+			pearl.style.width = '8px';
+			pearl.style.height = '8px';
+			pearl.style.margin = '8px';
+			pearl.style['border-radius'] = '4px'
+			pearl.style['background-color'] = 'white';
+			
+			const flexy = document.createElement('div');
+			flexy.classList.add('flexPart');
+			flexy.style['margin-left'] = 0;
+			flexy.append(pearl, lineDiv, pearl.cloneNode(true), subHeadline, pearl.cloneNode(true), lineDiv.cloneNode(true), pearl.cloneNode(true));
+			
+			const subContainer = document.createElement('div');
+			subContainer.style.margin = '15px';
+			subContainer.style['margin-bottom'] = '60px';
+			
+			container.append(flexy, loopObject(object[key], subContainer));
+		}
+		else 
+		{
+			const aDiv = document.createElement('div');
+			aDiv.style['margin-bottom'] = '20px';
+			subHeadline.style['letter-spacing'] = '0.1em';
+			subHeadline.style['font-style'] = 'italic';
+			subHeadline.style['font-family'] = 'Crimson Pro';
+			
+			aDiv.append(subHeadline);
+			
+			if (Array.isArray(object[key])) for (const point of object[key])
+			{
+				const subDiv = document.createElement('div');
+				subDiv.innerHTML = point;
+				//subDiv.style['margin-left'] = '20px';
 				
 				const flexy = document.createElement('div');
 				flexy.classList.add('flexPart');
-				flexy.style['margin-left'] = 0;
-				flexy.append(pearl, lineDiv, pearl.cloneNode(true), subHeadline, pearl.cloneNode(true), lineDiv.cloneNode(true), pearl.cloneNode(true));
-				
-				const subContainer = document.createElement('div');
-				subContainer.style.margin = '15px';
-				subContainer.style['margin-bottom'] = '60px';
-				
-				container.append(flexy, loopObject(object[key], subContainer));
+				flexy.style['justify-content'] = 'left';
+				flexy.style.margin = 0;
+				flexy.style['margin-bottom'] = '10px';
+				const bullet = document.createElement('div');
+				bullet.style.marginRight = '10px';
+				bullet.innerHTML = "<strong>&#9679</strong>"
+				flexy.append(bullet, subDiv)
+				aDiv.append(flexy)
+				/*if (x === object[key].length-1) aDiv.append(subDiv)
+				else aDiv.append(flexy);*/ // useful when creating style-divisions between the points, so that there's no division after the last point
+			}
+			else if (key === 'imgLink')
+			{
+				subHeadline.innerHTML = "";
+				const image = document.createElement('img');
+				image.src = object[key];
+				const frame = document.createElement('div');
+				frame.style.border = "8px solid white";
+				frame.style['border-radius'] = '10px';
+				image.onload = ()=>
+				{
+					frame.style['max-width'] = image.naturalWidth+'px';
+					frame.style['max-height'] = image.naturalHeight+'px';
+					frame.style.margin = '0 auto';
+					frame.append(image);
+					aDiv.append(frame);
+				}
 			}
 			else 
 			{
-				const aDiv = document.createElement('div');
-				aDiv.style['margin-bottom'] = '20px';
-				subHeadline.style['letter-spacing'] = '0.1em';
-				subHeadline.style['font-style'] = 'italic';
-				subHeadline.style['font-family'] = 'Crimson Pro';
-				
-				aDiv.append(subHeadline);
-				
-				if (Array.isArray(object[key])) for (const point of object[key])
-				{
-					const subDiv = document.createElement('div');
-					subDiv.innerHTML = point;
-					//subDiv.style['margin-left'] = '20px';
-					
-					const flexy = document.createElement('div');
-					flexy.classList.add('flexPart');
-					flexy.style['justify-content'] = 'left';
-					flexy.style.margin = 0;
-					flexy.style['margin-bottom'] = '10px';
-					const bullet = document.createElement('div');
-					bullet.style.marginRight = '10px';
-					bullet.innerHTML = "<strong>&#9679</strong>"
-					flexy.append(bullet, subDiv)
-					aDiv.append(flexy)
-					/*if (x === object[key].length-1) aDiv.append(subDiv)
-					else aDiv.append(flexy);*/ // useful when creating style-divisions between the points, so that there's no division after the last point
-				}
-				else if (key === 'imgLink')
-				{
-					subHeadline.innerHTML = "";
-					const image = document.createElement('img');
-					image.src = object[key];
-					const frame = document.createElement('div');
-					frame.style.border = "8px solid white";
-					frame.style['border-radius'] = '10px';
-					image.onload = ()=>
-					{
-						frame.style['max-width'] = image.naturalWidth+'px';
-						frame.style['max-height'] = image.naturalHeight+'px';
-						frame.style.margin = '0 auto';
-						frame.append(image);
-						aDiv.append(frame);
-					}
-				}
-				else 
-				{
-					const subDiv = document.createElement('div');
-					subDiv.innerHTML = object[key];
-					aDiv.append(subDiv);
-				}
-				container.append(aDiv);
+				const subDiv = document.createElement('div');
+				subDiv.innerHTML = object[key];
+				aDiv.append(subDiv);
 			}
+			container.append(aDiv);
 		}
-		return container;
 	}
-});
+	return container;
+}
 
 function replaceRenderedText(windowDiv, starAndGlow, renderedText)
 {
