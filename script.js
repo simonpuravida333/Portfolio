@@ -56,7 +56,7 @@ projects.push(auctions);
 const mail = structuredClone(codingProject);
 mail.name = 'Mail (Harvard CS50W Project 3)';
 mail.objective = 'A single-page e-mail application implemention on the front-end.';
-mail.stack = 'Front-end: AJAX, RestAPI, CSS, HTML';
+mail.stack = 'Front-end: AJAX, JSON API, CSS, HTML';
 mail.tasks = 'algorithms, UI design';
 mail.sophistication = '&#x2B24 &#x2B24 &#x2B24';
 mail.links.push('https://github.com/simonpuravida333/Mail');
@@ -65,7 +65,7 @@ projects.push(mail);
 const network = structuredClone(codingProject);
 network.name = 'Network (Harvard CS50W Project 4)';
 network.objective = 'A Twitter-like single-page app for writing messages and following people.'
-network.stack = 'Back-end: Python / Django, SQLite, JSON API<br>Front-end: AJAX, JSON RestAPI, Web Animations API, HTML, CSS';
+network.stack = 'Back-end: Python / Django, SQLite, JSON API<br>Front-end: AJAX, JSON API, Web Animations API, HTML, CSS';
 network.tasks = '3 SQL tables / models, routing, algoritms (on both stack-ends), UI design';
 network.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 ';
 network.links.push('https://github.com/simonpuravida333/Network');
@@ -119,7 +119,7 @@ const myself = {
 		intermediate: 'JavaScript',
 		junior: 'Java <strong>&#9679</strong> C# <strong>&#9679</strong> Python',
 		more_techs: 'Git <strong>&#9679</strong> SQL (SQLite) <strong>&#9679</strong> Django <strong>&#9679</strong> CI/CD <strong>&#9679</strong> HTML <strong>&#9679</strong> CSS <strong>&#9679</strong> Bootstrap',
-		coding_experience: [" completed Harvard's CS50W (Webdevelopment with Python and JavaScript)<br> "," currently engaged in Harvard's CS50G (Introduction to Game Development) which is great for learning to create sophisticated and engaging interaction designs for (web)apps."," some private coding experiences","completed 'Fundamentals of Programming' and 'Algorithm and Datastructures' at university + two more CS courses."],
+		coding_experience: [" completed Harvard's CS50W (Webdevelopment with Python and JavaScript)<br> "," currently engaged in Harvard's CS50G (Introduction to Game Development) which is great for learning to create sophisticated and engaging interaction designs for (web)apps."," some private coding experiences","completed 'Fundamentals of Programming' and 'Algorithm and Datastructures' at university + two more CS uni courses."],
 	},
 	design:
 	{
