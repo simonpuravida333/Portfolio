@@ -1,8 +1,3 @@
-// TODO
-// MAKE VIDEOS, ADD YOUTUBE LINKS
-// UNFADE OF STARDESCRIPTION IS APRUBT
-
-
 const starSVG = "<div class = 'star'><svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 100 100' xml:space='preserve'><style type='text/css'>.st0{fill:#229948;}</style><g><path class='st0' d='M56.9,77.2V100c22.3-3.1,39.9-20.6,42.9-42.9H77C74.4,66.8,66.8,74.6,56.9,77.2z'/><path class='st0' d='M22.7,56.9H0c3.1,22.3,20.6,39.9,42.9,42.9V77.2C33,74.6,25.2,66.8,22.7,56.9z'/><path class='st0' d='M42.9,22.8V0C20.6,3.1,3.1,20.6,0,42.9h22.8C25.2,33,33,25.4,42.9,22.8z'/><path class='st0' d='M77,42.9h22.8C96.8,20.6,79,3.1,56.9,0v22.8C66.8,25.4,74.4,33,77,42.9z'/></g></svg></div>";
 const haloSVG = "<div class='halo'><svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 100 100' xml:space='preserve'><style type='text/css'>.st2{fill:url(#SVGID_1_);}</style><radialGradient id='SVGID_1_' cx='50' cy='50' r='50' gradientUnits='userSpaceOnUse'><stop  offset='0' style='stop-color:#00FF3B'/><stop  offset='1' style='stop-color:#00FF00;stop-opacity:0'/></radialGradient><path class='st2' d='M50,0C22.4,0,0,22.4,0,50c0,27.6,22.4,50,50,50s50-22.4,50-50C100,22.4,77.6,0,50,0z M50,78.8c-15.9,0-28.8-12.9-28.8-28.8c0-15.9,12.9-28.8,28.8-28.8S78.8,34.1,78.8,50C78.8,65.9,65.9,78.8,50,78.8z'/></svg></div>";
 const gitHubIconSVG = "<svg width='98' height='96' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' clip-rule='evenodd' d='M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z' fill='#fff'/></svg>";
@@ -277,7 +272,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 			
 			// STAR TEXT
 			const renderedText = document.createElement('div');
-			renderedText.classList.add('starDescription','mask');
+			renderedText.classList.add('starDescription'/*,'mask'*/);
 			for (const key in projects[z])
 			{
 				if (key === 'links' || key === 'imageLinks') continue;
@@ -324,13 +319,12 @@ document.addEventListener("DOMContentLoaded", (event) =>
 				globalImageArray = imageArray;
 				globalImageIndex = index;
 				touchArea.click();
-				hideStars(true);
 				displayImageFullWindow(true);
 			}
 			
-			var go = true;
+			let go = true;
 			const imageArray = [];
-			var index = -1;
+			let index = -1;
 			
 			if (projects[z].imageLinks.length > 0)
 			{
@@ -344,13 +338,11 @@ document.addEventListener("DOMContentLoaded", (event) =>
 				imagesArea.append(imageArray[0]);
 			}
 			
-			var theTimeout;
+			let theTimeout;
 			function nextImage(continueAgain)
 			{
 				if (index >= imageArray.length-1 || index < 0) index = 0;
 				else if(!continueAgain) index ++;
-				console.log('NEXT IMAGE');
-				console.log(index);
 				if (!continueAgain) imageArray[index].onload = imagesArea.animate({opacity: [1,0]},333).onfinish = ()=>
 				{
 					if(imagesArea.children.length > 0) imagesArea.removeChild(imagesArea.children[0]);
@@ -398,11 +390,12 @@ document.addEventListener("DOMContentLoaded", (event) =>
 				
 				if (blockAllAni)
 				{
-					renderedText.classList.remove('mask');
-					renderedText.animate([{borderTop: '20px solid #2D476B', borderBottom: '20px solid #2D476B'},{borderTop: '20px solid white', borderBottom: '20px solid white'},{borderTop: '20px solid '+ color, borderBottom: '20px solid '+color}],500).onfinish = ()=>
+					//renderedText.classList.remove('mask');
+					renderedText.animate([{borderTop: '20px solid #2D476B', borderBottom: '20px solid #2D476B', backgroundColor: 'transparent'},{borderTop: '20px solid white', borderBottom: '20px solid white', backgroundColor: 'transparent'},{borderTop: '20px solid '+ color, borderBottom: '20px solid '+color, backgroundColor: '#2D476B'}],500).onfinish = ()=>
 					{
 						renderedText.style['border-bottom'] = "20px solid " + color;
 						renderedText.style['border-top'] = "20px solid " + color;
+						renderedText.style['background-color'] = null;
 					}
 					imagesArea.style.display = 'block';
 					imagesArea.animate({opacity: [0,1]},500);
@@ -417,7 +410,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 				}
 				else 
 				{
-					renderedText.classList.add('mask');
+					//renderedText.classList.add('mask');
 					renderedText.animate([{borderTop: '20px solid '+ color, borderBottom: '20px solid '+color}, {borderTop: '20px solid #2D476B', borderBottom: '20px solid #2D476B'}],500).onfinish =()=>
 					{
 						renderedText.style['border-bottom'] = "20px solid #2D476B";
@@ -447,6 +440,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 				
 				if (infoDivAni.playbackRate === -1) infoDivAni.playbackRate = 1;
 				renderedText.style.display = 'block';
+				renderedText.style['background-color'] = 'transparent';
 				renderedText.style.color = 'rgba(255,255,255,0)';
 				infoDivAni.play();
 				infoDivAni.onfinish = ()=>
@@ -575,6 +569,8 @@ document.addEventListener("DOMContentLoaded", (event) =>
 	{
 		body.style.overflow = 'hidden';
 		fullWindow.style.display = 'block';
+		fullWindow.style.left = window.scrollX + 'px';
+		fullWindow.style.top = window.scrollY + 'px';
 		fullWindow.animate({opacity: [0,1]}, 333);
 		hideStars(true);
 		myselfDiv.animate({opacity: [1,0]},500).onfinish =()=> myselfDiv.style.display = 'none';
@@ -593,7 +589,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 	function goRight()
 	{
 		globalImageIndex++;
-		if (globalImageIndex >= globalImageArray.length-1) globalImageIndex = 0;
+		if (globalImageIndex > globalImageArray.length-1) globalImageIndex = 0;
 		displayImageFullWindow(true);
 	}
 	function goLeft()
