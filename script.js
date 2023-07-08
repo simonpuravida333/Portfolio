@@ -103,6 +103,7 @@ vela.name = 'Vela';
 vela.concept = "A design concept (UX and UI) for a novel way of creating, managing and developing ideas, information and big projects.<br>...Vela has been a huge undertaking that was years in the making, as it breaks with conventional UI and UX designs. The concept went through four revisions over three years.<br>In the near future I want to realize the concept technically.";
 vela.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24';
 vela.links.push('https://www.canva.com/design/DAFR2g6jMGE/Uq9ObLDajJBAQm3uq4PKOg/edit?utm_content=DAFR2g6jMGE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton', 'https://www.canva.com/design/DAFQpdEimPw/9MUFDx3xx5s9yrCGljKjnw/edit?utm_content=DAFQpdEimPw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton', 'https://www.canva.com/design/DAFX91MbUIE/Tq-tpr-geISHcNbDTI1xfA/edit?utm_content=DAFX91MbUIE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton');
+vela.imageLinks.push('captures/Vela 1.png', 'captures/Vela 2.png', 'captures/Vela 3.png', 'captures/Vela 4.png', 'captures/Vela 5.png');
 projects.push(vela);
 
 const berlioz = structuredClone(designProject)
@@ -110,6 +111,7 @@ berlioz.name = 'Berlioz';
 berlioz.concept = "A design concept for a novel way of composing melodies. It combines the strengths of MIDI keys with conventional notation, something that doesn't exist currently, but has huge potential.";
 berlioz.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24';
 berlioz.links.push('https://www.canva.com/design/DAFSzcX9FIE/nsbMCeFcpSsz7-xhMKUsIw/edit?utm_content=DAFSzcX9FIE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton');
+berlioz.imageLinks.push('captures/Berlioz 1.png', 'captures/Berlioz 2.png', 'captures/Berlioz 3.png', 'captures/Berlioz 4.png');
 projects.push(berlioz);
 
 const myself = {
