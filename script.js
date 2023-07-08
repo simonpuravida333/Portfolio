@@ -1,3 +1,8 @@
+// TODO
+// MAKE VIDEOS, ADD YOUTUBE LINKS
+// UNFADE OF STARDESCRIPTION IS APRUBT
+
+
 const starSVG = "<div class = 'star'><svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 100 100' xml:space='preserve'><style type='text/css'>.st0{fill:#229948;}</style><g><path class='st0' d='M56.9,77.2V100c22.3-3.1,39.9-20.6,42.9-42.9H77C74.4,66.8,66.8,74.6,56.9,77.2z'/><path class='st0' d='M22.7,56.9H0c3.1,22.3,20.6,39.9,42.9,42.9V77.2C33,74.6,25.2,66.8,22.7,56.9z'/><path class='st0' d='M42.9,22.8V0C20.6,3.1,3.1,20.6,0,42.9h22.8C25.2,33,33,25.4,42.9,22.8z'/><path class='st0' d='M77,42.9h22.8C96.8,20.6,79,3.1,56.9,0v22.8C66.8,25.4,74.4,33,77,42.9z'/></g></svg></div>";
 const haloSVG = "<div class='halo'><svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 100 100' xml:space='preserve'><style type='text/css'>.st2{fill:url(#SVGID_1_);}</style><radialGradient id='SVGID_1_' cx='50' cy='50' r='50' gradientUnits='userSpaceOnUse'><stop  offset='0' style='stop-color:#00FF3B'/><stop  offset='1' style='stop-color:#00FF00;stop-opacity:0'/></radialGradient><path class='st2' d='M50,0C22.4,0,0,22.4,0,50c0,27.6,22.4,50,50,50s50-22.4,50-50C100,22.4,77.6,0,50,0z M50,78.8c-15.9,0-28.8-12.9-28.8-28.8c0-15.9,12.9-28.8,28.8-28.8S78.8,34.1,78.8,50C78.8,65.9,65.9,78.8,50,78.8z'/></svg></div>";
 const gitHubIconSVG = "<svg width='98' height='96' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' clip-rule='evenodd' d='M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z' fill='#fff'/></svg>";
@@ -15,6 +20,7 @@ const codingProject = {
 	tasks: "",
 	sophistication: "",
 	links: [],
+	imageLinks: [],
 }
 const designProject = {
 	work: 'Design',
@@ -22,17 +28,19 @@ const designProject = {
 	concept: "",
 	sophistication: "",
 	links: [],
+	imageLinks: [],
 }
 
 const projects = [];
 
 const googleSearch = structuredClone(codingProject);
 googleSearch.name = 'Google Search (Harvard CS50W Project 0)';
-googleSearch.objective = 'Functionally and visually identical to google search front page.';
+googleSearch.objective = 'Visually identical google search front page, queries will redirect to google results.';
 googleSearch.stack = 'Front-end: HTML, CSS';
 googleSearch.tasks = 'Mostly a CSS challenge. Links with parameters. Image search page, advanced search parameters page.';
 googleSearch.sophistication = '&#x2B24 ';
 googleSearch.links.push('https://github.com/simonpuravida333/GoogleSearch');
+googleSearch.imageLinks.push('captures/Google Search 1.png', 'captures/Google Search 2.png', 'captures/Google Search 2B.png', 'captures/Google Search 3.png', 'captures/Google Search 4.png');
 projects.push(googleSearch);
 
 const wiki = structuredClone(codingProject);
@@ -42,6 +50,7 @@ wiki.stack = 'Back-end: Python / Django<br>Front-end: HTML, CSS';
 wiki.tasks = 'Django routing; Django templates; algorithms; use of Markdown';
 wiki.sophistication = '&#x2B24 &#x2B24 ';
 wiki.links.push('https://github.com/simonpuravida333/Wiki');
+wiki.imageLinks.push('captures/Wiki 1.png', 'captures/Wiki 2.png', 'captures/Wiki 3.png', 'captures/Wiki 4.png');
 projects.push(wiki);
 
 const auctions = structuredClone(codingProject);
@@ -51,24 +60,27 @@ auctions.stack = 'Back-end: Pyton / Django, SQLite, Jinja2<br>Front-end: HTML, C
 auctions.tasks = '8 SQL tables / models, additional to user; Django forms; 7 basic pages (like watchlist, active biddings, acquired auctions...); algorithms, bidding with responsive messages; comments; article categories; UI design';
 auctions.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24';
 auctions.links.push('https://github.com/simonpuravida333/Auctions');
+auctions.imageLinks.push('captures/Auctions 1.png', 'captures/Auctions 2.png', 'captures/Auctions 3.png', 'captures/Auctions 4.png', 'captures/Auctions 5.png', 'captures/Auctions 6.png', 'captures/Auctions 7.png', 'captures/Auctions 8.png', 'captures/Auctions 9.png', 'captures/Auctions 10.png', 'captures/Auctions 12.png', 'captures/Auctions 13.png');
 projects.push(auctions);
 
 const mail = structuredClone(codingProject);
 mail.name = 'Mail (Harvard CS50W Project 3)';
 mail.objective = 'A single-page e-mail application implemention on the front-end.';
 mail.stack = 'Front-end: AJAX, JSON API, CSS, HTML';
-mail.tasks = 'algorithms, UI design';
+mail.tasks = 'algorithms, UI design, single-page app';
 mail.sophistication = '&#x2B24 &#x2B24 &#x2B24';
 mail.links.push('https://github.com/simonpuravida333/Mail');
+mail.imageLinks.push('captures/Mail 1.png', 'captures/Mail 2.png', 'captures/Mail 3.png', 'captures/Mail 4.png', 'captures/Mail 5.png', 'captures/Mail 6.png')
 projects.push(mail);
 
 const network = structuredClone(codingProject);
 network.name = 'Network (Harvard CS50W Project 4)';
 network.objective = 'A Twitter-like single-page app for writing messages and following people.'
 network.stack = 'Back-end: Python / Django, SQLite, JSON API<br>Front-end: AJAX, JSON API, Web Animations API, HTML, CSS';
-network.tasks = '3 SQL tables / models, routing, algoritms (on both stack-ends), UI design';
+network.tasks = '3 SQL tables / models, routing, algoritms (on both stack-ends), UI design, single-page app';
 network.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 ';
 network.links.push('https://github.com/simonpuravida333/Network');
+network.imageLinks.push('captures/Network 1.png', 'captures/Network 2.png', 'captures/Network 3.png', 'captures/Network 4.png', 'captures/Network 5.png');
 projects.push(network);
 
 const life = structuredClone(codingProject);
@@ -77,16 +89,18 @@ life.objective = 'A single-page app to easily access the data of the GBIF (Globa
 life.stack = 'Front-end: AJAX, Web Animations API, HTML, CSS<br>Back-end: yet to be implemented.';
 life.tasks = 'deep examination of the GBIF (rest) API, sensible user querying and filter options, fetch calls design with thorough server response vetting, dynamic image loading, dynamic and appealing UI design, animations';
 life.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24';
-life.links.push('https://github.com/simonpuravida333/Life');
+life.links.push('https://github.com/simonpuravida3in/Life');
+life.imageLinks.push('captures/Life 1.png', 'captures/Life 2.png', 'captures/Life 3.png', 'captures/Life 4.png', 'captures/Life 5.png', 'captures/Life 6.png', 'captures/Life 7.png', 'captures/Life 8.png', 'captures/Life 9.png', 'captures/Life 10.png', 'captures/Life 11.png');
 projects.push(life);
 
 const vocz = structuredClone(codingProject);
 vocz.name = 'Vocz';
 vocz.objective = "A single-page app for learning vocabulary.";
 vocz.stack = 'Front-end: JavaScript, HTML, CSS';
-vocz.tasks = 'appealing design and fluent user interactivity to make it feel like a computer game; algorithms<br><br>Creator comment: Vocz is my first JS application, written several years ago out of personal need / desire. Today, knowing JS better, I would write the code differently. It is perfectly stable though and the code is coherent. I may rewrite Vocz in the near future (e.g. using objects instead of global variables).'
+vocz.tasks = 'appealing design and fluent user interactivity to make it feel like a computer game; algorithms<br><br>Creator comment: Vocz was my first JS application, written several years ago out of personal need / desire. Today, knowing JS better, I would write the code differently. It is perfectly stable though and the code is coherent.<br>I may rewrite Vocz in the near future (e.g. using objects instead of global variables).'
 vocz.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24';
 vocz.links.push('https://github.com/simonpuravida333/Vocz');
+vocz.imageLinks.push('captures/Vocz 1.png', 'captures/Vocz 2.png', 	'captures/Vocz 3.png', 	'captures/Vocz 4.png', 	'captures/Vocz 5.png',	'captures/Vocz 6.png');
 projects.push(vocz);
 
 const vela = structuredClone(designProject);
@@ -129,7 +143,7 @@ const myself = {
 
 document.addEventListener("DOMContentLoaded", (event) =>
 {
-	const body = document.querySelector('body');	
+	const body = document.querySelector('body');
 	body.innerHTML += canvaIconSVGDefsPart; // adds the "defs" part to body. It contains the styling IDs. This is vital if you have several instances of the same SVG and deal with display none / block of the SVGs. It's because the browser caches IDs only once, so the second, third... SVG you call won't have styling. Only the first (unless the first is display = block while another one is display = block. Then the other one will also have proper styling for the time the first SVG is visible. In other words: the browser caches the ID reference only once, but becuase the ID gets appended / removed from the DOM, it can't find it for the second, third ... SVG (which usually doesn't happen for IDs). That's the tricky thing about having in-place IDs (as in SVGs) get added / removed fromt the DOM body. The browers is fooled in thinking IDs are always global. That's why here I place the <defs> part to the body right away as it contains the stylings.
 	const background = document.createElement('img');
 	if (window.innerHeight <= 1080 && window.innerWidth <= 1920) background.src = "nightsky compressed.jpg"; // 2K
@@ -144,6 +158,9 @@ document.addEventListener("DOMContentLoaded", (event) =>
 	const backgroundAspectRatio = 1.7778; // 16:9
 	let backgroundImageFullHeight = true;
 	if (windowAspectRatio > backgroundAspectRatio) backgroundImageFullHeight = false;
+
+	var globalImageIndex = 0;
+	var globalImageArray;
 
 	background.onload = ()=>
 	{
@@ -260,10 +277,10 @@ document.addEventListener("DOMContentLoaded", (event) =>
 			
 			// STAR TEXT
 			const renderedText = document.createElement('div');
-			renderedText.classList.add('starDescription');
+			renderedText.classList.add('starDescription','mask');
 			for (const key in projects[z])
 			{
-				if (key === 'links') continue;
+				if (key === 'links' || key === 'imageLinks') continue;
 				renderedText.innerHTML += "<strong><i>"+ key.charAt(0).toUpperCase()+key.slice(1) +"</i></strong><br>";
 				const aDiv = document.createElement('div');
 				aDiv.style['margin-left'] = '15px';
@@ -290,8 +307,65 @@ document.addEventListener("DOMContentLoaded", (event) =>
 				flexDiv.append(svgDiv);
 			}
 			windowDiv.append(renderedText);
+			const renderedTextCoordinatesDimensions = {
+				x: 0,
+				y: 0,
+				width: 0,
+				height: 0,
+			}
+			
+			// IMAGES
+			const imagesArea = document.createElement('div');
+			imagesArea.classList.add('imagesArea');
+			imagesArea.style.display = 'none';
+			windowDiv.append(imagesArea);
+			imagesArea.onclick = ()=>
+			{
+				globalImageArray = imageArray;
+				globalImageIndex = index;
+				touchArea.click();
+				hideStars(true);
+				displayImageFullWindow(true);
+			}
+			
+			var go = true;
+			const imageArray = [];
+			var index = -1;
+			
+			if (projects[z].imageLinks.length > 0)
+			{
+				for (const image in projects[z].imageLinks)
+				{
+					const img = document.createElement('img');
+					img.src = projects[z].imageLinks[image];
+					img.classList.add('starImage');
+					imageArray.push(img);
+				}
+				imagesArea.append(imageArray[0]);
+			}
+			
+			var theTimeout;
+			function nextImage(continueAgain)
+			{
+				if (index >= imageArray.length-1 || index < 0) index = 0;
+				else if(!continueAgain) index ++;
+				console.log('NEXT IMAGE');
+				console.log(index);
+				if (!continueAgain) imageArray[index].onload = imagesArea.animate({opacity: [1,0]},333).onfinish = ()=>
+				{
+					if(imagesArea.children.length > 0) imagesArea.removeChild(imagesArea.children[0]);
+					imagesArea.append(imageArray[index]);
+					placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
+					imagesArea.animate({opacity: [0,1]},333).onfinish = ()=> {theTimeout = setTimeout(nextImage, 3500, false)};
+				}
+				else theTimeout = setTimeout(nextImage, 3500, false);
+			}
 	
-			window.addEventListener('resize',()=> replaceRenderedText(windowDiv, starAndGlow, renderedText));
+			window.addEventListener('resize',()=>
+			{
+				placeRenderedText(windowDiv, starAndGlow, renderedText, renderedTextCoordinatesDimensions);
+				placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
+			});
 						
 			setTimeout(()=>
 			{
@@ -322,17 +396,36 @@ document.addEventListener("DOMContentLoaded", (event) =>
 				starBirthRing.style.display = 'block';
 				starBirthRing.animate([{width: '60%', height: '60%', opacity: 1},{width: '130%', height: '130%', borderWidth: '3px', opacity: 1},{width: '200%', height: '200%', borderWidth: '3px', opacity: 0}],400).onfinish = ()=> starBirthRing.style.display = 'none';
 				
-				if (blockAllAni) renderedText.animate([{borderTop: '20px solid #2D476B', borderBottom: '20px solid #2D476B'},{borderTop: '20px solid white', borderBottom: '20px solid white'},{borderTop: '20px solid '+ color, borderBottom: '20px solid '+color}],500).onfinish =()=>
+				if (blockAllAni)
 				{
-					renderedText.style['border-bottom'] = "20px solid "+ color;
-					renderedText.style['border-top'] = "20px solid "+color;
+					renderedText.classList.remove('mask');
+					renderedText.animate([{borderTop: '20px solid #2D476B', borderBottom: '20px solid #2D476B'},{borderTop: '20px solid white', borderBottom: '20px solid white'},{borderTop: '20px solid '+ color, borderBottom: '20px solid '+color}],500).onfinish = ()=>
+					{
+						renderedText.style['border-bottom'] = "20px solid " + color;
+						renderedText.style['border-top'] = "20px solid " + color;
+					}
+					imagesArea.style.display = 'block';
+					imagesArea.animate({opacity: [0,1]},500);
+					placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
+					
+					if (imageArray.length > 0)
+					{
+						clearTimeout(theTimeout);
+						go = true;
+						nextImage(true);
+					}
 				}
-				else renderedText.animate([{borderTop: '20px solid '+ color, borderBottom: '20px solid '+color}, {borderTop: '20px solid #2D476B', borderBottom: '20px solid #2D476B'}],500).onfinish =()=>
+				else 
 				{
-					renderedText.style['border-bottom'] = "20px solid #2D476B";
-					renderedText.style['border-top'] = "20px solid #2D476B";
+					renderedText.classList.add('mask');
+					renderedText.animate([{borderTop: '20px solid '+ color, borderBottom: '20px solid '+color}, {borderTop: '20px solid #2D476B', borderBottom: '20px solid #2D476B'}],500).onfinish =()=>
+					{
+						renderedText.style['border-bottom'] = "20px solid #2D476B";
+						renderedText.style['border-top'] = "20px solid #2D476B";
+					}
+					imagesArea.animate({opacity: [1,0]},500).onfinish = ()=> imagesArea.style.display = 'none';
+					clearTimeout(theTimeout);
 				}
-				
 				if (!blockAllAni) mouseOut();
 				else if (halo.style.opacity < 1) mouseOver();
 				blockMouseOut = true;
@@ -361,7 +454,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 					infoTextAni.play();
 					infoTextAni.onfinish = ()=> renderedText.style.color = 'rgba(255,255,255,1)';
 				}
-				replaceRenderedText(windowDiv, starAndGlow, renderedText);
+				placeRenderedText(windowDiv, starAndGlow, renderedText, renderedTextCoordinatesDimensions);
 			}
 		}
 	}
@@ -375,7 +468,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 	myselfRing.classList.add('ring');
 	myselfCore.style.width = '50%';
 	myselfCore.style.height = '50%';
-	myselfCore.style.opacity =1;
+	myselfCore.style.opacity = 1;
 	myselfRing.style.width = '100%';
 	myselfRing.style.height = '100%';
 	myselfRing.style.opacity = 1;
@@ -419,15 +512,124 @@ document.addEventListener("DOMContentLoaded", (event) =>
 		{
 			myselfInfo.style.display = 'block';
 			myselfInfo.animate({opacity:[0,1]},500);
+			hideStars(true);
 		}
-		else myselfInfo.animate({opacity:[1,0]},500).onfinish = ()=> myselfInfo.style.display = 'none';	
+		else
+		{
+			myselfInfo.animate({opacity:[1,0]},500).onfinish = ()=> myselfInfo.style.display = 'none';
+			hideStars(false);
+		}
 	}
-		
 	let myselfInfo = document.createElement('div');
 	myselfInfo.classList.add('starDescription');
 	myselfInfo.id = 'myselfDescription';
 	windowDiv.append(myselfInfo);
 	myselfInfo = loopObject(myself, myselfInfo);
+	
+	// FULL WINDOW IMAGE DISPLAY
+	const fullWindow = document.createElement('div');
+	fullWindow.id = 'fullWindow';
+	body.append(fullWindow);
+	
+	const fullWindowImage = document.createElement('IMG');
+	fullWindowImage.id = 'fullWindowImage';
+	fullWindow.append(fullWindowImage);
+	const arrow = document.createElement('div');
+	arrow.classList.add('fullWindowImageNavigationArrow');
+	const arrowLeft = arrow.cloneNode();
+	const arrowRight = arrow.cloneNode();
+	arrowLeft.style.left = '5%';
+	arrowRight.style.left = '95%';
+	arrowLeft.innerHTML = '&#x1F8A0';
+	arrowRight.innerHTML = '&#x1F8A1';
+	const escape = document.createElement('div');
+	escape.id = 'escape';
+	escape.innerHTML = '&#x229A';
+	escape.style['z-index'] = 3;
+	arrowLeft.addEventListener('click', goLeft);
+	arrowRight.addEventListener('click', goRight);
+	escape.addEventListener('click', leaveFullWindow);
+	/*fullWindow.onwheel = (event)=>
+	{
+		if (event.deltaY > 0) goRight();
+		else goLeft();
+	}*/
+	fullWindow.append(arrowRight, arrowLeft, escape);
+	window.addEventListener('keydown', (event)=>
+	{
+		let key = event.keyCode || event.which;
+
+		const escape = 27;
+		const arrowLeftKey = 37;
+		const arrowRightKey = 39;
+		
+		if(fullWindow.style.display === 'block')
+		{
+			if (key === escape) leaveFullWindow();
+			if (key === arrowLeftKey) goLeft();
+			if (key === arrowRightKey) goRight();
+		}
+	});
+	
+	function goFullWindow()
+	{
+		body.style.overflow = 'hidden';
+		fullWindow.style.display = 'block';
+		fullWindow.animate({opacity: [0,1]}, 333);
+		hideStars(true);
+		myselfDiv.animate({opacity: [1,0]},500).onfinish =()=> myselfDiv.style.display = 'none';
+	}
+	function leaveFullWindow()
+	{
+		fullWindow.animate({opacity: [1,0]}, 200).onfinish = ()=>
+		{
+			fullWindow.style.display = null;
+			body.style.overflow = null;
+			hideStars(false);
+			myselfDiv.style.display = 'block';
+			myselfDiv.animate({opacity: [0,1]},500);
+		};
+	}
+	function goRight()
+	{
+		globalImageIndex++;
+		if (globalImageIndex >= globalImageArray.length-1) globalImageIndex = 0;
+		displayImageFullWindow(true);
+	}
+	function goLeft()
+	{
+		globalImageIndex--;
+		if (globalImageIndex < 0) globalImageIndex = globalImageArray.length-1;
+		displayImageFullWindow(true);
+	}
+	
+	function displayImageFullWindow(rerender)
+	{
+		if (fullWindow.style.display !== 'block') goFullWindow();
+		
+		fullWindowImage.src = globalImageArray[globalImageIndex].src;
+		
+		if (rerender) fullWindowImage.style.opacity = 1/3;
+		const windowAspectRatio = fullWindow.clientWidth / fullWindow.clientHeight;
+		const imageAspectRatio = fullWindowImage.naturalWidth / fullWindowImage.naturalHeight;
+		
+		if (fullWindowImage.naturalWidth < fullWindow.clientWidth && fullWindowImage.naturalHeight < fullWindow.clientHeight)
+		{
+			fullWindowImage.style.width = fullWindowImage.naturalWidth+'px';
+			fullWindowImage.style.height = fullWindowImage.naturalHeight+'px';
+		}
+		else if (imageAspectRatio >= windowAspectRatio)
+		{
+			fullWindowImage.style.width = '100%';
+			fullWindowImage.style.height = fullWindow.clientWidth/imageAspectRatio+'px';
+		}
+		else
+		{
+			fullWindowImage.style.height = '100%';
+			fullWindowImage.style.width = fullWindow.clientHeight*imageAspectRatio+'px';
+		}
+		if (rerender) fullWindowImage.animate({opacity: [0,1]}, 333).onfinish = ()=> fullWindowImage.style.opacity = 1;
+	}
 });
 
 function loopObject(object, container)
@@ -525,7 +727,7 @@ function loopObject(object, container)
 	return container;
 }
 
-function replaceRenderedText(windowDiv, starAndGlow, renderedText)
+function placeRenderedText(windowDiv, starAndGlow, renderedText, renderedTextCoordinatesDimensions)
 {
 	// I love using getBoundingClientRect() because of its reliability, but it gives coordinates relative to the window, so once there's scrolling, you have to add scroll offset or use offsetLeft / offsetTop as I do here. CAUTION: offset takes transform-translate into consideration, unlike getBoundingClientRect(). Since starAndGlow is grabbed by its center, the sides are +/- width/2 or height/2. ALSO CAUTION: renderedText only has translateX(-50%), meaning offsetTop is literally the top.
 	
@@ -543,6 +745,35 @@ function replaceRenderedText(windowDiv, starAndGlow, renderedText)
 			else renderedText.style.left = starAndGlow.offsetLeft + starAndGlow.getBoundingClientRect().width/2 + renderedText.getBoundingClientRect().width/2 + 'px'; //... if star-center is perfectly center or left of background middle, place rendered text right of star
 		}
 	}
+	
+	renderedTextCoordinatesDimensions.x = renderedText.offsetLeft;
+	renderedTextCoordinatesDimensions.y = renderedText.offsetTop;
+	renderedTextCoordinatesDimensions.width = renderedText.getBoundingClientRect().width;
+	renderedTextCoordinatesDimensions.height = renderedText.getBoundingClientRect().height;
+}
+
+function placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions)
+{
+	// very curious bug: if you keep clicking on a star without clicking anywhere else, renderedText styling coordinates and dimensions will become 0. offsetTop, getBoundingClientRect().x / .top and getBoundingClientRect().height... everything becomes zero. But the object is perfectly fine, it still has the coordinates and dimensions it should. Only when you click somewhere else and then again on the star it suddenly shows the proper numbers again. ... i bet this is caused by some caching algorithm that realizes there's been no other interaction (clicks elsewhere) that could have affected a change so it just doesn't perform any more readings.
+	// the only function that seems to be immunce against this is window.getComputedStyle(element)
+	// we don't need it upper in the placeRenderedText because renderedText is placed relative to a steady star it belongs to, but renderedText itself gets turned off and on and relative to it is placed the image.
+	
+	// and then... window.getComputedStyle(renderedText).getPropertyValue('height') would trip me up. Just as with mentioned upper, from the second opening of the text (when not having clicked anywhere else) it would show 'auto', all the other numbers work. I've tried focus and click (executed by the program) events to simulate click on body in between opening the texts, but it wouldn't work.
+	// So I've created an object that gets updated in placeRenderedText, and then read in this function. The most simplest solution.
+	
+	//console.log(renderedTextCoordinatesDimensions);
+	imagesArea.style.top = renderedTextCoordinatesDimensions.y + renderedTextCoordinatesDimensions.height - imagesArea.getBoundingClientRect().height+'px';
+
+	if (renderedTextCoordinatesDimensions.x > windowDiv.getBoundingClientRect().width/2) imagesArea.style.left = renderedTextCoordinatesDimensions.x - renderedTextCoordinatesDimensions.width/2 - imagesArea.getBoundingClientRect().width - 20 + 'px';
+	else imagesArea.style.left = renderedTextCoordinatesDimensions.x + renderedTextCoordinatesDimensions.width/2 + 20 + 'px';
+}
+
+function hideStars(hide)
+{
+	const allStars = document.getElementsByClassName('starAndGlow');
+	
+	if (hide) for (const star of Array.from(allStars)) setTimeout(()=>{ star.animate({opacity: [1,0]},400).onfinish =()=> star.style.display = 'none'},100*getRndInteger(0,allStars.length));
+	else for (const star of Array.from(allStars)) setTimeout(()=>{star.style.display = 'block'; star.animate({opacity: [0,1]},400)},100*getRndInteger(0,allStars.length));
 }
 
 function getRndInteger(min, max)

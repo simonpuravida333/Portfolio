@@ -42,6 +42,12 @@ body
 	display: none;
 }
 
+.mask
+{
+	-webkit-mask-image: linear-gradient(transparent, rgba(0,0,0,0.75));
+	mask-image: linear-gradient(transparent, rgba(0,0,0,0.75));
+}
+
 .starAndGlow
 {
 	width: 110px;
@@ -147,6 +153,38 @@ body
 	margin: 20px;
 }
 
+.starImage
+{
+	width: 100%;
+	outline: 3px solid white;
+	outline-offset: -7px;
+	border: 6px solid white;
+	border-radius: 10px;
+}
+
+.imagesArea
+{
+	position: absolute;
+	width: 400px;
+	z-index: 2;
+}
+
+.fullWindowImageNavigationArrow
+{
+	font-size: 65px;
+	font-weight: bold;
+	color: white;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	z-index: 3;
+	&:hover
+	{
+		cursor: pointer;
+		color: deepskyblue;
+	}
+}
+
 #myselfStar
 {
 	width: 50px;
@@ -167,10 +205,55 @@ body
 	overflow-y: scroll;
 	overflow-x: hidden;
 	color: white;
-    /*background-color: #4B5A96;*/
-    background-image: linear-gradient(0deg, #1F2D40, #2B4975, #465B96, #4E7FA0);
+    background-color: rgba(25,32,53,0.3); /*transparent; /*#414D70*/
+    /*background-image: linear-gradient(0deg, #1F2D40, #2B4975, #465B96, #4E7FA0);*/
     border-top: 20px solid white;
     border-bottom: 20px solid white;
     font-size: 18px;
     letter-spacing: 0.05em;
+}
+
+#escape
+{
+	position : absolute;
+	left : 95%;
+	top : 5%;
+	color : white;
+	font-size : 40px;
+	font-family: 'Arial';
+	transform : translate(-50%,-50%);
+	text-align: center;
+	
+	&:hover
+	{
+		/*font-weight: bold;*/
+		color: orange;
+		font-size: 50px;
+		cursor: pointer;
+	}	
+}
+
+#fullWindow
+{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	display: none;
+	/*background-color: rgba(0,25,50,0.8);*/
+}
+
+#fullWindowImage
+{
+	z-index: 2;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	outline: 3px solid white;
+	outline-offset: -7px;
+	border: 6px solid white;
+	border-radius: 10px;
 }
