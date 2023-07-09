@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 	windowDiv.classList.add('window');
 	windowDiv.append(background);
 	body.append(windowDiv);
-
+	
 	let windowAspectRatio = (window.innerWidth / window.innerHeight).toFixed(4);
 	const backgroundAspectRatio = 1.7778; // 16:9
 	let backgroundImageFullHeight = true;
@@ -327,17 +327,24 @@ document.addEventListener("DOMContentLoaded", (event) =>
 			let go = true;
 			const imageArray = [];
 			let index = -1;
+			let openedFirstTime = false;
 			
-			if (projects[z].imageLinks.length > 0)
+			async function loadImages()
 			{
-				for (const image in projects[z].imageLinks)
+				if (projects[z].imageLinks.length > 0)
 				{
-					const img = document.createElement('img');
-					img.src = projects[z].imageLinks[image];
-					img.classList.add('starImage');
-					imageArray.push(img);
-				}
-				imagesArea.append(imageArray[0]);
+					for (const image in projects[z].imageLinks)
+					{
+						const img = document.createElement('img');
+						img.src = projects[z].imageLinks[image];
+						console.log(img.src);
+						img.classList.add('starImage');
+						imageArray.push(img);
+					}
+					imagesArea.append(imageArray[0]);
+					await new Promise(wait => imageArray[0].onload = wait);
+					return true;
+				}				
 			}
 			
 			let theTimeout;
@@ -384,7 +391,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 				if (!blockAllAni && !blockMouseOut) mouseOut();
 				blockMouseOut = false;
 			});
-			touchArea.addEventListener('click', ()=>
+			touchArea.addEventListener('click', async ()=>
 			{
 				blockAllAni ^= true;
 				starBirthRing.style.display = 'block';
@@ -399,6 +406,13 @@ document.addEventListener("DOMContentLoaded", (event) =>
 						renderedText.style['border-top'] = "20px solid " + color;
 						renderedText.style['background-color'] = null;
 					}
+					
+					if (!openedFirstTime)
+					{
+						openedFirstTime = true;
+						await loadImages();
+					}
+					
 					imagesArea.style.display = 'block';
 					imagesArea.animate({opacity: [0,1]},500);
 					placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
@@ -610,7 +624,14 @@ document.addEventListener("DOMContentLoaded", (event) =>
 		if (rerender) fullWindowImage.style.opacity = 1/3;
 		const windowAspectRatio = fullWindow.clientWidth / fullWindow.clientHeight;
 		const imageAspectRatio = fullWindowImage.naturalWidth / fullWindowImage.naturalHeight;
-		
+		/*
+		console.log('WINDOW X '+fullWindow.clientWidth);
+		console.log('WINDOW Y '+fullWindow.clientHeight);
+		console.log('WINDOW ASPECT RATIO '+windowAspectRatio);
+		console.log('IMAGE X '+fullWindowImage.naturalWidth);
+		console.log('IMAGE Y '+fullWindowImage.naturalHeight);
+		console.log('IMAGE ASPECT RATIO '+imageAspectRatio);
+		*/
 		if (fullWindowImage.naturalWidth < fullWindow.clientWidth && fullWindowImage.naturalHeight < fullWindow.clientHeight)
 		{
 			fullWindowImage.style.width = fullWindowImage.naturalWidth+'px';
