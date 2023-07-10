@@ -182,7 +182,11 @@ document.addEventListener("DOMContentLoaded", (event) =>
 		}
 		
 		adjustBackground();
-		window.addEventListener('resize',()=> adjustBackground());
+		window.addEventListener('resize',()=>
+		{
+			adjustBackground();
+			if (fullWindow.style.display === 'block') frameImageFullWindow();
+		});
 		
 		// GETTING PLACEMENT RANGES
 		/* I've changed the placement of stars from relative within the window (absolute %) to relative within background (absolute %), so this condition isn't necessary anymore. It worked well though with the previous model. It's job was, that if you would have a high window aspect ratio of 2 or more (and would only see the sky of the background) it would place stars accordingly on the window.
@@ -618,10 +622,14 @@ document.addEventListener("DOMContentLoaded", (event) =>
 	function displayImageFullWindow(rerender)
 	{
 		if (fullWindow.style.display !== 'block') goFullWindow();
-		
 		fullWindowImage.src = globalImageArray[globalImageIndex].src;
-		
 		if (rerender) fullWindowImage.style.opacity = 1/3;
+		frameImageFullWindow()
+		if (rerender) fullWindowImage.animate({opacity: [0,1]}, 333).onfinish = ()=> fullWindowImage.style.opacity = 1;
+	}
+	
+	function frameImageFullWindow()
+	{
 		const windowAspectRatio = fullWindow.clientWidth / fullWindow.clientHeight;
 		const imageAspectRatio = fullWindowImage.naturalWidth / fullWindowImage.naturalHeight;
 		/*
@@ -647,7 +655,6 @@ document.addEventListener("DOMContentLoaded", (event) =>
 			fullWindowImage.style.height = '100%';
 			fullWindowImage.style.width = fullWindow.clientHeight*imageAspectRatio+'px';
 		}
-		if (rerender) fullWindowImage.animate({opacity: [0,1]}, 333).onfinish = ()=> fullWindowImage.style.opacity = 1;
 	}
 });
 
@@ -787,12 +794,35 @@ function placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions)
 	else imagesArea.style.left = renderedTextCoordinatesDimensions.x + renderedTextCoordinatesDimensions.width/2 + 20 + 'px';
 }
 
-function hideStars(hide)
+var inLock = false;
+async function hideStars(hide)
 {
-	const allStars = document.getElementsByClassName('starAndGlow');
-	
-	if (hide) for (const star of Array.from(allStars)) setTimeout(()=>{ star.animate({opacity: [1,0]},400).onfinish =()=> star.style.display = 'none'},100*getRndInteger(0,allStars.length));
-	else for (const star of Array.from(allStars)) setTimeout(()=>{star.style.display = 'block'; star.animate({opacity: [0,1]},400)},100*getRndInteger(0,allStars.length));
+	if (!inLock)
+	{
+		inLock = true;
+		const results = Array.from(document.getElementsByClassName('starAndGlow'));
+		const allStars = [];
+		for (let star = 0; star<results.length; star += 2) allStars.push(results[star]); // every second element is starDiffraction which uses the same class.
+		
+		while (!allHiddenOrVisible(allStars)) await new Promise(resolve => setTimeout(resolve,200));
+		if (hide) for (const star of allStars) setTimeout(()=>{ star.animate({opacity: [1,0]},400).onfinish =()=> star.style.display = 'none'},200*getRndInteger(0,allStars.length));
+		else for (const star of allStars) setTimeout(()=>{star.style.display = 'block'; star.animate({opacity: [0,1]},400)},200*getRndInteger(0,allStars.length));
+		await new Promise(resolve => setTimeout(resolve, allStars.length*200));
+		inLock = false;
+	}
+}
+
+function allHiddenOrVisible(allStars)
+{
+	let none = 0, block = 0, empty = 0;
+	for (const star of allStars)
+	{
+		if (star.style.display === '') empty++; // the first time will be this, when only the CSS styling is in effect, before any JS-set styling (block/none), as we're here only reading JS-set styling.
+		if (star.style.display === 'none') none++;
+		if (star.style.display === 'block') block++;
+	}
+	if (empty === allStars.length || block === allStars.length || none === allStars.length) return true;
+	return false;
 }
 
 function getRndInteger(min, max)
