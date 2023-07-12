@@ -433,8 +433,8 @@ document.addEventListener("DOMContentLoaded", (event) =>
 					//renderedText.classList.add('mask');
 					renderedText.animate([{borderTop: '20px solid '+ color, borderBottom: '20px solid '+color}, {borderTop: '20px solid #2D476B', borderBottom: '20px solid #2D476B'}],500).onfinish =()=>
 					{
-						renderedText.style['border-bottom'] = "20px solid #2D476B";
-						renderedText.style['border-top'] = "20px solid #2D476B";
+						renderedText.style['border-bottom'] = "20px solid transparent";
+						renderedText.style['border-top'] = "20px solid transparent";
 					}
 					imagesArea.animate({opacity: [1,0]},500).onfinish = ()=> imagesArea.style.display = 'none';
 					clearTimeout(theTimeout);

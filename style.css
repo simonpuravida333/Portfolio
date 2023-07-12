@@ -31,8 +31,8 @@ body
 	position: absolute;
 	transform: translateX(-50%);
 	background-color: #2D476B;
-	border-bottom: 20px solid #2D476B;
-	border-top: 20px solid #2D476B;
+	border-bottom: 20px solid transparent;
+	border-top: 20px solid transparent;
 	font-size: 18px;
 	border-radius: 20px;
 	padding: 20px;
