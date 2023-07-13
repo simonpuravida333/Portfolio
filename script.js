@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 	const body = document.querySelector('body');
 	body.innerHTML += canvaIconSVGDefsPart; // adds the "defs" part to body. It contains the styling IDs. This is vital if you have several instances of the same SVG and deal with display none / block of the SVGs. It's because the browser caches IDs only once, so the second, third... SVG you call won't have styling. Only the first (unless the first is display = block while another one is display = block. Then the other one will also have proper styling for the time the first SVG is visible. In other words: the browser caches the ID reference only once, but becuase the ID gets appended / removed from the DOM, it can't find it for the second, third ... SVG (which usually doesn't happen for IDs). That's the tricky thing about having in-place IDs (as in SVGs) get added / removed fromt the DOM body. The browers is fooled in thinking IDs are always global. That's why here I place the <defs> part to the body right away as it contains the stylings.
 	const background = document.createElement('img');
-	if (window.innerHeight <= 1080 && window.innerWidth <= 1920) background.src = "nightsky compressed.jpg"; // 2K
+	if (window.screen.height <= 1080 && window.screen.width <= 1920) background.src = "nightsky compressed.jpg"; // 2K
 	else background.src = "nightsky upscaled compressed.jpg"; // 8K
 	background.classList.add('window');
 	const windowDiv = document.createElement('div');
@@ -464,7 +464,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 				
 				if (infoDivAni.playbackRate === -1) infoDivAni.playbackRate = 1;
 				renderedText.style.display = 'block';
-				renderedText.style['background-color'] = 'transparent';
+				renderedText.style['background-color'] = 'rgba(25,32,53,0.3)'; //'transparent';
 				renderedText.style.color = 'rgba(255,255,255,0)';
 				infoDivAni.play();
 				infoDivAni.onfinish = ()=>
