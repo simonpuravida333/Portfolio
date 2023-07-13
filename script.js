@@ -408,7 +408,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 				if (blockAllAni)
 				{
 					//renderedText.classList.remove('mask');
-					renderedText.animate([{borderTop: '20px solid #2D476B', borderBottom: '20px solid #2D476B', backgroundColor: 'transparent'},{borderTop: '20px solid white', borderBottom: '20px solid white', backgroundColor: 'transparent'},{borderTop: '20px solid '+ color, borderBottom: '20px solid '+color, backgroundColor: '#2D476B'}],500).onfinish = ()=>
+					renderedText.animate([{borderTop: '20px solid #2D476B', borderBottom: '20px solid #2D476B', backgroundColor: 'rgba(25,32,53,0.3)'},{borderTop: '20px solid white', borderBottom: '20px solid white', backgroundColor: 'rgba(25,32,53,0.3)'},{borderTop: '20px solid '+ color, borderBottom: '20px solid '+color, backgroundColor: '#2D476B'}],500).onfinish = ()=>
 					{
 						renderedText.style['border-bottom'] = "20px solid " + color;
 						renderedText.style['border-top'] = "20px solid " + color;
