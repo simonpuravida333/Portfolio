@@ -421,18 +421,15 @@ document.addEventListener("DOMContentLoaded", (event) =>
 						await loadImages();
 					}
 
-					if (blockAllAni) // if star is STILL opened after the await upper is finished / the user didn't close it quickly after opening (while image was still loading). Otherwise image preview would appear without an opened star.
+					if (blockAllAni) imagesArea.style.display = 'block';
+					imagesArea.animate({opacity: [0,1]},500);
+					placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
+					
+					if (imageArray.length > 0)
 					{
-						imagesArea.style.display = 'block';
-						imagesArea.animate({opacity: [0,1]},500);
-						placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
-						
-						if (imageArray.length > 0)
-						{
-							clearTimeout(theTimeout);
-							go = true;
-							nextImage(true);
-						}
+						clearTimeout(theTimeout);
+						go = true;
+						nextImage(true);
 					}
 				}
 				else 
