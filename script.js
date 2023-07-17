@@ -350,7 +350,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 						imageArray.push(img);
 					}
 					imagesArea.append(imageArray[0]);
-					await new Promise(wait => imageArray[0].onload = wait);
+					if (!imageArray[0].complete) await new Promise(wait => imageArray[0].onload = wait);
 					return true;
 				}				
 			}
@@ -360,7 +360,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 			{
 				if (index >= imageArray.length-1 || index < 0) index = 0;
 				else if(!continueAgain) index ++;
-				await new Promise(wait => imageArray[index].onload = wait);
+				if (!imageArray[index].complete) await new Promise(wait => imageArray[index].onload = wait);
 				if (!continueAgain) imagesArea.animate({opacity: [1,0]},333).onfinish = ()=>
 				{
 					if(imagesArea.children.length > 0) imagesArea.removeChild(imagesArea.children[0]);
