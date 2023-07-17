@@ -421,7 +421,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 						await loadImages();
 					}
 
-					if (blockAllAni) imagesArea.style.display = 'block';
+					imagesArea.style.display = 'block';
 					imagesArea.animate({opacity: [0,1]},500);
 					placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
 					
