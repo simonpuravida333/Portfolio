@@ -365,7 +365,7 @@ document.addEventListener("DOMContentLoaded", (event) =>
 					if(imagesArea.children.length > 0) imagesArea.removeChild(imagesArea.children[0]);
 					imagesArea.append(imageArray[index]);
 					placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
-					imagesArea.animate({opacity: [0,1]},333).onfinish = ()=> {theTimeout = setTimeout(nextImage, 3500, false)};
+					imagesArea.animate({opacity: [0,1]}, 333).onfinish = ()=> {theTimeout = setTimeout(nextImage, 3500, false)};
 				}
 				else theTimeout = setTimeout(nextImage, 3500, false);
 			}
@@ -420,16 +420,19 @@ document.addEventListener("DOMContentLoaded", (event) =>
 						openedFirstTime = true;
 						await loadImages();
 					}
-					
-					imagesArea.style.display = 'block';
-					imagesArea.animate({opacity: [0,1]},500);
-					placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
-					
-					if (imageArray.length > 0)
+
+					if (blockAllAni) // if star is STILL opened after the await upper is finished / the user didn't close it quickly after opening (while image was still loading). Otherwise image preview would appear without an opened star.
 					{
-						clearTimeout(theTimeout);
-						go = true;
-						nextImage(true);
+						imagesArea.style.display = 'block';
+						imagesArea.animate({opacity: [0,1]},500);
+						placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
+						
+						if (imageArray.length > 0)
+						{
+							clearTimeout(theTimeout);
+							go = true;
+							nextImage(true);
+						}
 					}
 				}
 				else 
