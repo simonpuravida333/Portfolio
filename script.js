@@ -81,7 +81,7 @@ const life = structuredClone(codingProject);
 life.name = 'Life (Harvard CS50W Final Project)';
 life.objective = 'A single-page app to easily access the data of the GBIF (Global Biodiversity Information Facility). The choice of project was free in this final assignment: I chose the GBIF where two passions come together: nature and tech.';
 life.stack = 'Front-end: AJAX, Web Animations API, HTML, CSS<br>Back-end: yet to be implemented.';
-life.tasks = 'deep examination of the GBIF (rest) API, sensible user querying and filter options, fetch calls design with thorough server response vetting, dynamic image loading, dynamic and appealing UI design, animations';
+life.tasks = 'deep examination of the GBIF (rest) API, sensible user querying and filter options, fetch calls design with thorough server response vetting, everything is fetched and loaded (images) dynamically, depending on how deep the user explores the results, dynamic and appealing UI design, animations';
 life.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24';
 life.links.push('https://github.com/simonpuravida333/Life');
 life.imageLinks.push('captures/Life 1.png', 'captures/Life 2.png', 'captures/Life 3.png', 'captures/Life 4.png', 'captures/Life 5.png', 'captures/Life 6.png', 'captures/Life 7.png', 'captures/Life 8.png', 'captures/Life 9.png', 'captures/Life 10.png', 'captures/Life 11.png');
@@ -142,7 +142,7 @@ const myself = {
 	}
 }
 
-document.addEventListener("DOMContentLoaded", (event) =>
+document.addEventListener("DOMContentLoaded", () =>
 {
 	const body = document.querySelector('body');
 	body.innerHTML += canvaIconSVGDefsPart; // adds the "defs" part to body. It contains the styling IDs. This is vital if you have several instances of the same SVG and deal with display none / block of the SVGs. It's because the browser caches IDs only once, so the second, third... SVG you call won't have styling. Only the first (unless the first is display = block while another one is display = block. Then the other one will also have proper styling for the time the first SVG is visible. In other words: the browser caches the ID reference only once, but becuase the ID gets appended / removed from the DOM, it can't find it for the second, third ... SVG (which usually doesn't happen for IDs). That's the tricky thing about having in-place IDs (as in SVGs) get added / removed fromt the DOM body. The browers is fooled in thinking IDs are always global. That's why here I place the <defs> part to the body right away as it contains the stylings.
@@ -520,10 +520,9 @@ document.addEventListener("DOMContentLoaded", (event) =>
 			easing: ['ease-in','ease-out'],
 		},800);
 	}
-	let myselfInfoVisible = false;
+	let myselfInfoVisible = false;var hey = 0;
 	myselfDiv.onclick = ()=>
-	{
-		myselfRing.animate({
+	{		myselfRing.animate({
 			width: ['100%','200%','300%'],
 			height: ['100%','200%','300%'],
 			opacity: [1,1,0],
