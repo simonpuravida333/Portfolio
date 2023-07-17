@@ -421,16 +421,18 @@ document.addEventListener("DOMContentLoaded", (event) =>
 						openedFirstTime = true;
 						await loadImages();
 					}
-
-					imagesArea.style.display = 'block';
-					imagesArea.animate({opacity: [0,1]},500);
-					placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
-					
-					if (imageArray.length > 0)
+					if (blockAllAni)
 					{
-						clearTimeout(theTimeout);
-						go = true;
-						nextImage(true);
+						imagesArea.style.display = 'block';
+						imagesArea.animate({opacity: [0,1]},500);
+						placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
+						
+						if (imageArray.length > 0)
+						{
+							clearTimeout(theTimeout);
+							go = true;
+							nextImage(true);
+						}
 					}
 				}
 				else 
