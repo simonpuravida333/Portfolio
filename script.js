@@ -356,11 +356,12 @@ document.addEventListener("DOMContentLoaded", (event) =>
 			}
 			
 			let theTimeout;
-			function nextImage(continueAgain)
+			async function nextImage(continueAgain)
 			{
 				if (index >= imageArray.length-1 || index < 0) index = 0;
 				else if(!continueAgain) index ++;
-				if (!continueAgain) imageArray[index].onload = imagesArea.animate({opacity: [1,0]},333).onfinish = ()=>
+				await new Promise(wait => imageArray[index].onload = wait);
+				if (!continueAgain) imagesArea.animate({opacity: [1,0]},333).onfinish = ()=>
 				{
 					if(imagesArea.children.length > 0) imagesArea.removeChild(imagesArea.children[0]);
 					imagesArea.append(imageArray[index]);
