@@ -11,7 +11,7 @@ const codingProject = {
 	name: "",
 	objective: "",
 	stack: "",
-	tasks: "",
+	implementations: "",
 	sophistication: "",
 	links: [],
 	imageLinks: [],
@@ -60,7 +60,7 @@ projects.push(auctions);
 const mail = structuredClone(codingProject);
 mail.name = 'Mail (Harvard CS50W Project 3)';
 mail.objective = 'A single-page e-mail application implemention on the front-end.';
-mail.stack = 'Front-end: AJAX, JSON API, CSS, HTML';
+mail.stack = 'Front-end: JavaScript, AJAX, JSON API, CSS, HTML';
 mail.tasks = 'algorithms, UI design, single-page app';
 mail.sophistication = '&#x2B24 &#x2B24 &#x2B24';
 mail.links.push('https://github.com/simonpuravida333/Mail');
@@ -70,7 +70,7 @@ projects.push(mail);
 const network = structuredClone(codingProject);
 network.name = 'Network (Harvard CS50W Project 4)';
 network.objective = 'A Twitter-like single-page app for writing messages and following people.'
-network.stack = 'Back-end: Python / Django, SQLite, JSON API<br>Front-end: AJAX, JSON API, Web Animations API, HTML, CSS';
+network.stack = 'Back-end: Python / Django, SQLite, JSON API<br>Front-end: JavaScript, AJAX, JSON API, Web Animations API, HTML, CSS';
 network.tasks = '3 SQL tables / models, routing, algoritms (on both stack-ends), UI design, single-page app';
 network.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 ';
 network.links.push('https://github.com/simonpuravida333/Network');
@@ -80,8 +80,8 @@ projects.push(network);
 const life = structuredClone(codingProject);
 life.name = 'Life (Harvard CS50W Final Project)';
 life.objective = 'A single-page app to easily access the data of the GBIF (Global Biodiversity Information Facility). The choice of project was free in this final assignment: I chose the GBIF where two passions come together: nature and tech.';
-life.stack = 'Front-end: AJAX, Web Animations API, HTML, CSS<br>Back-end: yet to be implemented.';
-life.tasks = 'deep examination of the GBIF (rest) API, sensible user querying and filter options, fetch calls design with thorough server response vetting, everything is fetched and loaded (images) dynamically, depending on how deep the user explores the results, dynamic and appealing UI design, animations';
+life.stack = 'Front-end: JavaScript, AJAX, Rest API, Web Animations API, HTML, CSS, mobile responsive<br>Back-end: yet to be implemented.';
+life.tasks = 'deep examination of the GBIF Rest API, sensible user querying and filter options, fetch calls design with thorough server response vetting, everything is fetched and loaded (images) dynamically, depending on how deep the user explores the results, dynamic and appealing UI design, animations';
 life.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24';
 life.links.push('https://github.com/simonpuravida333/Life');
 life.imageLinks.push('captures/Life 1.png', 'captures/Life 2.png', 'captures/Life 3.png', 'captures/Life 4.png', 'captures/Life 5.png', 'captures/Life 6.png', 'captures/Life 7.png', 'captures/Life 8.png', 'captures/Life 9.png', 'captures/Life 10.png', 'captures/Life 11.png');
@@ -329,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () =>
 				globalImageArray = imageArray;
 				globalImageIndex = index;
 				touchArea.click();
-				displayImageFullWindow(true);
+				nextimaGefulLwinDow(true);
 			}
 			
 			let go = true;
@@ -616,16 +616,16 @@ document.addEventListener("DOMContentLoaded", () =>
 	{
 		globalImageIndex++;
 		if (globalImageIndex > globalImageArray.length-1) globalImageIndex = 0;
-		displayImageFullWindow(true);
+		nextimaGefulLwinDow(true);
 	}
 	function goLeft()
 	{
 		globalImageIndex--;
 		if (globalImageIndex < 0) globalImageIndex = globalImageArray.length-1;
-		displayImageFullWindow(true);
+		nextimaGefulLwinDow(true);
 	}
 	
-	function displayImageFullWindow(rerender)
+	function nextimaGefulLwinDow(rerender)
 	{
 		if (fullWindow.style.display !== 'block') goFullWindow();
 		fullWindowImage.src = globalImageArray[globalImageIndex].src;
