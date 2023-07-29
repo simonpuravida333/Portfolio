@@ -145,7 +145,7 @@ const myself = {
 document.addEventListener("DOMContentLoaded", () =>
 {
 	const body = document.querySelector('body');
-	body.innerHTML += canvaIconSVGDefsPart; // adds the "defs" part to body. It contains the styling IDs. This is vital if you have several instances of the same SVG and deal with display none / block of the SVGs. It's because the browser caches IDs only once, so the second, third... SVG you call won't have styling. Only the first (unless the first is display = block while another one is display = block. Then the other one will also have proper styling for the time the first SVG is visible. In other words: the browser caches the ID reference only once, but becuase the ID gets appended / removed from the DOM, it can't find it for the second, third ... SVG (which usually doesn't happen for IDs). That's the tricky thing about having in-place IDs (as in SVGs) get added / removed fromt the DOM body. The browers is fooled in thinking IDs are always global. That's why here I place the <defs> part to the body right away as it contains the stylings.
+	body.innerHTML += canvaIconSVGDefsPart; // adds the "defs" part to body. It contains the styling IDs. This is vital if you have several instances of the same SVG and deal with display none / block of the SVGs. It's because the browser caches IDs only once, so the second, third... SVG you call won't have styling. Only the first (unless the first is display = block while another one is display = block. Then the other one will also have proper styling for the time the first SVG is visible. In other words: the browser caches the ID reference only once, but becuase the ID gets appended / removed from the DOM, it can't find it for the second, third ... SVG (which usually doesn't happen for IDs). That's the tricky thing about having in-place IDs (as in SVGs) get added / removed from the DOM body. The browers is fooled in thinking (CSS) IDs are always global. That's why I've seperated the <defs> part from the Canva SVG it belonged to and just place the <defs> part permanently to the body right away, to provide global styling.
 	const background = document.createElement('img');
 	if (window.screen.height <= 1080 && window.screen.width <= 1920) background.src = "nightsky compressed.jpg"; // 2K
 	else background.src = "nightsky upscaled compressed.jpg"; // 8K
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () =>
 	body.append(windowDiv);
 	
 	let windowAspectRatio = (window.innerWidth / window.innerHeight).toFixed(4);
-	const backgroundAspectRatio = 1.7778; // 16:9
+	const backgroundAspectRatio = 1.7778; // 16:9, the aspect ratio of the background image
 	let backgroundImageFullHeight = true;
 	if (windowAspectRatio > backgroundAspectRatio) backgroundImageFullHeight = false;
 
@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () =>
 		});
 		
 		// GETTING PLACEMENT RANGES
-		/* I've changed the placement of stars from relative within the window (absolute %) to relative within background (absolute %), so this condition isn't necessary anymore. It worked well though with the previous model. It's job was, that if you would have a high window aspect ratio of 2 or more (and would only see the sky of the background) it would place stars accordingly on the window.
+		/* I've changed the placement of stars from relative within the window (absolute %) to relative within background (absolute %), so this condition isn't necessary anymore. It worked well though with the previous model. Its job was, that if you would have a high window aspect ratio of 2 or more (=ultra-wide screen, and thus would only see the sky of the background) it would place stars accordingly on the window.
 		let verticalUpperRangePercent = 50; // the upper half of the background on which stars can appear IF full height of background image is visible.
 		if (!backgroundImageFullHeight)
 		{
@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () =>
 			starAndGlow.style.left = xPlacement+'%';
 			starAndGlow.style.top = yPlacement+'%';
 			
-			// GETTING STAR AND HALO (and making the classes and IDs names unique to avoid duplicates)
+			// GETTING STAR AND HALO (and making the classes and IDs names in SVGs unique to avoid duplicate styling)
 			let newStar = `${starSVG}`; // clones the string
 			newStar = newStar.replace(/#([0-9]|[A-F]){6}/, color);
 			newStar = newStar.replaceAll('st0','st'+z);
@@ -329,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () =>
 				globalImageArray = imageArray;
 				globalImageIndex = index;
 				touchArea.click();
-				nextimaGefulLwinDow(true);
+				nextImageFullWindow(true);
 			}
 			
 			let go = true;
@@ -345,7 +345,7 @@ document.addEventListener("DOMContentLoaded", () =>
 					{
 						const img = document.createElement('img');
 						img.src = projects[z].imageLinks[image];
-						console.log(img.src);
+						//console.log(img.src);
 						img.classList.add('starImage');
 						imageArray.push(img);
 					}
@@ -386,8 +386,8 @@ document.addEventListener("DOMContentLoaded", () =>
 				core.animate([{opacity: 0},{opacity: 0.2},{opacity: 1}],1500).onfinish = ()=> core.style.opacity = 1;
 			}, shuffledSuccession[z]*200);
 			
-			const infoDivAni = renderedText.animate([{opacity: 0},{opacity: 1}],300);
-			const infoTextAni = renderedText.animate([{color: 'rgba(255,255,255,0)'},{color: 'rgba(255,255,255,1)'}],333);
+			const infoDivAni = renderedText.animate({opacity: [0,1]},300);
+			const infoTextAni = renderedText.animate({color: ['rgba(255,255,255,0)','rgba(255,255,255,1)']},333);
 			infoDivAni.pause();
 			infoTextAni.pause();
 			
@@ -616,16 +616,16 @@ document.addEventListener("DOMContentLoaded", () =>
 	{
 		globalImageIndex++;
 		if (globalImageIndex > globalImageArray.length-1) globalImageIndex = 0;
-		nextimaGefulLwinDow(true);
+		nextImageFullWindow(true);
 	}
 	function goLeft()
 	{
 		globalImageIndex--;
 		if (globalImageIndex < 0) globalImageIndex = globalImageArray.length-1;
-		nextimaGefulLwinDow(true);
+		nextImageFullWindow(true);
 	}
 	
-	function nextimaGefulLwinDow(rerender)
+	function nextImageFullWindow(rerender)
 	{
 		if (fullWindow.style.display !== 'block') goFullWindow();
 		fullWindowImage.src = globalImageArray[globalImageIndex].src;
