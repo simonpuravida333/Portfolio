@@ -5,6 +5,8 @@ const canvaIconSVG = "<svg width='100' height='100' viewBox='0 0 100 100' fill='
 const canvaIconSVGDefsPart = "<svg><defs><radialGradient id='paint0_radial_1_11' cx='0' cy='0' r='1' gradientUnits='userSpaceOnUse' gradientTransform='translate(19.2735 88.5696) rotate(-49.416) scale(77.2871)'><stop stop-color='#6420FF'/><stop offset='1' stop-color='#6420FF' stop-opacity='0'/></radialGradient><radialGradient id='paint1_radial_1_11' cx='0' cy='0' r='1' gradientUnits='userSpaceOnUse' gradientTransform='translate(26.4548 11.3602) rotate(54.703) scale(87.1555)'><stop stop-color='#00C4CC'/><stop offset='1' stop-color='#00C4CC' stop-opacity='0'/></radialGradient><radialGradient id='paint2_radial_1_11' cx='0' cy='0' r='1' gradientUnits='userSpaceOnUse' gradientTransform='translate(19.3022 88.5691) rotate(-45.1954) scale(76.3513 35.115)'><stop stop-color='#6420FF'/><stop offset='1' stop-color='#6420FF' stop-opacity='0'/></radialGradient><radialGradient id='paint3_radial_1_11' cx='0' cy='0' r='1' gradientUnits='userSpaceOnUse' gradientTransform='translate(40.8659 13.4642) rotate(66.5198) scale(78.674 131.797)'><stop stop-color='#00C4CC'/><stop offset='1' stop-color='#00C4CC' stop-opacity='0'/></radialGradient><clipPath id='clip0_1_11'><rect width='100' height='100' fill='white'/></clipPath><clipPath id='clip1_1_11'><rect width='100' height='100' fill='white'/></clipPath></defs></svg>";
 // why here and not placed in HTML? Because HTML loads faster than DOMContentLoaded, making the stars and halo flash across the whole screen before they get the hidden attribute. When they flash, some of them are stretched to 100% width (from having no width, so it uses the 100% from the viewbox).
 //svg.style.visibility = 'hidden'; // DON'T USE style.display on SVGs directly! it messes up the SVG.
+const arrowLeftSVG = "<svg width='60' height='60' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'><path class='arrowColor' d='M36.8 85.7L3.1 54.6L44.8 18.3V31.8H95.9V66.9L86.6 76.3H44.8V80.1L36.8 85.7ZM41.8 75.3V65.2H92.6V35H41.8V25.9L14 50.1L41.8 75.3Z'/></svg>";
+const arrowRightSVG = "<svg width='60' height='60' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'><path class='arrowColor' d='M62.2 85.7L54.2 80.1V76.3H12.4L3.1 66.9V31.8H54.2V18.3L95.9 54.6L62.2 85.7ZM57.2 75.3L85 50.1L57.2 25.9V35H6.4V65.2H57.2V75.3Z'/></svg>";
 
 const codingProject = {
 	work: 'Software Engineering',
@@ -554,14 +556,41 @@ document.addEventListener("DOMContentLoaded", () =>
 	const fullWindowImage = document.createElement('IMG');
 	fullWindowImage.id = 'fullWindowImage';
 	fullWindow.append(fullWindowImage);
+	
+	/*
 	const arrow = document.createElement('div');
 	arrow.classList.add('fullWindowImageNavigationArrow');
 	const arrowLeft = arrow.cloneNode();
 	const arrowRight = arrow.cloneNode();
-	arrowLeft.style.left = '5%';
-	arrowRight.style.left = '95%';
 	arrowLeft.innerHTML = '&#x1F8A0';
 	arrowRight.innerHTML = '&#x1F8A1';
+	...turns out not every OS knows this unicode (Android e.g. doesn't). So I turned it into a vector.
+	*/
+	
+	const arrowLeft = document.createElement('div');
+	const arrowRight = document.createElement('div');
+	arrowLeft.classList.add('fullWindowImageNavigationArrowSVG');
+	arrowRight.classList.add('fullWindowImageNavigationArrowSVG');
+	arrowLeft.style.left = '5%';
+	arrowRight.style.left = '95%';
+	const svgArrowLeftOne = document.createElement('div');
+	const svgArrowRightOne = document.createElement('div');
+	svgArrowLeftOne.innerHTML = arrowLeftSVG;
+	svgArrowRightOne.innerHTML = arrowRightSVG;
+	const svgArrowLeftTwo = document.createElement('div');
+	const svgArrowRightTwo = document.createElement('div');
+	svgArrowLeftTwo.innerHTML = arrowLeftSVG.replace('arrowColor','arrowColorHover');
+	svgArrowRightTwo.innerHTML = arrowRightSVG.replace('arrowColor','arrowColorHover');
+	svgArrowLeftTwo.style.display = 'none';
+	svgArrowRightTwo.style.display = 'none';
+	arrowLeft.append(svgArrowLeftOne, svgArrowLeftTwo);
+	arrowRight.append(svgArrowRightOne, svgArrowRightTwo);
+	arrowLeft.onmouseover = ()=>{svgArrowLeftOne.style.display = 'none'; svgArrowLeftTwo.style.display = 'block'};
+	arrowLeft.onmouseout = ()=>{svgArrowLeftOne.style.display = 'block'; svgArrowLeftTwo.style.display = 'none'};
+	arrowRight.onmouseover = ()=>{svgArrowRightOne.style.display = 'none'; svgArrowRightTwo.style.display = 'block'};
+	arrowRight.onmouseout = ()=>{svgArrowRightOne.style.display = 'block'; svgArrowRightTwo.style.display = 'none'};
+	//... ok what's all this fuss about the arrows? Originally I just added the unicode ('commented-out block just upper of this arrow block') until I realized that not all OS know this arrow, like Android e.g.. Easy solution: export it as SVG in Figma (because Illustrator doesn't know it either) and add it as svg-inline-element. That worked well, but then there would be a challenge regarding the hover effect: adding an onmouse listener to the SVG would fire frame-wise (onmouseover ever frame)! So it needed a parent div, then it would do the escpected behaviour, but it was not possible to just change the styling of SVG like this. My first guess was to just change the fill property directly in the shape property (as I got it from Figma), meaning I'd replace the innerHTML string that described the fill part within another; but as feared, the browser engine doesn't that readily update the reading of the inline-SVG, meaning when you hover, sometimes it would change colour, sometimes not. So just for trying, I removed the fill property and added a class which described the fill property in CSS. But as expected, because the browser engine wouldn't update frequently the content of the HTML SVG element (with a new class) the color update still wasn't convincing. You could directly add the CSS hover property to it, but because most of the SVG is actually empty space, you'd have to directly hover over the white part (vector area) of the SVG for the arrow to turn blue, it wouldn't work in the center part e.g.. The arrow vector of the SVG was placed in a rectangle originally, but there's no way to add a hover listener to the rectangle that would then address the child arrow vector, or likewise a listener to the viewBox. I later removed the rectangle, it was not needed, it's just something that came from Figma. So I thought: alright, let's just take the class and load the stylestheet in JS to change the class there, because stylesheet changes are updated frame-wise. But that wouldn't work because the browser throws in a CORS block when loading the stylesheet in JS, and it doesn't tell you that it's caused by a CORS block btw, it just tells you that it failed to load the rules part of hte stylehsheet, the part we need. Since I want this script to run directly in github, it's not an option to put it into a server. So in the end it had to be a simple but a bit blatant solution of actually having a two SVGs for every arrow, with different styling classes each. The SVG get swapped when hovering.
+		
 	const escape = document.createElement('div');
 	escape.id = 'escape';
 	escape.innerHTML = '&#x229A';

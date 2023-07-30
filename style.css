@@ -185,6 +185,32 @@ body
 		color: deepskyblue;
 	}
 }
+.fullWindowImageNavigationArrowSVG
+{
+	position: absolute;
+	height: 60px;
+	width: 60px;
+	border-radius: 30px;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	z-index: 3;
+	&:hover
+	{
+		cursor: pointer;
+	}
+}
+.arrowColor
+{
+	fill: white;
+	/*&:hover
+	{
+		fill: deepskyblue;
+	}*/
+}
+.arrowColorHover
+{
+	fill: deepskyblue;
+}
 
 #myselfStar
 {
