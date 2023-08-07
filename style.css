@@ -40,6 +40,7 @@ body
 	width: 450px;
 	z-index: 1;
 	display: none;
+	overflow-y: scroll;
 }
 
 .mask
@@ -64,6 +65,17 @@ body
 	width: 50%;
 	height: 50%;
 	border-radius: 100%; /* doesn't work for the SVG, which always is rendered in a rectangular viewBox, but I need it for the touch area */
+}
+.starDiffraction
+{
+	transform: translate(-50%,-50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 130%;
+	height: 130%;
+	opacity: 0;
+	pointer-events: none;
 }
 .starDiffractionHorizontal
 {	
@@ -131,11 +143,15 @@ body
 .svgDiv
 {
 	cursor:pointer;
-	width: 100px;
-	height: 100px;
-	border-radius:100%;
 	margin-right: 15px;
 }
+.svgDivMobile
+{
+	cursor:pointer;
+	margin-right: 15px;
+	margin-left: 55px;
+}
+
 .window
 {
 	position: absolute;
@@ -168,6 +184,13 @@ body
 	width: 400px;
 	z-index: 2;
 	cursor: cell;
+}
+
+.imagesAreaMobile
+{
+	z-index: 2;
+	cursor: cell;
+	margin: 55px;
 }
 
 .fullWindowImageNavigationArrow
@@ -211,6 +234,39 @@ body
 {
 	fill: deepskyblue;
 }
+.lineDiv
+{
+	background-color: white;
+	flex: 1;
+	height: 2px;
+	border-radius: 2px;
+	margin: 5px;
+}
+.lineDivMobile
+{
+	background-color: white;
+	flex: 1;
+	height: 4px;
+	border-radius: 4px;
+	margin: 10px;
+}
+.pearl
+{
+	width: 8px;
+	height: 8px;
+	margin: 8px;
+	border-radius: 4px
+	background-color: white;
+}
+.pearlMobile
+{
+	width: 16px;
+	height: 16px;
+	margin: 16px;
+	border-radius: 8px
+	background-color: white;
+}
+
 
 #myselfStar
 {
@@ -220,8 +276,9 @@ body
 	top: 50px;
 	cursor: pointer;
 	display: none;
+	z-index: 3;
 }
-	
+
 #myselfDescription
 {
 	transform: translate(0,0);
@@ -238,6 +295,19 @@ body
     border-bottom: 20px solid white;
     font-size: 18px;
     letter-spacing: 0.05em;
+    z-index: 4;
+}
+
+#myselfDescriptionMobile
+{
+	overflow-y: scroll;
+	overflow-x: hidden;
+	color: white;
+    background-color: rgba(25,32,53,0.3); /*transparent; /*#414D70*/
+    /*background-image: linear-gradient(0deg, #1F2D40, #2B4975, #465B96, #4E7FA0);*/
+    font-size: 36px;
+    letter-spacing: 0.05em;
+    z-index: 4;
 }
 
 #escape
@@ -283,4 +353,20 @@ body
 	outline-offset: -7px;
 	border: 6px solid white;
 	border-radius: 10px;
+}
+
+#infoBlockScreen
+{
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	color: white;
+	width: 500px;
+	font-size: 40px;
+	font-weight: bold;
+	font-style: italic;
+	font-family: 'Crimson Pro';
+	z-index: 5;
+	display: none;
 }
