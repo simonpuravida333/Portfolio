@@ -52,9 +52,10 @@ function handleEnd(element, touchArea)
 
 function handleMove(event, element)
 {
-	if (event.touches.length > 1) return;
+	if (event.touches.length > 1) return; // only one finger allowed, or it would mess when the user tried to zoom (pinch / two finger interaction)
 	movement = event.changedTouches[0].clientY;
 	let delta = movement - startPosition;
+	if (delta < 0) return; // this is a late implementation. As you can see below, it regards both, positive and negative deltas. This implementation limits the swipe-away movement to upwards only. Downwards is a bit tricky, as the div shows alternating images of various heights, which changes the height of the div the user wants to swipe away, causing a messing with the condition readings.
 	
 	if (delta > 0 && element.scrollTop > 0) // if there's scrolling within the div, the scrolling has precedence until it reaches to lower or upper limit, and only then allows the whole div to be pushed up or down, depending on which scroll-end the user is.
 	{
