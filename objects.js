@@ -93,7 +93,7 @@ const portfolio = structuredClone(codingProject);
 portfolio.name = '(This) Portfolio';
 portfolio.objective = "A single-page app for presenting my projects.";
 portfolio.stack = "Front-end: vanilla JavaScript, CSS";
-portfolio.implementations = "appealing visuals; mobile responsive; browser is essentially used like a game engine, meaning objects are given absolute coordinate values and placed on a 2D landscape; it became more sophisticated than anticipated.";
+portfolio.implementations = "appealing visuals; mobile responsive; browser is essentially used like a game engine, meaning objects are given absolute coordinate values and placed on a 2D landscape; all coordinates and dimensions dynamically calculated; it became more sophisticated than anticipated.";
 portfolio.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24';
 portfolio.links.push('https://github.com/simonpuravida333/Portfolio');
 projects.push(portfolio);
@@ -123,7 +123,7 @@ export const myself = {
 		what_fascinates_me_the_most: "Creativity, nature and tech. My app designs draw strongly from nature &#x1F33A &#x1F99A &#x1F338 aesthetically and functionally, and are often about aiding the ideation process",
 		why_You_want_me: "Generally, I like any programming challenge: back-end, front-end, data, algorithms... I've always loved puzzle games and programming is the <i>ultimate</i> puzzle game.<br>My full potential comes to the fore where I'm allowed to explore concepts, designs and user interactivities. Preferebly I do it all: software engineering, UX, conceptualization...",
 		further_interests: "Astronomy, ancient history, cultures and anthropology, composing music, creative writing, the conservation of the natural world.",
-		imgLink: "images/myself lower res.jpg",
+		imgLink: "images/myself close-up 1000px.jpg",
 	},
 	software_engineering:
 	{

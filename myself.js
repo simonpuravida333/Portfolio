@@ -51,6 +51,7 @@ async function createMyself()
 		},800);
 	}
 	let myselfInfoVisible = false;
+	let openedFirstTime = false;
 	myselfStar.onclick = ()=>
 	{		
 		myselfRing.animate({
@@ -61,6 +62,11 @@ async function createMyself()
 		myselfInfoVisible ^= true;
 		if (myselfInfoVisible)
 		{
+			if (!openedFirstTime)
+			{
+				myselfInfo = loopObject(myself, myselfInfo);
+				openedFirstTime = true;
+			}
 			myselfInfo.style.display = 'block';
 			myselfInfo.animate({opacity:[0,1]},500);
 			if (!isMobile) hideStars(true);
@@ -100,7 +106,6 @@ async function createMyself()
 		myselfStar.style.left = (dimensions/2)+'px';
 		myselfStar.style.top = (dimensions/2)+'px';
 	}
-	myselfInfo = loopObject(myself, myselfInfo);
 }
 
 function loopObject(object, container)
@@ -167,17 +172,17 @@ function loopObject(object, container)
 				subHeadline.innerHTML = "";
 				const image = document.createElement('img');
 				image.src = object[key];
-				const frame = document.createElement('div');
-				frame.style.border = ((isMobile) ? "16px solid white" : "8px solid white");
-				frame.style['border-radius'] =  ((isMobile) ? '20px' : '10px');
 
 				image.onload = ()=>
 				{
-					frame.style['max-width'] = image.naturalWidth+'px';
-					frame.style['max-height'] = image.naturalHeight+'px';
-					frame.style.margin = '0 auto';
-					frame.append(image);
-					aDiv.append(frame);
+					image.style.width = ((isMobile) ? window.innerWidth*0.6 : 300) + 'px';
+					image.style.height = ((isMobile) ? window.innerWidth*0.6 : 300) + 'px';
+					image.style['border-radius'] = '50%';
+					image.style.border = ((isMobile) ? '20px' : '8px' ) + ' solid white';
+					image.style['margin-left'] = 'auto';
+					image.style['margin-right'] = 'auto';
+					image.style.display = 'block';
+					aDiv.append(image);
 				}
 			}
 			else 
