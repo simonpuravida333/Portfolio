@@ -107,6 +107,7 @@ export default windowDiv;
 
 
 // DEBUG - HARD REFRESH TRIGGER (since there's no quick option in Chrome mobile)
+/*
 const refreshStar = document.createElement('div');
 const refreshCore = document.createElement('div');
 const refreshRing = document.createElement('div');
@@ -138,4 +139,5 @@ if (isMobile)
 refreshStar.append(refreshCore, refreshRing);
 windowDiv.append(refreshStar);
 refreshStar.onclick = ()=> window.location.reload(true);
+*/
 // END DEBUG
