@@ -1,11 +1,13 @@
 import {projects, myself} from './objects.js';
 import {starSVG, haloSVG, gitHubIconSVG, canvaIconSVG, canvaIconSVGDefsPart} from './SVGs.js';
-import {fullWindow, nextImageFullWindow, frameImageFullWindow, globalImageIndex, globalImageArray} from './fullScreenImage.js';
+import {fullWindow, nextImageFullWindow, frameImageFullWindow, globalImage} from './fullScreenImage.js';
 import {placeRenderedText, placeImages} from './placements.js';
 import {isMobile, touchResponse, adjustSizesForMobile} from './mobileResponsiveness.js';
 
 const body = document.querySelector('body');
 body.innerHTML += canvaIconSVGDefsPart; // adds the "defs" part to body. It contains the styling IDs. This is vital if you have several instances of the same SVG and deal with display none / block of the SVGs. It's because the browser caches IDs only once, so the second, third... SVG you call won't have styling. Only the first (unless the first is display = block while another one is display = block. Then the other one will also have proper styling for the time the first SVG is visible. In other words: the browser caches the ID reference only once, but becuase the ID gets appended / removed from the DOM, it can't find it for the second, third ... SVG (which usually doesn't happen for IDs). That's the tricky thing about having in-place IDs (as in SVGs) get added / removed from the DOM body. The browers is fooled in thinking (CSS) IDs are always global. That's why I've seperated the <defs> part from the Canva SVG it belonged to and just place the <defs> part permanently to the body right away, to provide global styling.
+
+const stars = {}
 
 async function createContent()
 {
@@ -142,17 +144,49 @@ async function createContent()
 		
 		// IMAGES
 		const imagesArea = document.createElement('div');
-		if (isMobile) imagesArea.classList.add('imagesAreaMobile');
-		else imagesArea.classList.add('imagesArea');
-		imagesArea.style.display = 'none';
-		windowDiv.append(imagesArea);
-		if (!isMobile) imagesArea.onclick = ()=>
-		{
-			globalImageArray = imageArray;
-			globalImageIndex = index;
-			touchArea.click();
-			nextImageFullWindow(true);
+		if (isMobile)
+		{	
+			imagesArea.classList.add('imagesAreaMobile');
+			renderedText.append(imagesArea);
+			let imageFocus = false;
+			imagesArea.onclick = ()=>
+			{
+				imageFocus ^= true;
+				stars[z].imageFocus = imageFocus;
+				if (imageFocus)
+				{
+					for (const child of renderedText.children) child.style.opacity = 0.5;
+					imagesArea.style.opacity = 1;
+					imagesArea.style.position = 'absolute';
+					imagesArea.style.transform = 'translate(-50%,-50%)';
+					imagesArea.style.left = '50%';
+					imagesArea.style.top = '50%';
+					imagesArea.style.width = '95%';
+					imagesArea.style.margin = '0px';
+					imagesArea.style['z-index'] = 5;
+					clearTimeout(theTimeout);
+				}
+				else
+				{
+					for (const child of renderedText.children) child.style.opacity = 1;
+					imagesArea.style = null;
+					theTimeout = setTimeout(nextImage, presentationTime, false);
+				}
+			}
 		}
+		else
+		{
+			imagesArea.classList.add('imagesArea');
+			windowDiv.append(imagesArea);
+			imagesArea.onclick = ()=>
+			{
+				globalImage.array = imageArray;
+				globalImage.index = index;
+				touchArea.click();
+				nextImageFullWindow(true);
+			}
+		}
+		imagesArea.style.display = 'none';
 		
 		let go = true;
 		const imageArray = [];
@@ -183,7 +217,7 @@ async function createContent()
 		async function nextImage(continueAgain)
 		{
 			if (index >= imageArray.length-1 || index < 0) index = 0;
-			else if(!continueAgain) index ++;
+			else if(!continueAgain) index++;
 			if (!imageArray[index].complete) await new Promise(wait => imageArray[index].onload = wait);
 			if (!continueAgain) imagesArea.animate({opacity: [1,0]},333).onfinish = ()=>
 			{
@@ -195,13 +229,12 @@ async function createContent()
 			}
 			else theTimeout = setTimeout(nextImage, presentationTime, false);
 		}
-		if (isMobile) renderedText.append(imagesArea);
 
-		window.addEventListener('resize',()=>
+		if (!isMobile) window.addEventListener('resize',()=>
 		{
 			placeRenderedText(windowDiv, starAndGlow, renderedText, renderedTextCoordinatesDimensions);
-			if (!isMobile) placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
-		});
+			placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
+		});	
 					
 		setTimeout(()=>
 		{
@@ -226,7 +259,9 @@ async function createContent()
 			if (!blockAllAni && !blockMouseOut) mouseOut();
 			blockMouseOut = false;
 		});
-		touchArea.addEventListener('click', async ()=>
+		touchArea.addEventListener('click', accessingStar);
+		
+		async function accessingStar()
 		{
 			blockAllAni ^= true;
 			starBirthRing.style.display = 'block';
@@ -234,6 +269,7 @@ async function createContent()
 			
 			if (blockAllAni)
 			{
+				stars[z]['accessed'] = true;
 				if (isMobile)
 				{
 					body.style.overflow = 'hidden';
@@ -254,22 +290,23 @@ async function createContent()
 					openedFirstTime = true;
 					await loadImages();
 				}
-				if (blockAllAni)
+				if /* still */ (blockAllAni)
 				{
 					imagesArea.style.display = 'block';
 					imagesArea.animate({opacity: [0,1]},500);
-					placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
+					if (!isMobile) placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions);
 					
 					if (imageArray.length > 0)
 					{
 						clearTimeout(theTimeout);
 						go = true;
-						nextImage(true);
+						if (!stars[z].imageFocus) nextImage(true); // for mobile; on desktop it'll always be false.
 					}
 				}
 			}
 			else 
 			{
+				stars[z]['accessed'] = false;
 				if (isMobile)
 				{
 					touchResponse(null);
@@ -290,7 +327,7 @@ async function createContent()
 			else if (halo.style.opacity < 1) mouseOver();
 			blockMouseOut = true;
 			touchArea.blur();
-		});
+		}
 		
 		function mouseOut()
 		{
@@ -300,6 +337,7 @@ async function createContent()
 			infoDivAni.reverse();
 			infoDivAni.onfinish = ()=> renderedText.style.display = 'none';
 		}
+		
 		async function mouseOver()
 		{
 			starDiffraction.animate([{width: '130%', height: '130%'},{width: '230%',height: '230%'}],200).onfinish = ()=> {starDiffraction.style.width = '230%'; starDiffraction.style.height = '230%';};
@@ -318,6 +356,13 @@ async function createContent()
 			}
 			placeRenderedText(windowDiv, starAndGlow, renderedText, renderedTextCoordinatesDimensions);
 		}
+		
+		stars[z] = {}
+		stars[z]['star'] = starAndGlow;
+		stars[z]['access'] = accessingStar;
+		stars[z]['accessed'] = false;
+		stars[z]['imageFocus'] = false;
+	
 	}
 	return true;
 }
@@ -328,7 +373,8 @@ async function hideStars(hide)
 	if (!inLock)
 	{
 		inLock = true;
-		const allStars = Array.from(document.getElementsByClassName('starAndGlow'));
+		const allStars = []; //Array.from(document.getElementsByClassName('starAndGlow'));
+		for (const star in stars) allStars.push(stars[star].star);
 		while (!allHiddenOrVisible(allStars)) await new Promise(resolve => setTimeout(resolve,200));
 		if (hide) for (const star of allStars) setTimeout(()=>{ star.animate({opacity: [1,0]},400).onfinish = ()=> star.style.display = 'none'},200*getRndInteger(0,allStars.length));
 		else for (const star of allStars) setTimeout(()=>{star.style.display = 'block'; star.animate({opacity: [0,1]},400)},200*getRndInteger(0,allStars.length));
@@ -350,12 +396,16 @@ function allHiddenOrVisible(allStars)
 	return false;
 }
 
-function lessenStarsBrightness(lessen)
+function lessenStarsBrightness(lessen) // for mobile
 {
 	const allStars = Array.from(document.getElementsByClassName('starAndGlow'));
 	allStars.push(document.getElementById('myselfStar'));
 	const aniOpa = (lessen) ? [1,0.3] : [0.3,1];
-	for (const star of allStars) star.animate({opacity: aniOpa},500).onfinish = ()=>	star.style.opacity = (lessen) ? 0.3 : 1;
+	for (const star of allStars)
+	{
+		star.style.opacity = (lessen) ? 0.3 : 1;
+		star.animate({opacity: aniOpa},100*getRndInteger(0,allStars.length));
+	} 
 }
 
 function getRndInteger(min, max)
@@ -368,4 +418,4 @@ function getRndFloat(min, max)
 	return Math.random() * (max - min) + min;
 }
 
-export {createContent, hideStars, lessenStarsBrightness}
+export {createContent, hideStars, lessenStarsBrightness, stars}

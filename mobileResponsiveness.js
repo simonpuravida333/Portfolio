@@ -4,7 +4,7 @@ const userAgent = navigator.userAgent.toLowerCase();
 var isMobile = /iPhone|Android/i.test(navigator.userAgent);
 const isTablet = /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(userAgent); // credits: eyehunts.com > https://tutorial.eyehunts.com/js/javascript-detect-mobile-or-tablet-html-example-code/
 const touch = isMobile || isTablet;
-if (isMobile && isTablet) isMobile = false;
+if (isMobile && isTablet) isMobile = false; // assuming it's an Android tablet
 
 function touchResponse(element, touchArea)
 {
@@ -32,6 +32,8 @@ let originalElementPlacement = {
 	x:0,
 	y:0,
 }
+let moment;
+let locked = false;
 
 function handleStart(event, element)
 {
@@ -42,7 +44,7 @@ function handleStart(event, element)
 
 function handleEnd(element, touchArea)
 {
-	if (fullPull)
+	if (fullPull && !locked)
 	{
 		element.style.display = 'none';
 		touchArea.click();
@@ -50,13 +52,26 @@ function handleEnd(element, touchArea)
 	reset(element);
 }
 
+function lockUnlock()
+{
+	if (moment+500 > new Date().getTime()) locked = true;
+	else locked = false;
+	// there must be a time gap after you've last used two fingers (pinch zoom). Usually users don't pull away both fingers in the same frame, there's one finger left which may have suddenly a big delta, triggering fullPull /  handleEnd(). So for half a second after two-finger interaction everything gets reset.
+}
+
 function handleMove(event, element)
 {
-	if (event.touches.length > 1) return; // only one finger allowed, or it would mess when the user tried to zoom (pinch / two finger interaction)
+	if (event.touches.length > 1)
+	{
+		moment = new Date().getTime();
+		lockUnlock();
+		return; // only one finger allowed, or it would mess when the user tried to zoom (pinch / two finger interaction)
+	}
+	lockUnlock();
 	movement = event.changedTouches[0].clientY;
 	let delta = movement - startPosition;
 	if (delta < 0) return; // this is a late implementation. As you can see below, it regards both, positive and negative deltas. This implementation limits the swipe-away movement to upwards only. Downwards is a bit tricky, as the div shows alternating images of various heights, which changes the height of the div the user wants to swipe away, causing a messing with the condition readings.
-	
+	//console.log(delta)
 	if (delta > 0 && element.scrollTop > 0) // if there's scrolling within the div, the scrolling has precedence until it reaches to lower or upper limit, and only then allows the whole div to be pushed up or down, depending on which scroll-end the user is.
 	{
 		//console.log('NOT REACHED TOP YET');
@@ -97,19 +112,22 @@ function reset(element)
 function adjustSizesForMobile(starAndGlow, renderedText)
 {
 	const starGlowWidthHeight = ((window.innerWidth > window.innerHeight) ? window.innerWidth : window.innerHeight)*0.1; // the ruler is the longest side, because only on that matters how big objects should appear visually subjectivively. 10% is a good range. We need to keep the starAndGlow with pixel dimensions, only its children can have percentages, and sensibly so. The reason of course being that the direct parent of starAndGlow is the body (or windowDiv, which covers the body) and because the body is not a perfect square usually, the star needs absolute pixel dimensions, not relative percentages. But we still need to scale with the window, which is the job of this if statement.
-	if (starAndGlow !== null)
+	if (starAndGlow !== null && starAndGlow !== undefined)
 	{
 		starAndGlow.style.width = starGlowWidthHeight+'px';
 		starAndGlow.style.height = starGlowWidthHeight+'px';
 	}
-		
-	renderedText.style['border-bottom'] = starGlowWidthHeight/10+ 'px solid transparent';
-	renderedText.style['border-top'] =  starGlowWidthHeight/10+ 'px solid transparent';
-	renderedText.style['font-size'] = starGlowWidthHeight/5+'px';
-	for (const child of renderedText.children)
+	
+	if (renderedText !== undefined)
 	{
-		child.style['margin-left'] = starGlowWidthHeight/5+'px';
-		child.style['margin-bottom'] = starGlowWidthHeight/5+'px';
+		renderedText.style['border-bottom'] = starGlowWidthHeight/10+ 'px solid transparent';
+		renderedText.style['border-top'] =  starGlowWidthHeight/10+ 'px solid transparent';
+		renderedText.style['font-size'] = starGlowWidthHeight/5+'px';
+		for (const child of renderedText.children)
+		{
+			child.style['margin-left'] = starGlowWidthHeight/5+'px';
+			child.style['margin-bottom'] = starGlowWidthHeight/5+'px';
+		}
 	}
 	return starGlowWidthHeight;
 }

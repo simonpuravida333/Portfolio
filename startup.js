@@ -1,6 +1,6 @@
 import {createMyself} from './myself.js';
-import {createContent} from './content.js';
-import {isMobile} from './mobileResponsiveness.js';
+import {createContent, stars} from './content.js';
+import {isMobile, adjustSizesForMobile} from './mobileResponsiveness.js';
 import {fullWindow, frameImageFullWindow} from './fullScreenImage.js';
 
 const body = document.querySelector('body');
@@ -40,12 +40,10 @@ background.onload = async ()=>
 		if (isMobile)
 		{
 			viewport.setAttribute('content', 'height='+window.innerHeight+'px');
-			const allStars = Array.from(document.getElementsByClassName('starAndGlow'));
-			allStars.push(document.getElementById('myselfStar'));
 			
 			if (backgroundImageFullHeight)
 			{
-				if (contentDelivered) for (const star of allStars) star.style.display = 'block';
+				if (contentDelivered) for (const star in stars) stars[star].star.style.display = 'block';
 				infoBlockScreen.style.display = 'none';
 				preventCreatingContent = false;
 			}
@@ -53,13 +51,13 @@ background.onload = async ()=>
 			{
 				if (contentDelivered)
 				{
-					for (const star of allStars)
+					for (const star in stars)
 					{
-						if (star.children[1].style.opacity === '1' && star.id !== 'myselfStar') star.children[4].click();
-						else if (star.id === 'myselfStar' && star.style.opacity === '0.3') star.click();
-						star.style.display = 'none';
+						if (stars[star].accessed === true) stars[star].access();
+						stars[star].star.style.display = 'none';
 					}
-					for (const child of windowDiv.children) if (child.style.display === 'block') child.style.display = 'none'; // opened star texts, no time for animation ...and not necessary, as tilting the screen is an animation - or movement - in the user's hand
+					const myselfStar = document.getElementById('myselfStar');
+					if (myselfStar.style.opacity === '0.3') myselfStar.click();
 				}
 				infoBlockScreen.style.display = 'block';
 			}
@@ -105,3 +103,39 @@ background.onload = async ()=>
 }
 
 export default windowDiv;
+
+
+
+// DEBUG - HARD REFRESH TRIGGER (since there's no quick option in Chrome mobile)
+const refreshStar = document.createElement('div');
+const refreshCore = document.createElement('div');
+const refreshRing = document.createElement('div');
+refreshStar.classList.add('star');
+refreshCore.classList.add('core');
+refreshRing.classList.add('ring');
+refreshCore.style.width = '50%';
+refreshCore.style.height = '50%';
+refreshCore.style.opacity = 1;
+refreshCore.style['background-color'] = 'rgb(0,175,255)';
+refreshRing.style.width = '100%';
+refreshRing.style.height = '100%';
+refreshRing.style.opacity = 1;
+refreshRing.style.border = ((isMobile) ? '20px' : '5px') + ' solid white';
+refreshStar.style.cursor = 'pointer';
+refreshStar.style['z-index'] = '10';
+refreshStar.style.width = '50px';
+refreshStar.style.height = '50px';
+refreshStar.style.left = '50px';
+refreshStar.style.top = '500px';
+if (isMobile)
+{
+	let dimensions = adjustSizesForMobile();
+	refreshStar.style.width = dimensions+'px';
+	refreshStar.style.height = dimensions+'px';
+	refreshStar.style.left = dimensions+'px';
+	refreshStar.style.top = (dimensions*10)+'px';
+}
+refreshStar.append(refreshCore, refreshRing);
+windowDiv.append(refreshStar);
+refreshStar.onclick = ()=> window.location.reload(true);
+// END DEBUG

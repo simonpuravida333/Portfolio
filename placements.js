@@ -12,7 +12,6 @@ function placeRenderedText(windowDiv, starAndGlow, renderedText, renderedTextCoo
 		else if (renderedText.getBoundingClientRect().height - 180 > vp.height) renderedText.style.height = vp.height-180+'px';
 		return;
 	}
-	
 	// I love using getBoundingClientRect() because of its reliability, but it gives coordinates relative to the window, so once there's scrolling, you have to add scroll offset or use offsetLeft / offsetTop as I do here. CAUTION: offset takes transform-translate into consideration, unlike getBoundingClientRect(). Since starAndGlow is grabbed by its center, the sides are +/- width/2 or height/2. ALSO CAUTION: renderedText only has translateX(-50%), meaning offsetTop is literally the top.
 
 	renderedText.style.top = starAndGlow.offsetTop + starAndGlow.getBoundingClientRect().height/2 +'px'; // renderedText are placed under the star by default

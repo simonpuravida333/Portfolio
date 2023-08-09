@@ -25,7 +25,7 @@ async function createMyself()
 	myselfRing.style.opacity = 1;
 	myselfStar.append(myselfCore, myselfRing);
 	windowDiv.append(myselfStar);
-	
+		
 	setTimeout(()=>
 	{
 		myselfStar.style.display = 'block';

@@ -3,14 +3,10 @@ import {hideStars} from './content.js';
 import {myselfStar} from './myself.js';
 
 const body = document.querySelector('body');
-const fullWindow = document.createElement('div');
-fullWindow.id = 'fullWindow';
-body.append(fullWindow);
-const fullWindowImage = document.createElement('IMG');
-fullWindowImage.id = 'fullWindowImage';
-fullWindow.append(fullWindowImage);
-var globalImageIndex = 0;
-var globalImageArray;
+var globalImage = {
+	index: 0,
+	array: [],
+}
 
 /*
 const arrow = document.createElement('div');
@@ -58,7 +54,7 @@ escape.addEventListener('click', leaveFullWindow);
 	if (event.deltaY > 0) goRight();
 	else goLeft();
 }*/
-fullWindow.append(arrowRight, arrowLeft, escape);
+
 window.addEventListener('keydown', (event)=>
 {
 	let key = event.keyCode || event.which;
@@ -75,10 +71,25 @@ window.addEventListener('keydown', (event)=>
 	}
 });
 
+var fullWindow;
+var fullWindowImage;
+var firstTime = true;
 function goFullWindow()
 {
-	body.style.overflow = 'hidden';
+	if (firstTime)
+	{
+		fullWindowImage = document.createElement('IMG');
+		fullWindowImage.id = 'fullWindowImage';
+		fullWindow = document.createElement('div');
+		fullWindow.id = 'fullWindow';
+		fullWindow.append(fullWindowImage);
+		fullWindow.append(arrowRight, arrowLeft, escape);
+		body.append(fullWindow);
+		firstTime = false;
+		// naturally you would have this whole block on the outermost scope level in this module, like the arrows upper e.g.. But for some very obscure reason, it was not possible to do fullWindow.style.display = 'block' / 'none', (or using setAttribute). The browser displayed at the in-line element styling that display was always none, even if it should be 'block'. Inersing it wouldn't work (giving CSS block, and setting it instantly to 'none' in the declaration). I just couldn't make it work to use JS to switch between block / none. Strangely so, this code is unchanged from a previous version where I hadn't split it up into modules. And now suddenly it wouldn't work. Eventually I tried this, where the declaration is executed only by the first call of this function. Then it worked, finally. But it still puzzles me. Agonisingly, I split this page into modules a couple of days ago, and since then this bug must have been there. I didn't realize it as I was focused on mobile responsiveness, and why would I? I worked perfectly before; in JS logic can be obscure. But this feature is one of the most important of this script, as it makes my work visible.
+	}
 	fullWindow.style.display = 'block';
+	body.style.overflow = 'hidden';
 	fullWindow.style.left = window.scrollX + 'px';
 	fullWindow.style.top = window.scrollY + 'px';
 	fullWindow.animate({opacity: [0,1]}, 333);
@@ -98,21 +109,22 @@ function leaveFullWindow()
 }
 function goRight()
 {
-	globalImageIndex++;
-	if (globalImageIndex > globalImageArray.length-1) globalImageIndex = 0;
+	globalImage.index++;
+	if (globalImage.index > globalImage.array.length-1) globalImage.index = 0;
 	nextImageFullWindow(true);
 }
 function goLeft()
 {
-	globalImageIndex--;
-	if (globalImageIndex < 0) globalImageIndex = globalImageArray.length-1;
+	globalImage.index--;
+	if (globalImage.index < 0) globalImage.index = globalImage.array.length-1;
 	nextImageFullWindow(true);
 }
 
 function nextImageFullWindow(rerender)
 {
-	if (fullWindow.style.display !== 'block') goFullWindow();
-	fullWindowImage.src = globalImageArray[globalImageIndex].src;
+	if (firstTime) goFullWindow();
+	else if (fullWindow.style.display !== 'block') goFullWindow();
+	fullWindowImage.src = globalImage.array[globalImage.index].src;
 	if (rerender) fullWindowImage.style.opacity = 1/3;
 	frameImageFullWindow()
 	if (rerender) fullWindowImage.animate({opacity: [0,1]}, 333).onfinish = ()=> fullWindowImage.style.opacity = 1;
@@ -147,4 +159,4 @@ function frameImageFullWindow()
 	}
 }
 
-export {fullWindow, nextImageFullWindow, frameImageFullWindow, globalImageIndex, globalImageArray}
+export {fullWindow, nextImageFullWindow, frameImageFullWindow, globalImage}
