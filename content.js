@@ -11,7 +11,7 @@ const stars = {}
 
 async function createContent()
 {
-	const theModule = await import('./startup.js'); // because of hoisting. startup.js is the last module to be loaded.
+	const theModule = await import('./startup.js'); // because of hoisting. startup.js is the last module to load.
 	let windowDiv = theModule.default;
 	const thatManyStars = projects.length;
 	const shuffledSuccession = [];

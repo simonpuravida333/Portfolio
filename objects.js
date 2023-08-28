@@ -130,7 +130,7 @@ export const myself = {
 		intermediate: 'JavaScript',
 		junior: 'Java <strong>&#9679</strong> C# <strong>&#9679</strong> Python',
 		more_techs: 'Git <strong>&#9679</strong> SQL (SQLite) <strong>&#9679</strong> Django <strong>&#9679</strong> CI/CD <strong>&#9679</strong> HTML <strong>&#9679</strong> CSS <strong>&#9679</strong> Bootstrap',
-		coding_experience: [" completed Harvard's CS50W (Webdevelopment with Python and JavaScript)<br> "," currently engaged in Harvard's CS50G (Introduction to Game Development) which is great for learning to create sophisticated and engaging interaction designs for (web)apps."," some private coding experiences","completed 'Fundamentals of Programming' and 'Algorithm and Datastructures' at university + two more CS uni courses."],
+		coding_experience: [" completed Harvard's CS50W (Webdevelopment with Python and JavaScript)<br> "," currently engaged in further Harvard's CS50 courses."," some private coding experiences","completed 'Fundamentals of Programming' and 'Algorithm and Datastructures' at university + two more CS uni courses: one Node.js course, and one called 'Tools of Informatics': being introduced to Regex, VMs, Python...."],
 	},
 	design:
 	{
