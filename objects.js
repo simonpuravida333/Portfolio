@@ -76,7 +76,7 @@ life.stack = 'Front-end: JavaScript, AJAX, Rest API, Web Animations API, HTML, C
 life.implementations = 'deep examination of the GBIF Rest API, sensible user querying and filter options, fetch calls design with thorough server response vetting, everything is fetched and loaded (images) dynamically, depending on how deep the user explores the results, dynamic and appealing UI design, animations';
 life.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24';
 life.links.push('https://github.com/simonpuravida333/Life');
-life.imageLinks.push('captures/Life 1.png', 'captures/Life 2.png', 'captures/Life 3.png', 'captures/Life 4.png', 'captures/Life 5.png', 'captures/Life 6.png', 'captures/Life 7.png', 'captures/Life 8.png', 'captures/Life 9.png', 'captures/Life 10.png', 'captures/Life 11.png');
+life.imageLinks.push('captures/Life 1.png', 'captures/Life 2.png', 'captures/Life 3.png', 'captures/Life 4.png', 'captures/Life 5.png', 'captures/Life 6.png', 'captures/Life 7.png', 'captures/Life 8.png', 'captures/Life 9.png', 'captures/Life 10.png', 'captures/Life 11.png',  'captures/Life 12.png',  'captures/Life 13.png');
 projects.push(life);
 
 const vocz = structuredClone(codingProject);
