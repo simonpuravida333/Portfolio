@@ -56,7 +56,7 @@ function lockUnlock()
 {
 	if (moment+500 > new Date().getTime()) locked = true;
 	else locked = false;
-	// there must be a time gap after you've last used two fingers (pinch zoom). Usually users don't pull away both fingers in the same frame, there's one finger left which may have suddenly a big delta, triggering fullPull /  handleEnd(). So for half a second after two-finger interaction everything gets reset.
+	// there must be a time gap after you've last used two fingers (pinch zoom). Usually users don't pull away both fingers in the same frame, there's one finger left which may have suddenly have a big delta, triggering fullPull /  handleEnd(). So for half a second after two-finger interaction everything gets reset.
 }
 
 function handleMove(event, element)
@@ -83,7 +83,7 @@ function handleMove(event, element)
 		return;
 	}
 	
-	let pullLimit = 500; // pixels
+	const pullLimit = 500; // pixels
 	element.style.top = delta + originalElementPlacement.y + 'px';
 	if (delta > pullLimit) {delta = pullLimit; fullPull = true;} // locks pull at same value
 	else if (delta < -pullLimit) {delta = -pullLimit; fullPull = true;}
