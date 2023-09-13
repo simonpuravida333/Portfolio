@@ -72,7 +72,7 @@ projects.push(network);
 const life = structuredClone(codingProject);
 life.name = 'Life (Harvard CS50W Final Project)';
 life.objective = 'A single-page app to easily access the data of the GBIF (Global Biodiversity Information Facility). The choice of project was free in this final assignment: I chose the GBIF where two passions come together: nature and tech.';
-life.stack = 'Front-end: JavaScript, AJAX, Rest API, Web Animations API, HTML, CSS, mobile responsive<br>Back-end: Rest API written in Django / Python that imitates (simplified) the GBIF Rest API, so that the frontend can deal with communication with GBIF and local Django <i>identically without any adaptations</i>; SQLite; allows for saving of new specieses and occurrences.';
+life.stack = 'Front-end: JavaScript, AJAX, Rest API, Web Animations API, HTML, CSS, mobile responsive<br>Back-end: Rest API written in Django / Python that imitates (simplified) the GBIF Rest API, so that the frontend can communicate with GBIF and local Django <i>identically without any adaptations</i>; SQLite; allows for saving of new specieses and occurrences.';
 life.implementations = 'deep examination of the GBIF Rest API, sensible user querying and filter options, fetch calls design with thorough server response vetting, everything is fetched and loaded dynamically, depending on how deep the user explores the results, dynamic and appealing UI design, animations';
 life.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24';
 life.links.push('https://github.com/simonpuravida333/Life');
