@@ -6,6 +6,7 @@ const codingProject = {
 	implementations: "",
 	sophistication: "",
 	links: [],
+	youtube: [],
 	imageLinks: [],
 }
 const designProject = {
@@ -27,7 +28,7 @@ googleSearch.implementations = 'Mostly a CSS challenge. Links with parameters. I
 googleSearch.sophistication = '&#x2B24 ';
 googleSearch.links.push('https://github.com/simonpuravida333/GoogleSearch');
 googleSearch.imageLinks.push('captures/Google Search 1.png', 'captures/Google Search 2.png', 'captures/Google Search 2B.png', 'captures/Google Search 3.png', 'captures/Google Search 4.png');
-projects.push(googleSearch);
+//projects.push(googleSearch);
 
 const wiki = structuredClone(codingProject);
 wiki.name = 'Wiki (Harvard CS50W Project 1)';
@@ -72,11 +73,12 @@ projects.push(network);
 const life = structuredClone(codingProject);
 life.name = 'Life (Harvard CS50W Final Project)';
 life.objective = 'A single-page app to easily access the data of the GBIF (Global Biodiversity Information Facility). The choice of project was free in this final assignment: I chose the GBIF where two passions come together: nature and tech.';
-life.stack = 'Front-end: JavaScript, AJAX, Rest API, Web Animations API, HTML, CSS, mobile responsive<br>Back-end: Rest API written in Django / Python that imitates (simplified) the GBIF Rest API, so that the frontend can communicate with GBIF and local Django <i>identically without any adaptations</i>; SQLite; allows for saving of new specieses and occurrences.';
-life.implementations = 'deep examination of the GBIF Rest API, sensible user querying and filter options, fetch calls design with thorough server response vetting, everything is fetched and loaded dynamically, depending on how deep the user explores the results, dynamic and appealing UI design, animations';
+life.stack = 'Front-end: JavaScript, AJAX, Rest API, Web Animations API, HTML, CSS, mobile responsive<br>Back-end: Rest API written in Django / Python that imitates (simplified) the GBIF Rest API; SQLite; allows for saving of new specieses and occurrences.';
+life.implementations = 'deep examination of the GBIF Rest API, sensible user querying and filter options, fetch calls design with thorough server response vetting, everything is fetched and loaded dynamically, dynamic and appealing UI design, animations';
 life.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24';
 life.links.push('https://github.com/simonpuravida333/Life');
-life.imageLinks.push('captures/Life 1.png', 'captures/Life 2.png', 'captures/Life 3.png', 'captures/Life 4.png', 'captures/Life 5.png', 'captures/Life 6.png', 'captures/Life 7.png', 'captures/Life 8.png', 'captures/Life 9.png', 'captures/Life 10.png', 'captures/Life 11.png',  'captures/Life 12.png',  'captures/Life 13.png');
+life.youtube.push('https://youtu.be/QZl-F8OFy-Q', 'https://youtu.be/buld3ph_Uvs');
+life.imageLinks.push('captures/Life 1.png', 'captures/Life 2.png', 'captures/Life 3.png', 'captures/Life 4.png', 'captures/Life 5.png', 'captures/Life 6.png', 'captures/Life 7.png', 'captures/Life 8.png', 'captures/Life 9.png', 'captures/Life 10.png', 'captures/Life 11.png',  'captures/Life 12.png',  'captures/Life 13.png', 'captures/Life 14.png');
 projects.push(life);
 
 const vocz = structuredClone(codingProject);

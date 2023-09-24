@@ -1,5 +1,5 @@
 import {projects, myself} from './objects.js';
-import {starSVG, haloSVG, gitHubIconSVG, canvaIconSVG, canvaIconSVGDefsPart} from './SVGs.js';
+import {starSVG, haloSVG, gitHubIconSVG, canvaIconSVG, canvaIconSVGDefsPart, youtubeIconSVG} from './SVGs.js';
 import {fullWindow, nextImageFullWindow, frameImageFullWindow, globalImage} from './fullScreenImage.js';
 import {placeRenderedText, placeImages} from './placements.js';
 import {isMobile, touchResponse, adjustSizesForMobile} from './mobileResponsiveness.js';
@@ -94,7 +94,7 @@ async function createContent()
 		renderedText.classList.add('starDescription'/*,'mask'*/);
 		for (const key in projects[z])
 		{
-			if (key === 'links' || key === 'imageLinks') continue;
+			if (key === 'links' || key === 'imageLinks' || key === 'youtube') continue;
 			renderedText.innerHTML += "<strong><i>"+ key.charAt(0).toUpperCase()+key.slice(1) +"</i></strong><br>";
 			const aDiv = document.createElement('div');
 			aDiv.style['margin-left'] = '15px';
@@ -109,15 +109,18 @@ async function createContent()
 		
 		// MOBILE SVG ADJUSTMENT
 		let iconSVG;
+		let youtubeSVG;
 		if (isMobile)
 		{
 			if (projects[z].work === 'Software Engineering') iconSVG = gitHubIconSVG.replace("width='98' height='96'","width='196' height='192'");
 			else iconSVG = canvaIconSVG.replace("width='100' height='100'", "width='200' height='200'");
+			youtubeSVG = youtubeIconSVG.replace("width='100' height='100'", "width='200' height='200'")
 		}
 		else
 		{
 			if (projects[z].work === 'Software Engineering') iconSVG = gitHubIconSVG;
 			else iconSVG = canvaIconSVG;
+			youtubeSVG = youtubeIconSVG;
 		}
 
 		const flexDiv = document.createElement('div');
@@ -134,6 +137,18 @@ async function createContent()
 			svgDiv.append(theLink);
 			flexDiv.append(svgDiv);
 		}
+		if (projects[z].work === 'Software Engineering') if (projects[z].youtube.length > 0) for (const link of projects[z].youtube)
+		{
+			const svgDiv = document.createElement('div');
+			if (isMobile) svgDiv.classList.add('svgDivMobile');
+			else svgDiv.classList.add('svgDiv');
+			const theLink = document.createElement('a');
+			theLink.href = link;
+			theLink.innerHTML = `${youtubeSVG}`;
+			svgDiv.append(theLink);
+			flexDiv.append(svgDiv);
+		}
+		
 		windowDiv.append(renderedText);
 		const renderedTextCoordinatesDimensions = {
 			x: 0,

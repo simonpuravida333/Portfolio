@@ -57,6 +57,7 @@ escape.addEventListener('click', leaveFullWindow);
 
 window.addEventListener('keydown', (event)=>
 {
+	if (fullWindow === undefined) return;
 	let key = event.keyCode || event.which;
 
 	const escape = 27;
@@ -86,7 +87,7 @@ function goFullWindow()
 		fullWindow.append(arrowRight, arrowLeft, escape);
 		body.append(fullWindow);
 		firstTime = false;
-		// naturally you would have this whole block on the outermost scope level in this module, like the arrows upper e.g.. But for some very obscure reason, it was not possible to do fullWindow.style.display = 'block' / 'none', (or using setAttribute). The browser displayed at the in-line element styling that display was always none, even if it should be 'block'. Inversing it wouldn't work (giving 'block' in the CSS file, and setting it instantly to 'none' in the declaration). I just couldn't make it work to use JS to switch between block / none. Strangely so, this code is unchanged from a previous version where I hadn't split it up into modules yet. But now, in modules it wouldn't work. Eventually I tried this, where the declaration is executed only by the first call of this function, which made it work (even though it's the same execution), finally. But it still puzzles me. Agonisingly, I split this page into modules a couple of days ago, and since then this bug must have been there. I didn't realize it as I was focused on mobile responsiveness, and why would I suspect such a thing? It worked perfectly before; in JS, logic can be obscure. ...this feature is one of the most important of this script, as it makes my work visible, which is the portfolio's purpose after all.
+		// naturally you would have this whole block on the outermost scope level in this module, like the arrows upper e.g.. But for some very obscure reason, it was not possible to do fullWindow.style.display = 'block' / 'none', (or using setAttribute). The browser displayed at the in-line element styling that display was always none, even if it should be 'block'. Inversing it wouldn't work (giving 'block' in the CSS file, and setting it instantly to 'none' in the declaration). I just couldn't make it work to use JS to switch between block / none. Strangely so, this code is unchanged from a previous version where I hadn't split it up into modules yet. But now, in modules it just wouldn't work. Following some tips online (this is a known js issue), eventually I tried this, where the declaration is executed only by the first call of this function, which made it work (even though it's the same execution), finally.
 	}
 	fullWindow.style.display = 'block';
 	body.style.overflow = 'hidden';
