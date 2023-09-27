@@ -67,6 +67,7 @@ network.stack = 'Back-end: Python / Django, SQLite, JSON API<br>Front-end: JavaS
 network.implementations = '3 SQL tables / models, routing, algoritms (on both stack-ends), UI design, single-page app';
 network.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 ';
 network.links.push('https://github.com/simonpuravida333/Network');
+network.youtube.push('https://youtu.be/QBCzfgj4_ow');
 network.imageLinks.push('captures/Network 1.png', 'captures/Network 2.png', 'captures/Network 3.png', 'captures/Network 4.png', 'captures/Network 5.png');
 projects.push(network);
 
