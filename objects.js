@@ -57,6 +57,7 @@ mail.stack = 'Front-end: JavaScript, AJAX, JSON API, CSS, HTML';
 mail.implementations = 'algorithms, UI design, single-page app';
 mail.sophistication = '&#x2B24 &#x2B24 &#x2B24';
 mail.links.push('https://github.com/simonpuravida333/Mail');
+mail.youtube.push('https://youtu.be/LIokAGj2cc4');
 mail.imageLinks.push('captures/Mail 1.png', 'captures/Mail 2.png', 'captures/Mail 3.png', 'captures/Mail 4.png', 'captures/Mail 5.png', 'captures/Mail 6.png')
 projects.push(mail);
 
