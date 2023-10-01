@@ -47,6 +47,7 @@ auctions.stack = 'Back-end: Pyton / Django, SQLite, Jinja2<br>Front-end: HTML, C
 auctions.implementations = '8 SQL tables / models, additional to user; Django forms; 7 basic pages (like watchlist, active biddings, acquired auctions...); algorithms, bidding with responsive messages; comments; article categories; UI design';
 auctions.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24';
 auctions.links.push('https://github.com/simonpuravida333/Auctions');
+auctions.youtube.push('https://youtu.be/HGsgk-MQWoE');
 auctions.imageLinks.push('captures/Auctions 1.png', 'captures/Auctions 2.png', 'captures/Auctions 3.png', 'captures/Auctions 4.png', 'captures/Auctions 5.png', 'captures/Auctions 6.png', 'captures/Auctions 7.png', 'captures/Auctions 8.png', 'captures/Auctions 9.png', 'captures/Auctions 10.png', 'captures/Auctions 12.png', 'captures/Auctions 13.png');
 projects.push(auctions);
 
