@@ -144,7 +144,7 @@ async function createContent()
 			else svgDiv.classList.add('svgDiv');
 			const theLink = document.createElement('a');
 			theLink.href = link;
-			theLink.innerHTML = `${youtubeSVG}`;
+			theLink.innerHTML = `${youtubeSVG.replaceAll('youtube', 'youtube'+z)}`;
 			svgDiv.append(theLink);
 			flexDiv.append(svgDiv);
 		}
