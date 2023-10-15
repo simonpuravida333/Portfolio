@@ -137,7 +137,7 @@ async function createContent()
 			svgDiv.append(theLink);
 			flexDiv.append(svgDiv);
 		}
-		if (projects[z].work === 'Software Engineering') if (projects[z].youtube.length > 0) for (const link of projects[z].youtube)
+		if (projects[z].work === 'Software Engineering' && projects[z].youtube !== undefined) if (projects[z].youtube.length > 0) for (const link of projects[z].youtube)
 		{
 			const svgDiv = document.createElement('div');
 			if (isMobile) svgDiv.classList.add('svgDivMobile');
@@ -210,7 +210,7 @@ async function createContent()
 		
 		async function loadImages()
 		{
-			if (projects[z].imageLinks.length > 0)
+			if(projects[z].imageLinks !== undefined) if (projects[z].imageLinks.length > 0)
 			{
 				for (const image in projects[z].imageLinks)
 				{
