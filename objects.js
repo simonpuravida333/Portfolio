@@ -61,7 +61,7 @@ const mail = {};
 mail.work = 'Software Engineering';
 mail.name = 'Mail (Harvard CS50W Project 3)';
 mail.objective = 'A single-page e-mail application implemention on the front-end.';
-mail.stack = 'Front-end: JavaScript, AJAX, JSON API, CSS, HTML';
+mail.stack = 'Front-end: JavaScript, AJAX, JSON REST API, CSS, HTML';
 mail.implementations = 'algorithms, UI design, single-page app';
 mail.sophistication = '&#x2B24 &#x2B24 &#x2B24';
 mail.links = ['https://github.com/simonpuravida333/Mail'];
@@ -73,7 +73,7 @@ const network = {};
 network.work = 'Software Engineering';
 network.name = 'Network (Harvard CS50W Project 4)';
 network.objective = 'A Twitter-like single-page app for writing messages and following people.'
-network.stack = 'Back-end: Python / Django, SQLite, JSON API<br>Front-end: JavaScript, AJAX, JSON API, Web Animations API, HTML, CSS';
+network.stack = 'Back-end: Python / Django, SQLite, JSON REST API<br>Front-end: JavaScript, AJAX, Web Animations API, HTML, CSS';
 network.implementations = '3 SQL tables / models, routing, algoritms (on both stack-ends), UI design, single-page app';
 network.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 ';
 network.links = ['https://github.com/simonpuravida333/Network'];
@@ -105,6 +105,7 @@ vocz.imageLinks = ['captures/Vocz 1.png', 'captures/Vocz 2.png', 'captures/Vocz 
 projects.push(vocz);
 
 const portfolio = {};
+portfolio.work = 'Software Engineering';
 portfolio.name = '(This) Portfolio';
 portfolio.objective = "A single-page app for presenting my projects.";
 portfolio.stack = "Front-end: vanilla JavaScript, CSS";
