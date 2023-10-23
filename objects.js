@@ -98,7 +98,7 @@ vocz.work = 'Software Engineering';
 vocz.name = 'Vocz';
 vocz.objective = "A single-page app for learning vocabulary.";
 vocz.stack = 'Front-end: JavaScript, HTML, CSS';
-vocz.implementations = 'appealing design and fluent user interactivity to make it feel like a computer game; algorithms<br><br>Creator comment: Vocz was my first JS application, written several years ago out of personal need / desire. Today, knowing JS better, I would write the code differently. It is perfectly stable though and the code is coherent.<br>I may rewrite Vocz in the near future (e.g. using objects instead of global variables).'
+vocz.implementations = 'appealing design and fluent user interactivity to make it feel like a computer game; algorithms<br><br>Creator comment: Vocz was my first JS application, written several years ago out of personal need / desire. Today, knowing JS better, I would write the code differently. It is perfectly stable though and the code is coherent.'
 vocz.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24';
 vocz.links = ['https://github.com/simonpuravida333/Vocz'];
 vocz.imageLinks = ['captures/Vocz 1.png', 'captures/Vocz 2.png', 	'captures/Vocz 3.png', 	'captures/Vocz 4.png', 	'captures/Vocz 5.png',	'captures/Vocz 6.png'];
@@ -143,7 +143,7 @@ export const myself = {
 	software_engineering:
 	{
 		intermediate: 'JavaScript',
-		junior: 'Java <strong>&#9679</strong> C# <strong>&#9679</strong> Python',
+		junior: 'Java <strong>&#9679</strong> C# <strong>&#9679</strong> Python <strong>&#9679</strong> Lua',
 		more_techs: 'Git <strong>&#9679</strong> SQL (SQLite) <strong>&#9679</strong> Django <strong>&#9679</strong> CI/CD <strong>&#9679</strong> HTML <strong>&#9679</strong> CSS <strong>&#9679</strong> Bootstrap',
 		coding_experience: [" completed Harvard's CS50W (Webdevelopment with Python and JavaScript)<br> "," currently engaged in further Harvard's CS50 courses."," some private coding experiences","completed 'Fundamentals of Programming' and 'Algorithm and Datastructures' at university + two more CS uni courses: one Node.js course, and one called 'Tools of Informatics': being introduced to Regex, VMs, Python...."],
 	},
