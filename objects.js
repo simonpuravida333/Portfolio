@@ -101,7 +101,7 @@ vocz.stack = 'Front-end: JavaScript, HTML, CSS';
 vocz.implementations = 'appealing design and fluent user interactivity to make it feel like a computer game; algorithms<br><br>Creator comment: Vocz was my first JS application, written several years ago out of personal need / desire. Today, knowing JS better, I would write the code differently. It is perfectly stable though and the code is coherent.'
 vocz.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24';
 vocz.links = ['https://github.com/simonpuravida333/Vocz'];
-vocz.imageLinks = ['captures/Vocz 1.png', 'captures/Vocz 2.png', 	'captures/Vocz 3.png', 	'captures/Vocz 4.png', 	'captures/Vocz 5.png',	'captures/Vocz 6.png'];
+vocz.imageLinks = ['captures/Vocz 1.png', 'captures/Vocz 2.png', 'captures/Vocz 3.png', 'captures/Vocz 6.png'];
 projects.push(vocz);
 
 const portfolio = {};
