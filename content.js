@@ -5,7 +5,7 @@ import {placeRenderedText, placeImages} from './placements.js';
 import {isMobile, touchResponse, adjustSizesForMobile} from './mobileResponsiveness.js';
 
 const body = document.querySelector('body');
-body.innerHTML += canvaIconSVGDefsPart; // adds the "defs" part to body. It contains the styling IDs. This is vital if you have several instances of the same SVG and deal with display none / block of the SVGs. It's because the browser caches IDs only once, so the second, third... SVG you call won't have styling. Only the first (unless the first is display = block while another one is display = block. Then the other one will also have proper styling for the time the first SVG is visible. In other words: the browser caches the ID reference only once, but becuase the ID gets appended / removed from the DOM, it can't find it for the second, third ... SVG (which usually doesn't happen for IDs). That's the tricky thing about having in-place IDs (as in SVGs) get added / removed from the DOM body. The browers is fooled in thinking (CSS) IDs are always global. That's why I've seperated the <defs> part from the Canva SVG it belonged to and just place the <defs> part permanently to the body right away, to provide global styling.
+body.innerHTML += canvaIconSVGDefsPart; // adds the "defs" part to body. It contains the styling IDs. This is vital if you have several instances of the same SVG and deal with display none / block of the SVGs. It's because the browser caches IDs only once, so the second, third... copy of a SVG you call won't have styling. Only the first does, unless the first is display = block while another one is display = block. Then the other one will also have proper styling for the time the first SVG is visible. Becuase the SVG get display = block / none in the DOM, the browser can't find the ID of the first SVG (the only one it cached) for the second, third ... SVG; so they won't have styling. That's the tricky thing about having in-place IDs (as in SVGs) get added / removed from the DOM. The brower is fooled in thinking (CSS) IDs are always global. That's why I've seperated the <defs> part from the Canva SVG it belonged to and just place the <defs> part permanently to the body right away, to provide global styling.
 
 const stars = {}
 
@@ -53,7 +53,7 @@ async function createContent()
 		newHalo = newHalo.replaceAll(/#([0-9]|[A-F]){6}/g, color);
 		newHalo = newHalo.replaceAll("SVGID_1_","SVGID_"+z+"_");
 		newHalo = newHalo.replaceAll("st2","st"+(thatManyStars+z));
-		const star = document.createElement('div'); // just appending newStar and newHalo to body won't work, even though it's HTML. So I have to wrap it into a designated doc div-element.
+		const star = document.createElement('div');
 		star.innerHTML = newStar;
 		star.style.opacity = 0;
 		const halo = document.createElement('div');
@@ -256,8 +256,8 @@ async function createContent()
 			starBirthCore.animate([{width: '10%', height: '10%', opacity: 1},{width: '80%', height: '80%', opacity: 1},{width: '130%', height: '130%',opacity:0}],1700).onfinish = ()=> starBirthCore.style.display = 'none';
 			starBirthRing.animate([{width: '10%', height: '10%', opacity: 1},{width: '250%', height: '250%', opacity: 1,  borderWidth: '10px'},{width: '500%', height: '500%', opacity: 0, borderWidth: '10px'}],1500).onfinish = ()=> starBirthRing.style.display = 'none';
 			starDiffraction.animate([{width: '130%', height: '130%', opacity: 0},{width: '400%',height: '300%', opacity: 1},{opacity: 1}],1500).onfinish = ()=> starDiffraction.style.opacity = 1;
-			star.animate([{opacity: 0},{opacity: 0.2},{opacity: 1}],1500).onfinish = ()=> star.style.opacity = 1;
-			core.animate([{opacity: 0},{opacity: 0.2},{opacity: 1}],1500).onfinish = ()=> core.style.opacity = 1;
+			star.animate({opacity: [0, 0.2, 1]},1500).onfinish = ()=> star.style.opacity = 1;
+			core.animate({opacity: [0, 0.2, 1]},1500).onfinish = ()=> core.style.opacity = 1;
 		}, shuffledSuccession[z]*200);
 		
 		const infoDivAni = renderedText.animate({opacity: [0,1]},300);
@@ -268,13 +268,13 @@ async function createContent()
 		let blockAllAni = false;
 		let blockMouseOut = false;
 		
-		touchArea.addEventListener('mouseover', ()=>{if (!blockAllAni) mouseOver()});
-		touchArea.addEventListener('mouseout', ()=>
+		touchArea.onmouseover = ()=> {if (!blockAllAni) mouseOver();}
+		touchArea.onmouseout = ()=>
 		{
 			if (!blockAllAni && !blockMouseOut) mouseOut();
 			blockMouseOut = false;
-		});
-		touchArea.addEventListener('click', accessingStar);
+		}
+		touchArea.onclick = ()=> accessingStar();
 		
 		async function accessingStar()
 		{
@@ -346,8 +346,8 @@ async function createContent()
 		
 		function mouseOut()
 		{
-			starDiffraction.animate([{width: '230%',height: '230%'},{width: '130%', height: '130%'}],200).onfinish = ()=> {starDiffraction.style.width = '130%'; starDiffraction.style.height = '130%';};
-			halo.animate([{opacity:1},{opacity: 0}],200).onfinish = ()=> halo.style.opacity = 0;
+			starDiffraction.animate([{width: '230%',height: '230%'},{width: '130%', height: '130%'}],200).onfinish = ()=> {starDiffraction.style.width = '130%'; starDiffraction.style.height = '130%';}
+			halo.animate({opacity: [1,0]},200).onfinish = ()=> halo.style.opacity = 0;
 			core.animate([{width: '15%', height: '15%'},{width: '10%', height: '10%'}],200).onfinish = ()=> {core.style.width = '10%'; core.style.height = '10%';}
 			infoDivAni.reverse();
 			infoDivAni.onfinish = ()=> renderedText.style.display = 'none';
@@ -356,7 +356,7 @@ async function createContent()
 		async function mouseOver()
 		{
 			starDiffraction.animate([{width: '130%', height: '130%'},{width: '230%',height: '230%'}],200).onfinish = ()=> {starDiffraction.style.width = '230%'; starDiffraction.style.height = '230%';};
-			halo.animate([{opacity: 0},{opacity:1}],200).onfinish = ()=> halo.style.opacity = 1;
+			halo.animate({opacity: [0,1]},200).onfinish = ()=> halo.style.opacity = 1;
 			core.animate([{width: '10%', height: '10%'},{width: '15%', height: '15%'}],200).onfinish = ()=> {core.style.width = '15%'; core.style.height = '15%';}
 			if (isMobile) await new Promise(wait=> setTimeout(wait,1000));
 			if (infoDivAni.playbackRate === -1) infoDivAni.playbackRate = 1;
@@ -391,7 +391,7 @@ async function hideStars(hide)
 		const allStars = []; //Array.from(document.getElementsByClassName('starAndGlow'));
 		for (const star in stars) allStars.push(stars[star].star);
 		while (!allHiddenOrVisible(allStars)) await new Promise(resolve => setTimeout(resolve,200));
-		if (hide) for (const star of allStars) setTimeout(()=>{ star.animate({opacity: [1,0]},400).onfinish = ()=> star.style.display = 'none'},200*getRndInteger(0,allStars.length));
+		if (hide) for (const star of allStars) setTimeout(()=>{star.animate({opacity: [1,0]},400).onfinish = ()=> star.style.display = 'none'},200*getRndInteger(0,allStars.length));
 		else for (const star of allStars) setTimeout(()=>{star.style.display = 'block'; star.animate({opacity: [0,1]},400)},200*getRndInteger(0,allStars.length));
 		await new Promise(resolve => setTimeout(resolve, allStars.length*200));
 		inLock = false;
@@ -403,7 +403,7 @@ function allHiddenOrVisible(allStars)
 	let none = 0, block = 0, empty = 0;
 	for (const star of allStars)
 	{
-		if (star.style.display === '') empty++; // the first time will be this, when only the CSS styling is in effect, before any JS-set styling (block/none), as we're here only reading JS-set styling.
+		if (star.style.display === '') empty++; // the first time will be this, when only the CSS styling is in effect, before any JS-set styling (block/none)
 		if (star.style.display === 'none') none++;
 		if (star.style.display === 'block') block++;
 	}

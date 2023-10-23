@@ -40,7 +40,7 @@ arrowLeft.onmouseover = ()=>{svgArrowLeftOne.style.display = 'none'; svgArrowLef
 arrowLeft.onmouseout = ()=>{svgArrowLeftOne.style.display = 'block'; svgArrowLeftTwo.style.display = 'none'};
 arrowRight.onmouseover = ()=>{svgArrowRightOne.style.display = 'none'; svgArrowRightTwo.style.display = 'block'};
 arrowRight.onmouseout = ()=>{svgArrowRightOne.style.display = 'block'; svgArrowRightTwo.style.display = 'none'};
-//... ok what's all this fuss about the arrows? Originally I just added the unicode ('commented-out block just upper of this arrow block') until I realized that not all OS know this arrow, like Android e.g.. Easy solution: export it as SVG in Figma (because Illustrator doesn't know it either) and add it as svg-inline-element. That worked well, but then there would be a challenge regarding the hover effect: adding an onmouse listener to the SVG would fire frame-wise (onmouseover every frame)! So it needed a parent div, then it would do the escpected behaviour, but it was not possible to just change the styling (for hover effect) of SVG like this. My first guess was to just change the fill property directly in the shape property (as I got it from Figma), meaning I'd replace the innerHTML string that described the fill part within another; but as feared, the browser engine doesn't that readily update the reading of the inline-SVG, meaning when you hover, sometimes it would change colour, sometimes not. So just for trying, I removed the fill property and added a class which described the fill property in CSS. But as expected, because the browser engine wouldn't update frequently the content of the HTML SVG element (with a new class) the color update still wasn't convincing. You could directly add the CSS hover property to it, but because most of the SVG is actually empty space, you'd have to directly hover over the white part (vector area) of the SVG for the arrow to turn blue, it wouldn't work in the center part e.g.. The arrow vector of the SVG was placed in a rectangle originally, but there's no way to add a hover listener to the rectangle that would then address the child arrow vector, or likewise a listener to the viewBox. I later removed the rectangle, it was not needed, it's just something that came from Figma. So I thought: alright, let's just take the class and load the stylestheet in JS to change the class there, because stylesheet changes are updated frame-wise. But that wouldn't work because the browser throws in a CORS block when loading the stylesheet in JS, and it doesn't tell you that it's caused by a CORS block btw, it just tells you that it failed to load the rules part of hte stylehsheet, the part we need. Since I want this script to run directly without a server, it's not an option. So in the end it had to be a simple but a bit blatant solutionof  actually having a two SVGs for every arrow, with different styling classes each. The SVGs get swapped (display block / none) when hovering.
+//... ok what's all this fuss about the arrows? Originally I just added the unicode ('commented-out block just upper of this arrow block') until I realized that not all OS know this arrow, like Android e.g.. Easy solution: export it as SVG in Figma (because Illustrator doesn't know it either) and add it as svg-inline-element. That worked well, but then there would be a challenge regarding the hover effect: adding an onmouse listener to the SVG would fire frame-wise (onmouseover every frame)! So it needed a parent div, then it would do the escpected behaviour, but it was not possible to just change the styling (for hover effect) of SVG like this. My first guess was to just change the fill property directly in the shape property (as I got it from Figma), meaning I'd replace the innerHTML string that described the fill part within another; but as feared, the browser engine doesn't that readily update the reading of the inline-SVG, meaning when you hover, sometimes it would change colour, sometimes not. So just for trying, I removed the fill property and added a class which described the fill property in CSS. But as expected, because the browser engine wouldn't update frequently the content of the HTML SVG element (with a new class) the color update still wasn't convincing. You could directly add the CSS hover property to it, but because most of the SVG is actually empty space, you'd have to directly hover over the white part (vector area) of the SVG for the arrow to turn blue, it wouldn't work in the center part e.g.. The arrow vector of the SVG was placed in a rectangle originally, but there's no way to add a hover listener to the rectangle that would then address the child arrow vector, or likewise a listener to the viewBox. I later removed the rectangle, it was not needed, it's just something that came from Figma. So I thought: alright, let's just take the class and load the stylestheet in JS to change the class there, because stylesheet changes are updated frame-wise. But that wouldn't work because the browser throws in a CORS block when loading the stylesheet in JS, and it doesn't tell you that it's caused by a CORS block btw, it just tells you that it failed to load the rules part of hte stylehsheet, the part we need. Since I want this script to run directly without a server, it's not an option. So in the end it had to be a simple but a bit blatant solution of actually having a two SVGs for every arrow, with different styling classes each. The SVGs get swapped (display block / none) when hovering.
 	
 const escape = document.createElement('div');
 escape.id = 'escape';
@@ -77,8 +77,10 @@ var fullWindowImage;
 var firstTime = true;
 function goFullWindow()
 {
+	console.log("GO FULL WINDOW")
 	if (firstTime)
 	{
+		console.log("FIRST TIME")
 		fullWindowImage = document.createElement('IMG');
 		fullWindowImage.id = 'fullWindowImage';
 		fullWindow = document.createElement('div');
@@ -95,7 +97,7 @@ function goFullWindow()
 	fullWindow.style.top = window.scrollY + 'px';
 	fullWindow.animate({opacity: [0,1]}, 333);
 	hideStars(true);
-	myselfStar.animate({opacity: [1,0]},500).onfinish =()=> myselfStar.style.display = 'none';
+	myselfStar.animate({opacity: [1,0]},500).onfinish = ()=> myselfStar.style.display = 'none';
 }
 function leaveFullWindow()
 {
@@ -106,7 +108,7 @@ function leaveFullWindow()
 		hideStars(false);
 		myselfStar.style.display = 'block';
 		myselfStar.animate({opacity: [0,1]},500);
-	};
+	}
 }
 function goRight()
 {

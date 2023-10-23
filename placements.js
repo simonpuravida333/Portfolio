@@ -38,7 +38,7 @@ function placeRenderedText(windowDiv, starAndGlow, renderedText, renderedTextCoo
 function placeImages(windowDiv, imagesArea, renderedTextCoordinatesDimensions)
 {
 	// very curious bug: if you keep clicking on a star without clicking anywhere else, renderedText styling coordinates and dimensions will become 0. offsetTop, getBoundingClientRect().x / .top and getBoundingClientRect().height... everything becomes zero. But the object is perfectly fine, it still has the coordinates and dimensions it should. Only when you click somewhere else and then again on the star it suddenly shows the proper numbers again. ... i bet this is caused by some caching algorithm that realizes there's been no other interaction (clicks elsewhere) that could have affected a change so it just doesn't perform any more readings.
-	// the only function that seems to be immunce against this is window.getComputedStyle(element)
+	// the only function that seems to be immune against this is window.getComputedStyle(element)
 	// we don't need it upper in the placeRenderedText because renderedText is placed relative to a steady star it belongs to, but renderedText itself gets turned off and on and relative to it is placed the image.
 	
 	// and then... window.getComputedStyle(renderedText).getPropertyValue('height') would trip me up. Just as with mentioned upper, from the second opening of the text (when not having clicked anywhere else) it would show 'auto', all the other numbers work. I've tried focus and click (executed by the program) events to simulate click on body in between opening the texts, but it wouldn't work.

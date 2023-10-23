@@ -1,4 +1,4 @@
-import {createMyself} from './myself.js';
+import {createMyself, myselfStar} from './myself.js';
 import {createContent, stars} from './content.js';
 import {isMobile, adjustSizesForMobile} from './mobileResponsiveness.js';
 import {fullWindow, frameImageFullWindow} from './fullScreenImage.js';
@@ -45,6 +45,7 @@ background.onload = async ()=>
 			{
 				if (contentDelivered) for (const star in stars) stars[star].star.style.display = 'block';
 				infoBlockScreen.style.display = 'none';
+				myselfStar.style.display = 'block';
 				preventCreatingContent = false;
 			}
 			else
@@ -56,8 +57,8 @@ background.onload = async ()=>
 						if (stars[star].accessed === true) stars[star].access();
 						stars[star].star.style.display = 'none';
 					}
-					const myselfStar = document.getElementById('myselfStar');
 					if (myselfStar.style.opacity === '0.3') myselfStar.click();
+					myselfStar.style.display = 'none';
 				}
 				infoBlockScreen.style.display = 'block';
 			}
@@ -81,7 +82,7 @@ background.onload = async ()=>
 	window.addEventListener('resize',()=>
 	{
 		adjustBackground();
-		if (fullWindow.style.display === 'block') frameImageFullWindow();
+		if (!isMobile) if (fullWindow.style.display === 'block') frameImageFullWindow();
 	});
 	if (isMobile)
 	{

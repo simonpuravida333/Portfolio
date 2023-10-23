@@ -111,7 +111,7 @@ function reset(element)
 
 function adjustSizesForMobile(starAndGlow, renderedText)
 {
-	const starGlowWidthHeight = ((window.innerWidth > window.innerHeight) ? window.innerWidth : window.innerHeight)*0.1; // the ruler is the longest side, because only on that matters how big objects should appear visually subjectivively. 10% is a good range. We need to keep the starAndGlow with pixel dimensions, only its children can have percentages, and sensibly so. The reason of course being that the direct parent of starAndGlow is the body (or windowDiv, which covers the body) and because the body is not a perfect square usually, the star needs absolute pixel dimensions, not relative percentages. But we still need to scale with the window, which is the job of this if statement.
+	const starGlowWidthHeight = ((window.innerWidth > window.innerHeight) ? window.innerWidth : window.innerHeight)*0.1; // the ruler is the longest side, because only on that matters how big objects should appear visually subjectively. 10% is a good range. We need to keep the starAndGlow with pixel dimensions, only its children can have percentages, and sensibly so. The reason of course being that the direct parent of starAndGlow is the body (or windowDiv, which covers the body) and because the body is not a perfect square usually, the star needs absolute pixel dimensions, not relative percentages. But we still need to scale with the window, which is the job of this if statement.
 	if (starAndGlow !== null && starAndGlow !== undefined)
 	{
 		starAndGlow.style.width = starGlowWidthHeight+'px';
