@@ -77,10 +77,8 @@ var fullWindowImage;
 var firstTime = true;
 function goFullWindow()
 {
-	console.log("GO FULL WINDOW")
 	if (firstTime)
 	{
-		console.log("FIRST TIME")
 		fullWindowImage = document.createElement('IMG');
 		fullWindowImage.id = 'fullWindowImage';
 		fullWindow = document.createElement('div');

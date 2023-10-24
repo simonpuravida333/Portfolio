@@ -1,29 +1,24 @@
 // PATTERN CODING PROJECT
-const codingProject = {
-	work: 'Software Engineering', // this string must be given
-	name: "",
-	objective: "",
-	stack: "",
-	implementations: "",
-	sophistication: "",
-	links: [],
-	youtube: [],
-	imageLinks: [],
+
+function codingProject(links, youtube, imageLinks)
+{
+	this.work = 'Software Engineering';
+	this.links = links;
+	this.youtube = youtube;
+	this.imageLinks = imageLinks;
 }
 
-// PATTERN DESIGN PROJECT
-const designProject = {
-	work: 'Design', // this string must be given
-	name: "",
-	concept: "",
-	sophistication: "",
-	links: [],
-	imageLinks: [],
+function designProject(links, youtube, imageLinks)
+{
+	this.work = 'Design';
+	this.links = links;
+	this.youtube = youtube;
+	this.imageLinks = imageLinks;
 }
 
 export const projects = [];
 
-const googleSearch = {};
+const googleSearch = new codingProject();
 googleSearch.work = 'Software Engineering';
 googleSearch.name = 'Google Search (Harvard CS50W Project 0)';
 googleSearch.objective = 'Visually identical google search front page, queries will redirect to google results.';
@@ -34,8 +29,7 @@ googleSearch.links = ['https://github.com/simonpuravida333/GoogleSearch'];
 googleSearch.imageLinks = ['captures/Google Search 1.png', 'captures/Google Search 2.png', 'captures/Google Search 2B.png', 'captures/Google Search 3.png', 'captures/Google Search 4.png'];
 //projects.push(googleSearch);
 
-const wiki = {};
-wiki.work = 'Software Engineering';
+const wiki = new codingProject();
 wiki.name = 'Wiki (Harvard CS50W Project 1)';
 wiki.objective = 'A simple Wikipedia App for reading, creating & editing articles.';
 wiki.stack = 'Back-end: Python / Django<br>Front-end: HTML, CSS';
@@ -45,8 +39,7 @@ wiki.links = ['https://github.com/simonpuravida333/Wiki']
 wiki.imageLinks = ['captures/Wiki 1.png', 'captures/Wiki 2.png', 'captures/Wiki 3.png', 'captures/Wiki 4.png']
 projects.push(wiki);
 
-const auctions = {};
-auctions.work = 'Software Engineering';
+const auctions = new codingProject();
 auctions.name = 'Auctions (Harvard CS50W Project 2)';
 auctions.objective = 'An ebay-like application.<br>Create listings, put articles on watchlist, bid on articles...';
 auctions.stack = 'Back-end: Pyton / Django, SQLite, Jinja2<br>Front-end: HTML, CSS';
@@ -57,8 +50,7 @@ auctions.youtube = ['https://youtu.be/HGsgk-MQWoE'];
 auctions.imageLinks = ['captures/Auctions 1.png', 'captures/Auctions 2.png', 'captures/Auctions 3.png', 'captures/Auctions 4.png', 'captures/Auctions 5.png', 'captures/Auctions 6.png', 'captures/Auctions 7.png', 'captures/Auctions 8.png', 'captures/Auctions 9.png', 'captures/Auctions 10.png', 'captures/Auctions 12.png', 'captures/Auctions 13.png'];
 projects.push(auctions);
 
-const mail = {};
-mail.work = 'Software Engineering';
+const mail = new codingProject();
 mail.name = 'Mail (Harvard CS50W Project 3)';
 mail.objective = 'A single-page e-mail application implemention on the front-end.';
 mail.stack = 'Front-end: JavaScript, AJAX, JSON REST API, CSS, HTML';
@@ -69,8 +61,7 @@ mail.youtube = ['https://youtu.be/LIokAGj2cc4'];
 mail.imageLinks = ['captures/Mail 1.png', 'captures/Mail 2.png', 'captures/Mail 3.png', 'captures/Mail 4.png', 'captures/Mail 5.png', 'captures/Mail 6.png'];
 projects.push(mail);
 
-const network = {};
-network.work = 'Software Engineering';
+const network = new codingProject();
 network.name = 'Network (Harvard CS50W Project 4)';
 network.objective = 'A Twitter-like single-page app for writing messages and following people.'
 network.stack = 'Back-end: Python / Django, SQLite, JSON REST API<br>Front-end: JavaScript, AJAX, Web Animations API, HTML, CSS';
@@ -81,8 +72,7 @@ network.youtube = ['https://youtu.be/QBCzfgj4_ow'];
 network.imageLinks = ['captures/Network 1.png', 'captures/Network 2.png', 'captures/Network 3.png', 'captures/Network 4.png', 'captures/Network 5.png'];
 projects.push(network);
 
-const life = {};
-life.work = 'Software Engineering';
+const life = new codingProject();
 life.name = 'Life (Harvard CS50W Final Project)';
 life.objective = 'A single-page app to easily access the data of the GBIF (Global Biodiversity Information Facility). The choice of project was free in this final assignment: I chose the GBIF where two passions come together: nature and tech.';
 life.stack = 'Front-end: JavaScript, AJAX, Rest API, Web Animations API, HTML, CSS, mobile responsive<br>Back-end: Rest API written in Django / Python that imitates (simplified) the GBIF Rest API; SQLite; allows for saving of new specieses and occurrences.';
@@ -93,8 +83,7 @@ life.youtube = ['https://youtu.be/QZl-F8OFy-Q', 'https://youtu.be/buld3ph_Uvs'];
 life.imageLinks = ['captures/Life 1.png', 'captures/Life 2.png', 'captures/Life 3.png', 'captures/Life 4.png', 'captures/Life 5.png', 'captures/Life 6.png', 'captures/Life 7.png', 'captures/Life 8.png', 'captures/Life 9.png', 'captures/Life 10.png', 'captures/Life 11.png',  'captures/Life 12.png',  'captures/Life 13.png', 'captures/Life 14.png'];
 projects.push(life);
 
-const vocz = {};
-vocz.work = 'Software Engineering';
+const vocz = new codingProject();
 vocz.name = 'Vocz';
 vocz.objective = "A single-page app for learning vocabulary.";
 vocz.stack = 'Front-end: JavaScript, HTML, CSS';
@@ -104,8 +93,7 @@ vocz.links = ['https://github.com/simonpuravida333/Vocz'];
 vocz.imageLinks = ['captures/Vocz 1.png', 'captures/Vocz 2.png', 'captures/Vocz 3.png', 'captures/Vocz 6.png'];
 projects.push(vocz);
 
-const portfolio = {};
-portfolio.work = 'Software Engineering';
+const portfolio = new codingProject();
 portfolio.name = '(This) Portfolio';
 portfolio.objective = "A single-page app for presenting my projects.";
 portfolio.stack = "Front-end: vanilla JavaScript, CSS";
@@ -114,7 +102,7 @@ portfolio.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24';
 portfolio.links = ['https://github.com/simonpuravida333/Portfolio'];
 projects.push(portfolio);
 
-const vela = {};
+const vela = new designProject();
 vela.name = 'Vela';
 vela.concept = "A design concept (UX and UI) for a novel way of creating, managing and developing ideas, information and big projects.<br>...Vela has been a huge undertaking that was years in the making as it breaks with conventional UI and UX designs. The concept went through four revisions over three years.<br>In the near future I want to realize the concept technically.";
 vela.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24';
@@ -122,7 +110,7 @@ vela.links = ['https://www.canva.com/design/DAFR2g6jMGE/Uq9ObLDajJBAQm3uq4PKOg/e
 vela.imageLinks = ['captures/Vela 1.png', 'captures/Vela 2.png', 'captures/Vela 3.png', 'captures/Vela 4.png', 'captures/Vela 5.png'];
 projects.push(vela);
 
-const berlioz = {};
+const berlioz = new designProject();
 berlioz.name = 'Berlioz';
 berlioz.concept = "A design concept for a novel way of composing melodies. It combines the strengths of MIDI keys with conventional notation, something that doesn't exist currently, but has huge potential.";
 berlioz.sophistication = '&#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24 &#x2B24';

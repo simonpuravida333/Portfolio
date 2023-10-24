@@ -83,7 +83,7 @@ background.onload = async ()=>
 	window.addEventListener('resize',()=>
 	{
 		adjustBackground();
-		if (!isMobile) if (fullWindow.style.display === 'block') frameImageFullWindow();
+		if (!isMobile && fullWindow !== undefined) if (fullWindow.style.display === 'block') frameImageFullWindow();
 	});
 	if (isMobile)
 	{
