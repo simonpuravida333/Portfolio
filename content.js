@@ -164,6 +164,7 @@ async function createContent()
 			imagesArea.classList.add('imagesAreaMobile');
 			renderedText.append(imagesArea);
 			let imageFocus = false;
+			/*
 			imagesArea.onclick = ()=>
 			{
 				imageFocus ^= true;
@@ -188,6 +189,7 @@ async function createContent()
 					theTimeout = setTimeout(nextImage, presentationTime, false);
 				}
 			}
+			*/
 		}
 		else
 		{
