@@ -25,6 +25,8 @@ infoBlockScreen.id = 'infoBlockScreen';
 infoBlockScreen.innerHTML = 'This app has been developed for portrait (upright) mobile screens. Tilt back to enjoy.';
 windowDiv.append(infoBlockScreen);
 
+const viewport = document.getElementById('theViewport');
+
 background.onload = async ()=>
 {
 	let contentDelivered = false;
@@ -36,7 +38,6 @@ background.onload = async ()=>
 		if (windowAspectRatio > backgroundAspectRatio) backgroundImageFullHeight = false;
 		else backgroundImageFullHeight = true;
 		
-		const viewport = document.getElementById('theViewport');
 		if (isMobile)
 		{
 			viewport.setAttribute('content', 'height='+window.innerHeight+'px');

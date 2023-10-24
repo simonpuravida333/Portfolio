@@ -6,6 +6,8 @@ const isTablet = /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch
 const touch = isMobile || isTablet;
 if (isMobile && isTablet) isMobile = false; // assuming it's an Android tablet
 
+const viewport = document.getElementById('theViewport');
+
 function touchResponse(element, touchArea)
 {
 	if (element === null) // important to detach listener after closing a star.
@@ -22,6 +24,7 @@ function touchResponse(element, touchArea)
 	 	body.ontouchend = ()=>{handleEnd(element, touchArea)};
 	 	body.ontouchcancel = ()=>{handleCancel(element)};
 	 	body.ontouchmove = (event)=>{handleMove(event, element)};
+	 	viewport.setAttribute('content', 'width=device-width, initial-scale=0.25, maximum-scale=0.25, user-scalable=no'); // in case the user has pinch-zoomed while flying over the landscape, meaning has not yet clicked on an object, this setAttribute resets the zoom as soon as the user opens a star.
 	}
 }
 
@@ -63,6 +66,9 @@ function handleMove(event, element)
 {
 	if (event.touches.length > 1)
 	{
+		viewport.setAttribute('content', 'width=device-width, initial-scale=0.25, maximum-scale=0.25, user-scalable=no');
+		// my way of preventing pinch-zooms: just whenever a pinch-zoom is detected, it resets the view-port.
+
 		moment = new Date().getTime();
 		lockUnlock();
 		return; // only one finger allowed, or it would mess when the user tried to zoom (pinch / two finger interaction)
