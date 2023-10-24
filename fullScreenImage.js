@@ -44,8 +44,11 @@ arrowRight.onmouseout = ()=>{svgArrowRightOne.style.display = 'block'; svgArrowR
 	
 const escape = document.createElement('div');
 escape.id = 'escape';
-escape.innerHTML = '&#x229A';
+escape.innerHTML = '⊙';
+//escape.innerHTML = '&#x229A';
 escape.style['z-index'] = 3;
+escape.onmouseover = ()=> escape.innerHTML = '⦿';
+escape.onmouseout = ()=> escape.innerHTML = '⊙';
 arrowLeft.addEventListener('click', goLeft);
 arrowRight.addEventListener('click', goRight);
 escape.addEventListener('click', leaveFullWindow);

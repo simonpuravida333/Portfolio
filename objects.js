@@ -1,5 +1,3 @@
-// PATTERN CODING PROJECT
-
 function codingProject(links, youtube, imageLinks)
 {
 	this.work = 'Software Engineering';
