@@ -38,8 +38,18 @@ let originalElementPlacement = {
 let moment;
 let locked = false;
 
+let doubleTapInterval = 0;
+
 function handleStart(event, element)
 {
+	if (new Date().getTime() - doubleTapInterval <= 333) // double tap zoom is triggered when second tap <= 300, guessing from testing. Set it to 333 to be secure.
+	{
+		setTimeout(()=>{viewport.setAttribute('content', 'width=device-width, initial-scale=0.25, maximum-scale=0.25, user-scalable=no')}, 333); // when the user double taps (tapping twice under ~ third of a second) this prevents a zoom of the viewport when a star is opened. Because the zoom happens with a small delay after the second tap, this delay makes certain that it readjusts the viewport swiftly after the second tap. 333 milliseconds delay is an arbitrarily chosen time that works well with devices.
+		setTimeout(()=>{viewport.setAttribute('content', 'width=device-width, initial-scale=0.25, maximum-scale=0.25, user-scalable=no')}, 666); // ...nontheless, it makes a second viewport set after twice the time, just to make certain in case of a slow device.
+	}
+	doubleTapInterval = new Date().getTime();
+	
+	
 	startPosition = event.changedTouches[0].clientY;
 	originalElementPlacement.x = element.offsetLeft;
 	originalElementPlacement.y = element.offsetTop;
@@ -55,11 +65,11 @@ function handleEnd(element, touchArea)
 	reset(element);
 }
 
-function lockUnlock()
+function lockUnlock() // not in use anymore as pinch-zooms are now disabled.
 {
 	if (moment+500 > new Date().getTime()) locked = true;
 	else locked = false;
-	// there must be a time gap after you've last used two fingers (pinch zoom). Usually users don't pull away both fingers in the same frame, there's one finger left which may have suddenly have a big delta, triggering fullPull /  handleEnd(). So for half a second after two-finger interaction everything gets reset.
+	// there must be a time gap after user has last pinch zoomed. Usually users don't pull away both fingers in the same frame, there's one finger left which may have suddenly have a big delta, triggering fullPull /  handleEnd(). So for half a second after two-finger interaction everything gets reset.
 }
 
 function handleMove(event, element)
@@ -69,11 +79,11 @@ function handleMove(event, element)
 		viewport.setAttribute('content', 'width=device-width, initial-scale=0.25, maximum-scale=0.25, user-scalable=no');
 		// my way of preventing pinch-zooms: just whenever a pinch-zoom is detected, it resets the view-port.
 
-		moment = new Date().getTime();
-		lockUnlock();
-		return; // only one finger allowed, or it would mess when the user tried to zoom (pinch / two finger interaction)
+		// moment = new Date().getTime();
+		// lockUnlock();
+		return; // only one finger allowed
 	}
-	lockUnlock();
+	// lockUnlock();
 	movement = event.changedTouches[0].clientY;
 	let delta = movement - startPosition;
 	if (delta < 0) return; // this is a late implementation. As you can see below, it regards both, positive and negative deltas. This implementation limits the swipe-away movement to upwards only. Downwards is a bit tricky, as the div shows alternating images of various heights, which changes the height of the div the user wants to swipe away, causing a messing with the condition readings.

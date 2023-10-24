@@ -1,6 +1,6 @@
 // PATTERN CODING PROJECT
 const codingProject = {
-	work: 'Software Engineering',
+	work: 'Software Engineering', // this string must be given
 	name: "",
 	objective: "",
 	stack: "",
@@ -13,7 +13,7 @@ const codingProject = {
 
 // PATTERN DESIGN PROJECT
 const designProject = {
-	work: 'Design',
+	work: 'Design', // this string must be given
 	name: "",
 	concept: "",
 	sophistication: "",
