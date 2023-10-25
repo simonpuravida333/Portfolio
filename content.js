@@ -1,11 +1,11 @@
 import {projects, myself} from './objects.js';
-import {starSVG, haloSVG, gitHubIconSVG, canvaIconSVG, canvaIconSVGDefsPart, youtubeIconSVG} from './SVGs.js';
+import {starSVG, haloSVG, gitHubIconSVG, canvaIconSVG, SVGDefsPart, youtubeIconSVG} from './SVGs.js';
 import {fullWindow, nextImageFullWindow, frameImageFullWindow, globalImage} from './fullScreenImage.js';
 import {placeRenderedText, placeImages} from './placements.js';
 import {isMobile, touchResponse, adjustSizesForMobile} from './mobileResponsiveness.js';
 
 const body = document.querySelector('body');
-body.innerHTML += canvaIconSVGDefsPart; // adds the "defs" part to body. It contains the styling IDs. This is vital if you have several instances of the same SVG and deal with display none / block of the SVGs. It's because the browser caches IDs only once, so the second, third... copy of a SVG you call won't have styling. Only the first does, unless the first is display = block while another one is display = block. Then the other one will also have proper styling for the time the first SVG is visible. Becuase the SVG get display = block / none in the DOM, the browser can't find the ID of the first SVG (the only one it cached) for the second, third ... SVG; so they won't have styling. That's the tricky thing about having in-place IDs (as in SVGs) get added / removed from the DOM. The brower is fooled in thinking (CSS) IDs are always global. That's why I've seperated the <defs> part from the Canva SVG it belonged to and just place the <defs> part permanently to the body right away, to provide global styling.
+body.innerHTML += SVGDefsPart; // adds the "defs" part to body. It contains the styling IDs. This is vital if you have several instances of the same SVG and deal with display none / block of the SVGs. It's because the browser caches IDs only once, so the second, third... copy of a SVG won't have styling. Unless the first is display = block while another one is display = block, then the other one will also have proper styling for the time the first SVG is "block". Becuase the SVG get display = block / none in the DOM, the browser can't find the ID of the first SVG (the only one it cached) for the second, third ... SVG. That's the tricky thing about having in-place IDs (as in SVGs) get added / removed from the DOM. The brower is fooled in thinking (CSS) IDs are always global. That's why I've seperated the <defs> part from the Canva SVG it belonged to and just place the <defs> part permanently to the body right away, to provide global styling.
 
 const stars = {}
 
@@ -126,25 +126,17 @@ async function createContent()
 		const flexDiv = document.createElement('div');
 		flexDiv.style.display = 'flex';
 		renderedText.append(flexDiv);
-		for (const link of projects[z].links)
+		for (const link of projects[z].links) addLink(link, iconSVG)
+		if (projects[z].work === 'Software Engineering' && projects[z].youtube !== undefined) if (projects[z].youtube.length > 0) for (const link of projects[z].youtube) addLink(link, youtubeSVG)
+		
+		function addLink(link, SVG)
 		{
 			const svgDiv = document.createElement('div');
 			if (isMobile) svgDiv.classList.add('svgDivMobile');
 			else svgDiv.classList.add('svgDiv');
 			const theLink = document.createElement('a');
 			theLink.href = link;
-			theLink.innerHTML = `${iconSVG}`;
-			svgDiv.append(theLink);
-			flexDiv.append(svgDiv);
-		}
-		if (projects[z].work === 'Software Engineering' && projects[z].youtube !== undefined) if (projects[z].youtube.length > 0) for (const link of projects[z].youtube)
-		{
-			const svgDiv = document.createElement('div');
-			if (isMobile) svgDiv.classList.add('svgDivMobile');
-			else svgDiv.classList.add('svgDiv');
-			const theLink = document.createElement('a');
-			theLink.href = link;
-			theLink.innerHTML = `${youtubeSVG.replaceAll('youtube', 'youtube'+z)}`;
+			theLink.innerHTML = `${SVG}`;
 			svgDiv.append(theLink);
 			flexDiv.append(svgDiv);
 		}
