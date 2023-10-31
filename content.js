@@ -94,7 +94,7 @@ async function createContent()
 		renderedText.classList.add('starDescription'/*,'mask'*/);
 		for (const key in projects[z])
 		{
-			if (key === 'links' || key === 'imageLinks' || key === 'youtube') continue;
+			if (key === 'links' || key === 'imageLinks' || key === 'youtube' || key === 'landscapeTitle') continue;
 			renderedText.innerHTML += "<strong><i>"+ key.charAt(0).toUpperCase()+key.slice(1) +"</i></strong><br>";
 			const aDiv = document.createElement('div');
 			aDiv.style['margin-left'] = '15px';
@@ -106,6 +106,16 @@ async function createContent()
 		// MOBILE TEXT ADJUSTMENT
 		let textAreaBorderWidth = 20;
 		if (isMobile) textAreaBorderWidth = adjustSizesForMobile(starAndGlow, renderedText)/10;
+
+		// STAR TITLE IN LANDSCAPE
+		const starLandscapeTitle = document.createElement('div');
+		starLandscapeTitle.classList.add('starLandscapeTitle');
+		starLandscapeTitle.style.left = xPlacement-10+'%';
+		starLandscapeTitle.style.top = yPlacement-10+'%';
+		starLandscapeTitle.style.width = '20%';
+		starLandscapeTitle.innerHTML = projects[z].landscapeTitle;
+		starLandscapeTitle.style.opacity = 0;
+		windowDiv.append(starLandscapeTitle);
 		
 		// MOBILE SVG ADJUSTMENT
 		let iconSVG;
@@ -114,7 +124,7 @@ async function createContent()
 		{
 			if (projects[z].work === 'Software Engineering') iconSVG = gitHubIconSVG.replace("width='98' height='96'","width='196' height='192'");
 			else iconSVG = canvaIconSVG.replace("width='100' height='100'", "width='200' height='200'");
-			youtubeSVG = youtubeIconSVG.replace("width='100' height='100'", "width='200' height='200'")
+			youtubeSVG = youtubeIconSVG.replace("width='100' height='100'", "width='200' height='200'");
 		}
 		else
 		{
@@ -371,8 +381,20 @@ async function createContent()
 		stars[z]['access'] = accessingStar;
 		stars[z]['accessed'] = false;
 		stars[z]['imageFocus'] = false;
-	
+		stars[z]['landscapeTitle'] = starLandscapeTitle
 	}
+	
+	const mouseVisibility = 250;
+	windowDiv.onmousemove = (mouse)=>
+	{
+		for (const star in stars)
+		{
+			let distance = euclideanDistance([mouse.clientX + window.scrollX, mouse.clientY + window.scrollY], [stars[star].star.offsetLeft, stars[star].star.offsetTop]);
+			if (distance <= mouseVisibility && stars[star].star.style.display !== 'none') stars[star].landscapeTitle.style.opacity = 1 - distance/mouseVisibility;
+			else stars[star].landscapeTitle.style.opacity = 0;
+		}
+	}	
+	
 	return true;
 }
 
@@ -426,5 +448,7 @@ function getRndFloat(min, max)
 {
 	return Math.random() * (max - min) + min;
 }
+
+const euclideanDistance = (a, b) => Math.hypot(...Object.keys(a).map(k => b[k] - a[k])); // thanks to https://www.30secondsofcode.org/js/s/euclidean-distance/ 
 
 export {createContent, hideStars, lessenStarsBrightness, stars}

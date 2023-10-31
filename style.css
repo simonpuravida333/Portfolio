@@ -42,13 +42,11 @@ body
 	display: none;
 	overflow-y: scroll;
 }
-
 .mask
 {
 	-webkit-mask-image: linear-gradient(transparent, rgba(0,0,0,0.75));
 	mask-image: linear-gradient(transparent, rgba(0,0,0,0.75));
 }
-
 .starAndGlow
 {
 	width: 110px;
@@ -265,6 +263,15 @@ body
 	margin: 16px;
 	border-radius: 8px
 	background-color: white;
+}
+.starLandscapeTitle
+{
+	position: absolute;
+	text-align: center;
+	font-family: Gaegu;
+	font-size: 30px;
+	color: white;
+	pointer-events: none;
 }
 
 
