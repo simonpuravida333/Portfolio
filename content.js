@@ -116,6 +116,8 @@ async function createContent()
 		starLandscapeTitle.innerHTML = projects[z].landscapeTitle;
 		starLandscapeTitle.style.opacity = 0;
 		windowDiv.append(starLandscapeTitle);
+		const starLandscapeTitleAni = starLandscapeTitle.animate({opacity: [0,1]},200);
+		starLandscapeTitleAni.pause();
 		
 		// MOBILE SVG ADJUSTMENT
 		let iconSVG;
@@ -381,7 +383,9 @@ async function createContent()
 		stars[z]['access'] = accessingStar;
 		stars[z]['accessed'] = false;
 		stars[z]['imageFocus'] = false;
-		stars[z]['landscapeTitle'] = starLandscapeTitle
+		stars[z]['landscapeTitle'] = starLandscapeTitle;
+		stars[z]['landscapeTitleAni'] = starLandscapeTitleAni;
+		stars[z]['landscapeTitleOn'] = false;
 	}
 	
 	const mouseVisibility = 250;
@@ -390,8 +394,20 @@ async function createContent()
 		for (const star in stars)
 		{
 			let distance = euclideanDistance([mouse.clientX + window.scrollX, mouse.clientY + window.scrollY], [stars[star].star.offsetLeft, stars[star].star.offsetTop]);
-			if (distance <= mouseVisibility && stars[star].star.style.display !== 'none') stars[star].landscapeTitle.style.opacity = 1 - distance/mouseVisibility;
-			else stars[star].landscapeTitle.style.opacity = 0;
+			if (distance <= mouseVisibility && stars[star].star.style.display !== 'none' && stars[star].landscapeTitleOn === false) 
+			{
+				//stars[star].landscapeTitle.style.opacity = 1 - distance/mouseVisibility;
+				stars[star].landscapeTitleAni.playbackRate = 1;
+				stars[star].landscapeTitleAni.play();
+				stars[star].landscapeTitleAni.onfinish = ()=> stars[star].landscapeTitle.style.opacity = 1;
+				stars[star].landscapeTitleOn = true;
+			}
+			if (distance >= mouseVisibility && stars[star].star.style.display !== 'none' && stars[star].landscapeTitleOn === true)
+			{
+				stars[star].landscapeTitleAni.reverse();
+				stars[star].landscapeTitleAni.onfinish = ()=> stars[star].landscapeTitle.style.opacity = 0;
+				stars[star].landscapeTitleOn = false;
+			}
 		}
 	}	
 	

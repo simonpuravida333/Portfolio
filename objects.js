@@ -18,7 +18,7 @@ export const projects = [];
 
 const googleSearch = new codingProject();
 googleSearch.work = 'Software Engineering';
-googleSearch.name = 'Google Search (Harvard CS50W Project 0)';
+googleSearch.name = 'Google Search';
 googleSearch.objective = 'Visually identical google search front page, queries will redirect to google results.';
 googleSearch.stack = 'Front-end: HTML, CSS';
 googleSearch.implementations = 'Mostly a CSS challenge. Links with parameters. Image search page, advanced search parameters page.';
@@ -28,7 +28,7 @@ googleSearch.imageLinks = ['captures/Google Search 1.png', 'captures/Google Sear
 //projects.push(googleSearch);
 
 const wiki = new codingProject();
-wiki.name = 'Wiki (Harvard CS50W Project 1)';
+wiki.name = 'Wiki';
 wiki.objective = 'A simple Wikipedia App for reading, creating & editing articles.';
 wiki.stack = 'Back-end: Python / Django<br>Front-end: HTML, CSS';
 wiki.implementations = 'Django routing; Django templates; algorithms; use of Markdown';
@@ -39,7 +39,7 @@ wiki.landscapeTitle = 'Wiki';
 projects.push(wiki);
 
 const auctions = new codingProject();
-auctions.name = 'Auctions (Harvard CS50W Project 2)';
+auctions.name = 'Auctions';
 auctions.objective = 'An ebay-like application.<br>Create listings, put articles on watchlist, bid on articles...';
 auctions.stack = 'Back-end: Pyton / Django, SQLite, Jinja2<br>Front-end: HTML, CSS';
 auctions.implementations = '8 SQL tables / models, additional to user; Django forms; 7 basic pages (like watchlist, active biddings, acquired auctions...); algorithms, bidding with responsive messages; comments; article categories; UI design';
@@ -51,7 +51,7 @@ auctions.landscapeTitle = 'Auctions (eBay)';
 projects.push(auctions);
 
 const mail = new codingProject();
-mail.name = 'Mail (Harvard CS50W Project 3)';
+mail.name = 'Mail';
 mail.objective = 'A single-page e-mail application implemention on the front-end.';
 mail.stack = 'Front-end: JavaScript, AJAX, JSON REST API, CSS, HTML';
 mail.implementations = 'algorithms, UI design, single-page app';
@@ -63,7 +63,7 @@ mail.landscapeTitle = 'E-Mail';
 projects.push(mail);
 
 const network = new codingProject();
-network.name = 'Network (Harvard CS50W Project 4)';
+network.name = 'Network';
 network.objective = 'A Twitter-like single-page app for writing messages and following people.'
 network.stack = 'Back-end: Python / Django, SQLite, JSON REST API<br>Front-end: JavaScript, AJAX, Web Animations API, HTML, CSS';
 network.implementations = '3 SQL tables / models, routing, algoritms (on both stack-ends), UI design, single-page app';
@@ -75,7 +75,7 @@ network.landscapeTitle = 'Network (Twitter)';
 projects.push(network);
 
 const life = new codingProject();
-life.name = 'Life (Harvard CS50W Final Project)';
+life.name = 'Life';
 life.objective = 'A single-page app to easily access the data of the GBIF (Global Biodiversity Information Facility). The choice of project was free in this final assignment: I chose the GBIF where two passions come together: nature and tech.';
 life.stack = 'Front-end: JavaScript, AJAX, Rest API, Web Animations API, HTML, CSS, mobile responsive<br>Back-end: Rest API written in Django / Python that imitates (simplified) the GBIF Rest API; SQLite; allows for saving of new specieses and occurrences.';
 life.implementations = 'deep examination of the GBIF Rest API, sensible user querying and filter options, fetch calls design with thorough server response vetting, everything is fetched and loaded dynamically, dynamic and appealing UI design, animations';
@@ -141,7 +141,7 @@ export const myself = {
 		intermediate: 'JavaScript',
 		junior: 'Java <strong>&#9679</strong> C# <strong>&#9679</strong> Python <strong>&#9679</strong> Lua',
 		more_techs: 'Git <strong>&#9679</strong> SQL (SQLite) <strong>&#9679</strong> Django <strong>&#9679</strong> CI/CD <strong>&#9679</strong> HTML <strong>&#9679</strong> CSS <strong>&#9679</strong> Bootstrap',
-		coding_experience: [" completed Harvard's CS50W (Webdevelopment with Python and JavaScript)<br> "," currently engaged in further Harvard's CS50 courses."," some private coding experiences","completed 'Fundamentals of Programming' and 'Algorithm and Datastructures' at university + two more CS uni courses: one Node.js course, and one called 'Tools of Informatics': being introduced to Regex, VMs, Python...."],
+		coding_experience: [" completed Harvard's CS50W (Webdevelopment with Python and JavaScript)<br> "," currently engaged in further Harvard's CS50 courses."," some private coding experiences","completed 'Fundamentals of Programming' and 'Algorithm and Datastructures' at university + two more CS uni courses, while being enrolled in Sociology and Musicology."],
 	},
 	design:
 	{
