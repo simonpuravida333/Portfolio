@@ -423,7 +423,16 @@ async function hideStars(hide)
 		const allStars = []; //Array.from(document.getElementsByClassName('starAndGlow'));
 		for (const star in stars) allStars.push(stars[star].star);
 		while (!allHiddenOrVisible(allStars)) await new Promise(resolve => setTimeout(resolve,200));
-		if (hide) for (const star of allStars) setTimeout(()=>{star.animate({opacity: [1,0]},400).onfinish = ()=> star.style.display = 'none'},200*getRndInteger(0,allStars.length));
+		if (hide) 
+		{
+			for (const star of allStars) setTimeout(()=> {star.animate({opacity: [1,0]},400).onfinish = ()=> star.style.display = 'none'},200*getRndInteger(0,allStars.length));
+			for (const x in stars) if (stars[x].landscapeTitleOn === true)
+			{
+				stars[x].landscapeTitleAni.reverse();
+				stars[x].landscapeTitleAni.onfinish = ()=> stars[x].landscapeTitle.style.opacity = 0;
+				stars[x].landscapeTitleOn === false;
+			}
+		}
 		else for (const star of allStars) setTimeout(()=>{star.style.display = 'block'; star.animate({opacity: [0,1]},400)},200*getRndInteger(0,allStars.length));
 		await new Promise(resolve => setTimeout(resolve, allStars.length*200));
 		inLock = false;
