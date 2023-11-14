@@ -110,11 +110,12 @@ async function createContent()
 		// STAR TITLE IN LANDSCAPE
 		const starLandscapeTitle = document.createElement('div');
 		starLandscapeTitle.classList.add('starLandscapeTitle');
+		starLandscapeTitle.style['font-size'] = (isMobile) ? '60px' : '30px';
 		starLandscapeTitle.style.left = xPlacement-10+'%';
 		starLandscapeTitle.style.top = yPlacement-10+'%';
 		starLandscapeTitle.style.width = '20%';
 		starLandscapeTitle.innerHTML = projects[z].landscapeTitle;
-		starLandscapeTitle.style.opacity = 0;
+		starLandscapeTitle.style.opacity = (isMobile) ? 1 : 0;
 		windowDiv.append(starLandscapeTitle);
 		const starLandscapeTitleAni = starLandscapeTitle.animate({opacity: [0,1]},200);
 		starLandscapeTitleAni.pause();
@@ -389,7 +390,7 @@ async function createContent()
 	}
 	
 	const mouseVisibility = 250;
-	windowDiv.onmousemove = (mouse)=>
+	if (!isMobile) windowDiv.onmousemove = (mouse)=>
 	{
 		for (const star in stars)
 		{
