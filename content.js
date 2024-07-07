@@ -18,7 +18,7 @@ async function createContent()
 	for (let z = 0; z < thatManyStars; z++) shuffledSuccession[z]=z;
 	shuffledSuccession.sort(() => Math.random() - 0.5);
 
-	let colorRange = getRndInteger(0,360);
+	let colorRange = getRndInteger(0, 360);
 	while (40 < colorRange && colorRange < 160) colorRange = getRndInteger(0,360); // avoids greens.
 	
 	// GETTING PLACEMENT RANGES
@@ -38,7 +38,7 @@ async function createContent()
 		// PLACEMENT COORDINATES IN ABSOLUTE % WITHIN windowDiv
 		xProgress += getRndFloat(0, horizontalSection)+margin;
 		const xPlacement = xProgress;
-		const yPlacement = getRndFloat(10, 50); // arbitrarily adjusted to background-image, where the upper 60% is the night sky above the landscape. Similar to X, it's given a upper and lower cushion.
+		const yPlacement = getRndFloat(10, 50); // arbitrarily adjusted to background-image, where the upper 60% is the night sky above the landscape. Similar to X, it's given an upper and lower cushion.
 		// const yPlacement = getRndFloat(30, verticalUpperRangePercent); // DEBUG
 		const starAndGlow = document.createElement('div');
 		starAndGlow.classList.add('starAndGlow');
@@ -357,7 +357,11 @@ async function createContent()
 			halo.animate({opacity: [1,0]},200).onfinish = ()=> halo.style.opacity = 0;
 			core.animate([{width: '15%', height: '15%'},{width: '10%', height: '10%'}],200).onfinish = ()=> {core.style.width = '10%'; core.style.height = '10%';}
 			infoDivAni.reverse();
-			infoDivAni.onfinish = ()=> renderedText.style.display = 'none';
+			infoDivAni.onfinish = ()=> 
+			{
+				renderedText.style.display = 'none';
+				renderedText.style.color = 'rgba(255,255,255,0)'; // prevents initial flicker on play() call.
+			}
 		}
 		
 		async function mouseOver()
@@ -389,7 +393,7 @@ async function createContent()
 		stars[z]['landscapeTitleOn'] = false;
 	}
 	
-	const mouseVisibility = 250;
+	const mouseVisibility = 130;
 	if (!isMobile) windowDiv.onmousemove = (mouse)=>
 	{
 		for (const star in stars)

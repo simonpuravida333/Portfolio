@@ -28,6 +28,7 @@ body
 
 .starDescription
 {
+	will-change: opacity;
 	position: absolute;
 	transform: translateX(-50%);
 	background-color: #2D476B;
@@ -272,7 +273,6 @@ body
 	color: white;
 	pointer-events: none;
 }
-
 
 #myselfStar
 {

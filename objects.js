@@ -36,7 +36,7 @@ wiki.sophistication = '&#x2B24 &#x2B24';
 wiki.links = ['https://github.com/simonpuravida333/Wiki'];
 wiki.imageLinks = ['captures/Wiki 1.png', 'captures/Wiki 2.png', 'captures/Wiki 3.png', 'captures/Wiki 4.png'];
 wiki.landscapeTitle = 'Wiki';
-projects.push(wiki);
+//projects.push(wiki);
 
 const auctions = new codingProject();
 auctions.name = 'Auctions';
