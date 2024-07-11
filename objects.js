@@ -17,7 +17,6 @@ function designProject(links, youtube, imageLinks)
 export const projects = [];
 
 const googleSearch = new codingProject();
-googleSearch.work = 'Software Engineering';
 googleSearch.name = 'Google Search';
 googleSearch.objective = 'Visually identical google search front page, queries will redirect to google results.';
 googleSearch.stack = 'Front-end: HTML, CSS';
@@ -138,14 +137,13 @@ export const myself = {
 	},
 	software_engineering:
 	{
-		intermediate: 'JavaScript',
-		junior: 'Java <strong>&#9679</strong> C# <strong>&#9679</strong> Python <strong>&#9679</strong> Lua',
-		more_techs: 'Git <strong>&#9679</strong> SQL (SQLite) <strong>&#9679</strong> Django <strong>&#9679</strong> CI/CD <strong>&#9679</strong> HTML <strong>&#9679</strong> CSS <strong>&#9679</strong> Bootstrap',
-		coding_experience: [" completed Harvard's CS50W (Webdevelopment with Python and JavaScript)<br> "," currently engaged in further Harvard's CS50 courses."," some private coding experiences","completed 'Fundamentals of Programming' and 'Algorithm and Datastructures' at university + two more CS uni courses, while being enrolled in Sociology and Musicology."],
+		tech: 'Java <strong>&#9679</strong> C# <strong>&#9679</strong> Python <strong>&#9679</strong>  Git <strong>&#9679</strong> SQL (SQLite) <strong>&#9679</strong> Django <strong>&#9679</strong> CI/CD <strong>&#9679</strong> HTML',
+		advanced_skill: 'Lua <strong>&#9679</strong> LÖVE <strong>&#9679</strong> JavaScript <strong>&#9679</strong> CSS',
+		coding_experience: ["completed Harvard's CS50W (Webdevelopment with Python and JavaScript)<br>","completed 'Fundamentals of Programming' and 'Algorithm and Datastructures' at university + two more CS uni courses"],
 	},
 	design:
 	{
-		skills: ["proficiency in Figma and Adobe Creative Suite","proficiency in conceptualization (wireframes, mockups and interactive, functional visuals)","deep knowledge of visual and functional design rules and concepts.","mulitple ongoing application design projects, that I want to technically realize in the near future","fascinated by and analysed designs (esp applications) since I can remember"],
+		skills: ["proficiency in Figma and Adobe Creative Suite","proficiency in conceptualization (wireframes, mockups and interactive, functional visuals)","deep knowledge of visual and functional design rules and concepts.", "proficiency in DaVinci Resolve"],
 	},
 	acknowledgements:
 	{
