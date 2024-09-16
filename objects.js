@@ -131,15 +131,15 @@ export const myself = {
 		passions: ["I &#x1F49C to conceptualize and design apps.","I &#x1F49C programming and technically design systems.","Interaction design serves my strong interests in aesthetics, conceptualization and creating an engaging flow state.","Programming serves my passions for building things and solving problems."],
 		what_I_Want: "To create ;)",
 		what_fascinates_me_the_most: "Creativity, nature and tech. My app designs draw strongly from nature &#x1F33A &#x1F99A &#x1F338 aesthetically and functionally, and are often about aiding the ideation process",
-		why_You_want_me: "Generally, I like any programming challenge: back-end, front-end, data, algorithms... I've always loved puzzle games and programming is the <i>ultimate</i> puzzle game.<br>My full potential comes to the fore where I'm allowed to explore concepts, designs and user interactivities. Preferebly I do it all: software engineering, UX, conceptualization...",
+		why_You_want_me: "Generally, I like any programming challenge. I can develop Fullstack Apps, but feel especially at home on the frontend. I've always loved puzzle games and programming is the <i>ultimate</i> puzzle game.<br><br>My full potential comes to the fore where I'm allowed to explore new user interfaces and visual interactivities, when I'm given space to let my creativity loose and develop novel and appealing interactive functionalities, designs and art." ,
 		further_interests: "Astronomy, ancient history, cultures and anthropology, composing music, creative writing, the conservation of the natural world.",
 		imgLink: "images/myself close-up 1000px.jpg",
 	},
 	software_engineering:
 	{
-		tech: 'Java <strong>&#9679</strong> C# <strong>&#9679</strong> Python <strong>&#9679</strong>  Git <strong>&#9679</strong> SQL (SQLite) <strong>&#9679</strong> Django <strong>&#9679</strong> CI/CD <strong>&#9679</strong> HTML',
+		junior_skills: 'Java <strong>&#9679</strong> Python <strong>&#9679</strong> Django <strong>&#9679</strong> Git <strong>&#9679</strong> SQL <strong>&#9679</strong> HTML <strong>&#9679</strong> CI',
 		advanced_skill: 'Lua <strong>&#9679</strong> LÖVE <strong>&#9679</strong> JavaScript <strong>&#9679</strong> CSS',
-		coding_experience: ["completed Harvard's CS50W (Webdevelopment with Python and JavaScript)<br>","completed 'Fundamentals of Programming' and 'Algorithm and Datastructures' at university + two more CS uni courses"],
+		programming_background: ["completed 'Fundamentals of Programming' and 'Algorithm and Datastructures' at university + two more CS Uni courses", "completed Harvard's CS50W (Webdevelopment with Python and JavaScript)<br>"],
 	},
 	design:
 	{
@@ -147,6 +147,7 @@ export const myself = {
 	},
 	acknowledgements:
 	{
+		regarding_this_app: "",
 		tools: ["Sublime Text", "Adobe Illustrator","Figma"],
 		credits: "Background (night sky): Comix Wave Films"
 	}
